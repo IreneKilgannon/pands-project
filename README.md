@@ -2,7 +2,7 @@
 
 This is my analysis of the Fisher's Iris data set for the programming and scripting module.
 
-## Project Plan
+## Project Statement
 * Research the project and summarise it in a README.
 * Download the data set and add it to my repository.
 * Write a program called analysis.py: 
