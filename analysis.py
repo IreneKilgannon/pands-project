@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-iris = pd.read_csv("iris.data")
+iris = pd.read_csv("iris.data", header = None)
 
 # To output to a txt file analysis.py > analysis.txt was entered in the terminal. Need a better method
 # Code needs to be entered after every 
@@ -16,16 +16,17 @@ print(f'Checking that the column names are correct: \n {iris.head()}')
 
 # Summary of the variables and data types in the data set
 print(iris.info())
+print()
 
 # Summary statistics of the data set
 print(iris.describe())
+print()
 
 # Summary statistics for each variable by flower species
 
-setosa = iris['species'] == 'setosa'
 
-
-iris['species'].unique()
+print(iris['species'].unique())
+print()
 
 setosa = iris[iris['species'] == 'Iris-setosa']
 print(f'Summary statistics for Iris setosa are: \n{setosa.describe()}')
