@@ -108,3 +108,6 @@ ax[0].set_ylabel('No of instances')
 fig.suptitle('Histogram of Petal Width by Iris species')
 
 plt.savefig('petal_width.png')
+
+
+plt.hist()
