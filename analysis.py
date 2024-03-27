@@ -39,3 +39,15 @@ print()
 virginica = iris[iris['species'] == 'Iris-virginica']
 print(f'Summary statistics for Iris virginica are: \n{virginica.describe()}')
 print()
+
+# Histogram of Sepal Length by species. 
+fig, ax = plt.subplots()
+ax.hist(setosa['sepal_length_cm'], label = 'Iris setosa', edgecolor = 'black', alpha = 0.3, bins = 15)
+ax.hist(versicolor['sepal_length_cm'], label = 'Iris versicolor', edgecolor = 'black', alpha = 0.3, bins = 15)
+ax.hist(virginica['sepal_length_cm'], label = 'Iris virginica', edgecolor = 'black', alpha = 0.3, bins = 15)
+ax.set_title('Histogram of sepal length for Iris species')
+ax.set_xlabel('Species of Iris')
+ax.set_ylabel('Sepal length (mm)')
+ax.legend()
+plt.savefig('sepal_length.png')
+plt.show()
