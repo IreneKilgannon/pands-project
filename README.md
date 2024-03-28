@@ -30,7 +30,9 @@ The data set is also known as Fisher's Iris Data set after the statistician and 
 The data set is a small data set with 150 rows and five columns with each row corresponding to a different flower sample. There are three different iris species, _Iris setosa_, _Iris versicolor_ and _Iris virginica_ with 50 samples for each species. 
 
 ![__Iris setosa__](https://upload.wikimedia.org/wikipedia/commons/a/a7/Irissetosa1.jpg)
+
 ![__Iris versicolor__](https://en.wikipedia.org/wiki/Iris_versicolor#/media/File:Blue_Flag,_Ottawa.jpg)
+
 ![__Iris virginica__](https://en.wikipedia.org/wiki/Iris_virginica#/media/File:Iris_virginica_2.jpg)
 
 
