@@ -31,7 +31,7 @@ The data set is a small data set with 150 rows and five columns with each row co
 
 ![__Iris setosa__](https://upload.wikimedia.org/wikipedia/commons/a/a7/Irissetosa1.jpg)
 
-![__Iris versicolor__](https://en.wikipedia.org/wiki/Iris_versicolor#/media/File:Blue_Flag,_Ottawa.jpg)
+![__Iris versicolor__](https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Blue_Flag%2C_Ottawa.jpg/480px-Blue_Flag%2C_Ottawa.jpg)
 
 ![__Iris virginica__](https://en.wikipedia.org/wiki/Iris_virginica#/media/File:Iris_virginica_2.jpg)
 
