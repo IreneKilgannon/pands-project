@@ -29,20 +29,26 @@ The data set is also known as Fisher's Iris Data set after the statistician and 
 
 The data set is a small data set with 150 rows and five columns with each row corresponding to a different flower sample. There are three different iris species, _Iris setosa_, _Iris versicolor_ and _Iris virginica_ with 50 samples for each species. 
 
+![Iris species](https://peaceadegbite1.medium.com/iris-flower-classification-60790e9718a1)
+
+ADJUST IMAGE SIZE
 ![Iris setosa](https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Kosaciec_szczecinkowaty_Iris_setosa.jpg/360px-Kosaciec_szczecinkowaty_Iris_setosa.jpg)
 
 ![Iris versicolor](https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Iris_versicolor_3.jpg/320px-Iris_versicolor_3.jpg)
 
 ![Iris virginica](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Iris_virginica.jpg/295px-Iris_virginica.jpg)
 
-
-
-
 There are four measurements (or variables) for each species:
 * sepal length
 * sepal width
 * petal length
 * petal width
+
+
+![Diagram of Iris](https://www.fs.usda.gov/wildflowers/beauty/iris/images/flower/blueflagiris_flower.jpg)
+
+Sepals, landing pad for bee. Petals are upright
+
 
 The data set is available at [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris). The data set is very widely used with over 700,000 views of the data set on the UCI website. Who would have thought that nearly one hundred years later Anderson's data would be used by thousands of students worldwide who are learning statistics, data science or machine learning? 
 
