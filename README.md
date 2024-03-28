@@ -39,11 +39,11 @@ Four measurements (variables) were taken for each flower examined:
 * petal length
 * petal width
 
-
+https://www.fs.usda.gov/wildflowers/beauty/iris/images/flower/blueflagiris_flower_lg.jpg
 
 Each iris has three true petals and three sepals. The three petals are upright and are also know as standards. Sepals are a modified leaf and are sometimes known as falls. This diagram from nicely illustrates the petals and the sepals. 
 
-![Sepals and petals](https://www.fs.usda.gov/wildflowers/beauty/iris/images/flower/blueflagiris_flower.jpg)
+![Sepals and petals](https://www.fs.usda.gov/wildflowers/beauty/iris/images/flower/blueflagiris_flower_lg.jpg)
 
 ![iris](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YYiQed4kj_EZ2qfg_imDWA.png)
 
