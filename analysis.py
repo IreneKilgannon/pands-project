@@ -9,23 +9,31 @@ iris = pd.read_csv("iris.data", header = None)
 
 # Having a look at the data set, checking that it loaded. 
 print(f'The first five rows of the data set are: \n {iris.head()}')
+print()
 
 # Add column names
 iris.columns = ['sepal_length_cm', 'sepal_width_cm', 'petal_length_cm', 'petal_width_cm', 'species']
 print(f'Checking that the column names are correct: \n {iris.head()}')
+print()
 
 # Summary of the variables and data types in the data set
+print(f'Summary of the variables and the data types in the data set.')
 print(iris.info())
 print()
 
-# Summary statistics of the data set
-print(iris.describe())
+# Looking for missing data, NaN
+print(f'Checking to see if there is any missing data or NaN. \n{iris.isna().sum()}')
 print()
+
+# Summary statistics of the data set
+print(f'Overall summary statistics for the data set. \n{iris.describe()}')
+print()
+
 
 # Summary statistics for each variable by flower species
 
 
-print(iris['species'].unique())
+print(f"The unique names in the species column are: \n {iris['species'].unique()}")
 print()
 
 setosa = iris[iris['species'] == 'Iris-setosa']
@@ -79,17 +87,18 @@ plt.savefig('sepal_width.png')
 
 
 #Histogram of Petal Length
-fig, ax = plt.subplots(1, 3, sharex= True, sharey= True, figsize = (8, 6))
-ax[0].hist(setosa['petal_length_cm'], edgecolor = 'black', alpha = 1.0, bins = 10)
-ax[1].hist(versicolor['petal_length_cm'], label = 'Iris versicolor', color = 'orange', edgecolor = 'black', alpha = 1.0, bins = 10)
-ax[2].hist(virginica['petal_length_cm'], label = 'Iris virginica', color = 'green', edgecolor = 'black', alpha = 1.0, bins = 10)
+fig, ax = plt.subplots(2, 2, sharex= True)
+ax[0,0].hist(iris['petal_length_cm'], edgecolor = 'black', bins = 7)
+ax[0, 1].hist(setosa['petal_length_cm'], edgecolor = 'black', alpha = 1.0, bins = 7)
+ax[1, 0].hist(versicolor['petal_length_cm'], label = 'Iris versicolor', color = 'orange', edgecolor = 'black', alpha = 1.0, bins = 7)
+ax[1, 1].hist(virginica['petal_length_cm'], label = 'Iris virginica', color = 'green', edgecolor = 'black', alpha = 1.0, bins = 7)
 
-ax[0].set_xlabel('Petal length (cm) \nIris setosa')
-ax[1].set_xlabel('Petal length (cm), \nIris versicolor')
-ax[2].set_xlabel('Petal length (cm), \nIris virginica')
-ax[0].set_ylabel('No of instances')
+#ax[0].set_xlabel('Petal length (cm) \nIris setosa')
+#ax[1].set_xlabel('Petal length (cm), \nIris versicolor')
+#ax[2].set_xlabel('Petal length (cm), \nIris virginica')
+#ax[0].set_ylabel('No of instances')
 
-fig.suptitle('Histogram of Petal Length by Iris species')
+#fig.suptitle('Histogram of Petal Length by Iris species')
 
 plt.savefig('petal_length.png')
 
@@ -110,4 +119,4 @@ fig.suptitle('Histogram of Petal Width by Iris species')
 plt.savefig('petal_width.png')
 
 
-plt.hist()
+#plt.hist()
