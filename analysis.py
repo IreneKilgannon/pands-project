@@ -1,6 +1,7 @@
 import numpy as np 
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 iris = pd.read_csv("iris.data", header = None)
 
@@ -119,4 +120,8 @@ fig.suptitle('Histogram of Petal Width by Iris species')
 plt.savefig('petal_width.png')
 
 
-#plt.hist()
+# Outputs a scatter plot of each pair of variables
+sns.pairplot(iris, hue = 'species')
+fig.suptitle('Scatter plot of each variable in the dataset')
+plt.savefig('Scatter_plot.png')
+#plt.show()
