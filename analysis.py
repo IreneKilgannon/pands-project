@@ -33,7 +33,6 @@ print()
 
 # Summary statistics for each variable by flower species
 
-
 print(f"The unique names in the species column are: \n {iris['species'].unique()}")
 print()
 

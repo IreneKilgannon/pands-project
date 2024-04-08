@@ -64,10 +64,10 @@ The
 
 ## Histogram of each pairs of variables
 
-![Sepal Width](https://github.com/IreneKilgannon/pands-project/blob/main/sepal_width.png)
+![Sepal Width](https://github.com/IreneKilgannon/pands-project/blob/main/sepal_width_cm.png)
 
-![Sepal length](https://github.com/IreneKilgannon/pands-project/blob/main/sepal_length_overlap.png)
+![Sepal length](https://github.com/IreneKilgannon/pands-project/blob/main/sepal_length_cm.png)
 
-![Petal Length](https://github.com/IreneKilgannon/pands-project/blob/main/petal_length.png)
+![Petal Length](https://github.com/IreneKilgannon/pands-project/blob/main/petal_length_cm.png)
 
-![Petal Width](https://github.com/IreneKilgannon/pands-project/blob/main/petal_width.png)
+![Petal Width](https://github.com/IreneKilgannon/pands-project/blob/main/petal_width_cm.png)
