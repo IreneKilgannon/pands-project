@@ -1,15 +1,17 @@
 # pands-project 
 
+Author: Irene Kilgannon
+
 This is my analysis of the Fisher's Iris data set for the programming and scripting module.
 
 ## Project Statement
 * Research the data set and summarise it in a README.
-* Download the data set and add it to my repository. TICK DONE
+* Download the data set and add it to my repository.
 * Write a program called analysis.py: 
     1. outputs a summary of each variable to a single text file
     2. saves a histogram of each variable to png files
     3. outputs a scatter plot of each pair of variables
-    4. any other analysis
+    4. any other analysis - suggested machine learning or regression analysis?? LEARN about them.
 
 
 ## Files in this project
@@ -18,7 +20,7 @@ analysis.ipynb
 iris.data
 README.md
 
-# Summary of the data set
+# Background to Fisher's Iris Data Set
 
 In 1928 Edgar Anderson published his paper entitled ['The Problem of Species in the Northern Blue Flags, _Iris versicolor_ and _Iris virginica_'](https://www.biodiversitylibrary.org/page/15997721). Anderson was a evolutionary biologist interested in answering two questions namely, what are species and how have they originated? Between 1923 and 1928 he and his team studied _Iris versicolor_, at a number of different sites from Ontario in Canada to Alabama in the United States, by measuring a number of different iris characteristics. Surprisingly his study found that there were actually two different iris species present, _Iris versicolor_ and _Iris virginia_ and that it was possible to differentiate between them by geographic location. 
 
@@ -26,7 +28,16 @@ The data set is commonly known as Fisher's Iris Data set after the statistician 
 
 Fisher's data set can be seen in his published paper but, in our computer age, the data set is available to download at [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris). The data set is very widely used with currently over 700,000 views of the data set on the UCI website.
 
-Analysis.txt is the output of analysis.py provides the infomation I here to summarise the data set. IMPORVE
+## Summary of the Data Set
+***
+
+Analysis.txt is the output of analysis.py provides the information I here to summarise the data set. IMPORVE
+
+```python 
+print(f'Summary of the variables and the data types in the data set.')
+print(iris.info())
+```
+
 
 It is a small data set with 150 rows and five columns with each row corresponding to a different flower sample. There are three different iris species, _Iris setosa_, _Iris versicolor_ and _Iris virginica_ with 50 samples for each species. There is no data missing from any of the columns.
 
@@ -49,4 +60,11 @@ https://www.integratedots.com/wp-content/uploads/2019/06/iris_petal-sepal-e15602
 The 
 
  Who would have thought that nearly one hundred years later Anderson's data would be used by thousands of students worldwide who are learning statistics, data science or machine learning? https://www.sciencedirect.com/science/article/pii/S1877050919320836
+
+
+## Histogram of each pairs of variables
+
+![Sepal Width](https://github.com/IreneKilgannon/pands-project/blob/main/sepal_width.png)
+
+![Sepal length](https://github.com/IreneKilgannon/pands-project/blob/main/sepal_length_overlap.png)
 
