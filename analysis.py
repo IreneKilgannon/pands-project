@@ -50,15 +50,15 @@ print(f'Summary statistics for Iris virginica are: \n{virginica.describe()}')
 print()
 
 # Save a histogram of each variable to png files
-
 for col in iris:
-    sns.histplot(x = col, data = iris, hue = 'species')
+    sns.set_palette("Set1")
+    sns.histplot(x = col, data = iris, hue = 'species', bins = 20)
     plt.title(f'Histogram of {col}')
     plt.savefig(f'{col}.png')
     plt.show()
 
 # Outputs a scatter plot of each pair of variables
 sns.pairplot(iris, hue = 'species')
-fig.suptitle('Scatter plot of each variable in the dataset')
+#fig.suptitle('Scatter plot of each variable in the dataset')
 plt.savefig('Scatter_plot.png')
 #plt.show()
