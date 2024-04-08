@@ -49,76 +49,13 @@ virginica = iris[iris['species'] == 'Iris-virginica']
 print(f'Summary statistics for Iris virginica are: \n{virginica.describe()}')
 print()
 
-# Histogram of Sepal Length by species. 
-fig, ax = plt.subplots(1, 3, sharex= True, sharey= True, figsize = (8, 6))
-ax[0].hist(setosa['sepal_length_cm'], edgecolor = 'black', alpha = 1.0, bins = 15)
-ax[1].hist(versicolor['sepal_length_cm'], label = 'Iris versicolor', color = 'orange', edgecolor = 'black', alpha = 1.0, bins = 15)
-ax[2].hist(virginica['sepal_length_cm'], label = 'Iris virginica', color = 'green', edgecolor = 'black', alpha = 1.0, bins = 15)
+# Save a histogram of each variable to png files
 
-ax[0].set_xlabel('Sepal length (cm) \nIris setosa')
-ax[1].set_xlabel('Sepal length (cm), \nIris versicolor')
-ax[2].set_xlabel('Sepal length (cm), \nIris virginica')
-ax[0].set_ylabel('No of instances')
-
-fig.suptitle('Histogram of Sepal Length by Iris species')
-
-plt.savefig('sepal_length.png')
-#plt.show()
-
-def iris_hist(**kwargs):
-    '''A function that accepts user inputs to plot a histogram for the iris data set'''
-    iris_dict = {}
-
-
-# Histogram of Sepal Width
-fig, ax = plt.subplots(1, 3, sharex= True, sharey= True, figsize = (8, 6))
-ax[0].hist(setosa['sepal_width_cm'], edgecolor = 'black', alpha = 1.0, bins = 15)
-ax[1].hist(versicolor['sepal_width_cm'], label = 'Iris versicolor', color = 'orange', edgecolor = 'black', alpha = 1.0, bins = 15)
-ax[2].hist(virginica['sepal_width_cm'], label = 'Iris virginica', color = 'green', edgecolor = 'black', alpha = 1.0, bins = 15)
-
-ax[0].set_xlabel('Sepal width (cm) \nIris setosa')
-ax[1].set_xlabel('Sepal width (cm), \nIris versicolor')
-ax[2].set_xlabel('Sepal width (cm), \nIris virginica')
-ax[0].set_ylabel('No of instances')
-
-fig.suptitle('Histogram of Sepal Width by Iris species')
-
-plt.savefig('sepal_width.png')
-#plt.show()
-
-
-#Histogram of Petal Length
-fig, ax = plt.subplots(2, 2, sharex= True)
-ax[0,0].hist(iris['petal_length_cm'], edgecolor = 'black', bins = 7)
-ax[0, 1].hist(setosa['petal_length_cm'], edgecolor = 'black', alpha = 1.0, bins = 7)
-ax[1, 0].hist(versicolor['petal_length_cm'], label = 'Iris versicolor', color = 'orange', edgecolor = 'black', alpha = 1.0, bins = 7)
-ax[1, 1].hist(virginica['petal_length_cm'], label = 'Iris virginica', color = 'green', edgecolor = 'black', alpha = 1.0, bins = 7)
-
-#ax[0].set_xlabel('Petal length (cm) \nIris setosa')
-#ax[1].set_xlabel('Petal length (cm), \nIris versicolor')
-#ax[2].set_xlabel('Petal length (cm), \nIris virginica')
-#ax[0].set_ylabel('No of instances')
-
-#fig.suptitle('Histogram of Petal Length by Iris species')
-
-plt.savefig('petal_length.png')
-
-
-# Histogram of Petal Width
-fig, ax = plt.subplots(1, 3, sharex= True, sharey= True, figsize = (8, 6))
-ax[0].hist(setosa['petal_width_cm'], edgecolor = 'black', alpha = 1.0, bins = 10)
-ax[1].hist(versicolor['petal_width_cm'], label = 'Iris versicolor', color = 'orange', edgecolor = 'black', alpha = 1.0, bins = 10)
-ax[2].hist(virginica['petal_width_cm'], label = 'Iris virginica', color = 'green', edgecolor = 'black', alpha = 1.0, bins = 10)
-
-ax[0].set_xlabel('Petal Width (cm) \nIris setosa')
-ax[1].set_xlabel('Petal Width (cm), \nIris versicolor')
-ax[2].set_xlabel('Petal Width (cm), \nIris virginica')
-ax[0].set_ylabel('No of instances')
-
-fig.suptitle('Histogram of Petal Width by Iris species')
-
-plt.savefig('petal_width.png')
-
+for col in iris:
+    sns.histplot(x = col, data = iris, hue = 'species')
+    plt.title(f'Histogram of {col}')
+    plt.savefig(f'{col}.png')
+    plt.show()
 
 # Outputs a scatter plot of each pair of variables
 sns.pairplot(iris, hue = 'species')

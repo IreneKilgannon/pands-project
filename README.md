@@ -68,3 +68,6 @@ The
 
 ![Sepal length](https://github.com/IreneKilgannon/pands-project/blob/main/sepal_length_overlap.png)
 
+![Petal Length](https://github.com/IreneKilgannon/pands-project/blob/main/petal_length.png)
+
+![Petal Width](https://github.com/IreneKilgannon/pands-project/blob/main/petal_width.png)
