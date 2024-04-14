@@ -57,12 +57,12 @@ Each iris has three true petals and three sepals. The three petals are upright a
 
 https://www.integratedots.com/wp-content/uploads/2019/06/iris_petal-sepal-e1560211020463.png
 
-The 
+
 
  Who would have thought that nearly one hundred years later Anderson's data would be used by thousands of students worldwide who are learning statistics, data science or machine learning? https://www.sciencedirect.com/science/article/pii/S1877050919320836
 
 
-## Histogram of each pairs of variables
+## Histogram of each variable saved to png files
 
 ![Sepal Width](https://github.com/IreneKilgannon/pands-project/blob/main/sepal_width_cm.png)
 
@@ -71,3 +71,10 @@ The
 ![Petal Length](https://github.com/IreneKilgannon/pands-project/blob/main/petal_length_cm.png)
 
 ![Petal Width](https://github.com/IreneKilgannon/pands-project/blob/main/petal_width_cm.png)
+
+__Discussion of histogram__
+
+## References
+
+https://www.reddit.com/r/learnpython/comments/12emhsa/how_do_i_save_the_output_of_the_python_code_as_a/
+
