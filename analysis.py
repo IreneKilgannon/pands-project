@@ -22,8 +22,9 @@ with open('analysis.txt', 'a') as f:
     f.write(add_header)
 
 # Summary of the variables and data types in the data set
-variables = f'Summary of the variables and the data types in the data set. \n {iris.info()} \n\n'
+info = f'Summary of the variables and the data types in the data set {iris.info()} \n\n'
 
+data_types = f'The data types in the data set are: \n{iris.dtypes}\n \n'
 
 # Looking for missing data, NaN
 missing_values = f'Checking to see if there is any missing data or NaN. \n{iris.isna().sum()} \n \n'
@@ -56,7 +57,8 @@ virginica_summary = f'Summary statistics for Iris virginica are: \n{virginica.de
 
 # Writing summary statistics to analysis.txt
 with open('analysis.txt', 'a') as f:
-    f.write(variables)
+    f.write(info)
+    f.write(data_types)
     f.write(missing_values)
     f.write(unique)
     f.write(summary_statistics)
@@ -65,33 +67,34 @@ with open('analysis.txt', 'a') as f:
     f.write(virginica_summary)
 
 
-#Trying to compare across the three species.
-fig, axes = plt.subplots(2,2, figsize = (8, 8))
-sns.boxplot(ax = axes[0, 0], x = 'Species', y = 'Sepal Length (cm)', data = iris)
-sns.boxplot(ax = axes[0, 1], x = iris['Species'], y= iris['Sepal Width (cm)'])
-sns.boxplot(ax = axes[1, 0], x = iris['Species'], y = iris['Petal Length (cm)'])
-sns.boxplot(ax = axes[1, 1], x = iris['Species'], y = iris['Petal Width (cm)'])
-plt.suptitle('Summary Statistics by Species for Each Variable')
-axes[0,0].set_title('Sepal Length')
-axes[0,1].set_title('Sepal Width')
-axes[1,0].set_title('Petal Length')
-axes[1,1].set_title('Petal Width')
-plt.savefig('Boxplot.png')
-#plt.show()
+
+ # #Trying to compare across the three species.
+ # fig, axes = plt.subplots(2,2, figsize = (8, 8))
+ # sns.boxplot(ax = axes[0, 0], x = 'Species', y = 'Sepal Length (cm)', data = iris)
+ # sns.boxplot(ax = axes[0, 1], x = iris['Species'], y= iris['Sepal Width (cm)'])
+ # sns.boxplot(ax = axes[1, 0], x = iris['Species'], y = iris['Petal Length (cm)'])
+ # sns.boxplot(ax = axes[1, 1], x = iris['Species'], y = iris['Petal Width (cm)'])
+ # plt.suptitle('Summary Statistics by Species for Each Variable')
+ # axes[0,0].set_title('Sepal Length')
+ # axes[0,1].set_title('Sepal Width')
+ # axes[1,0].set_title('Petal Length')
+ # axes[1,1].set_title('Petal Width')
+ # plt.savefig('Boxplot.png')
+ # #plt.show()
 
 # Save a histogram of each variable to png files
 for col in iris:
     sns.set_palette("Set1")
-    sns.histplot(x = col, data = iris, hue = 'Species', bins = 20)
+    sns.histplot(x = col, data = iris, hue = 'Species')
     plt.title(f'Histogram of {col}')
     plt.savefig(f'{col}.png')
-    #plt.show()
+    plt.show()
 
-# Outputs a scatter plot of each pair of variables
-sns.pairplot(iris, hue = 'Species')
-#fig.suptitle('Scatter plot of each variable in the dataset')
-plt.savefig('Scatter_plot.png')
-#plt.show()
+ # # Outputs a scatter plot of each pair of variables
+ # sns.pairplot(iris, hue = 'Species')
+ # #fig.suptitle('Scatter plot of each variable in the dataset')
+ # plt.savefig('Scatter_plot.png')
+ # #plt.show()
 
 #sns.scatterplot(data = iris, x = 'sepal_length_cm', y = 'Sepal Width (cm)', hue = 'Species')
 #plt.show()

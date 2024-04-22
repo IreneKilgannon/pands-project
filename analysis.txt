@@ -14,9 +14,16 @@ Checking that the column names are correct:
 3                4.6               3.1                1.5               0.2  Iris-setosa
 4                5.0               3.6                1.4               0.2  Iris-setosa
  
-Summary of the variables and the data types in the data set. 
- None 
+Summary of the variables and the data types in the data set None 
 
+The data types in the data set are: 
+Sepal Length (cm)    float64
+Sepal Width (cm)     float64
+Petal Length (cm)    float64
+Petal Width (cm)     float64
+Species               object
+dtype: object
+ 
 Checking to see if there is any missing data or NaN. 
 Sepal Length (cm)    0
 Sepal Width (cm)     0
