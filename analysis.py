@@ -89,12 +89,14 @@ for col in iris:
     plt.title(f'Histogram of {col}')
     plt.savefig(f'{col}.png')
     plt.show()
+    plt.close()
 
- # # Outputs a scatter plot of each pair of variables
- # sns.pairplot(iris, hue = 'Species')
- # #fig.suptitle('Scatter plot of each variable in the dataset')
- # plt.savefig('Scatter_plot.png')
- # #plt.show()
+# Outputs a scatter plot of each pair of variables
+sns.pairplot(iris, hue = 'Species')
+#fig.suptitle('Scatter plot of each variable in the dataset')
+plt.savefig('Scatter_plot.png')
+#plt.show()
+
 
 #sns.scatterplot(data = iris, x = 'sepal_length_cm', y = 'Sepal Width (cm)', hue = 'Species')
 #plt.show()
