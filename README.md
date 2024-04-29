@@ -64,15 +64,19 @@ https://www.integratedots.com/wp-content/uploads/2019/06/iris_petal-sepal-e15602
 
 ## Histogram of each variable saved to png files
 
-![Sepal Width](https://github.com/IreneKilgannon/pands-project/blob/main/sepal_width_cm.png)
+![Sepal Width](https://github.com/IreneKilgannon/pands-project/blob/main/Sepal%20Width%20(cm).png)
 
-![Sepal length](https://github.com/IreneKilgannon/pands-project/blob/main/sepal_length_cm.png)
+![Sepal length](https://github.com/IreneKilgannon/pands-project/blob/main/Sepal%20Length%20(cm).png)
 
-![Petal Length](https://github.com/IreneKilgannon/pands-project/blob/main/petal_length_cm.png)
+![Petal Length](https://github.com/IreneKilgannon/pands-project/blob/main/Petal%20Length%20(cm).png)
 
-![Petal Width](https://github.com/IreneKilgannon/pands-project/blob/main/petal_width_cm.png)
+![Petal Width](https://github.com/IreneKilgannon/pands-project/blob/main/Petal%20Length%20(cm).png)
 
 __Discussion of histogram__
+
+
+## Scatter plot of each pair of variables
+
 
 ## References
 
