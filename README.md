@@ -72,6 +72,8 @@ https://www.integratedots.com/wp-content/uploads/2019/06/iris_petal-sepal-e15602
 
 ![Petal Width](https://github.com/IreneKilgannon/pands-project/blob/main/Petal%20Length%20(cm).png)
 
+![vvdd](C:\Users\Martin\Desktop\pands\pands-project\Petal Length (cm).png)
+
 __Discussion of histogram__
 
 
