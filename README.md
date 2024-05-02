@@ -4,6 +4,17 @@ Author: Irene Kilgannon
 
 This is my analysis of the Fisher's Iris data set for the programming and scripting module.
 
+## Making a plan
+1. decide if using readme or jupyter notebooks for comments
+2. background research
+3. write summary statistics to .txt file
+4. histograms
+5. scatter plot /pair plot between all the variables
+6. perhaps some linear regression plots
+7. calculate correlation coefficients
+8. regression analysis https://campus.datacamp.com/courses/introduction-to-regression-with-statsmodels-in-python/simple-linear-regression-modeling?ex=1
+9. machine learning
+
 ## Project Statement
 * Research the data set and summarise it in a README.
 * Download the data set and add it to my repository.
