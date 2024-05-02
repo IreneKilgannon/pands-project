@@ -50,11 +50,9 @@ print(iris.info())
 ```
 
 
-It is a small data set with 150 rows and five columns with each row corresponding to a different flower sample. There are three different iris species, _Iris setosa_, _Iris versicolor_ and _Iris virginica_ with 50 samples for each species. There is no data missing from any of the columns.
+It is a small data set with 150 rows and five columns with each row corresponding to a different flower sample. There are three different iris species, _Iris setosa_, _Iris versicolor_ and _Iris virginica_ with 50 samples for each species. There is no data missing in any of the columns.
 
 ![iris](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YYiQed4kj_EZ2qfg_imDWA.png)
-
-![Iris species](https://s3.amazonaws.com/assets.datacamp.com/blog_assets/Machine+Learning+R/iris-machinelearning.png)
 
 Four measurements (or variables) were taken for each flower examined:
 * sepal length in cm
@@ -68,7 +66,7 @@ Each iris has three true petals and three sepals. The three petals are upright a
 
 https://www.integratedots.com/wp-content/uploads/2019/06/iris_petal-sepal-e1560211020463.png
 
-
+![Boxplot](c:/Users/Martin/Desktop/pands/pands-project/plots/Boxplot.png)
 
  Who would have thought that nearly one hundred years later Anderson's data would be used by thousands of students worldwide who are learning statistics, data science or machine learning? https://www.sciencedirect.com/science/article/pii/S1877050919320836
 
