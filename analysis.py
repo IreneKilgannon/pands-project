@@ -12,7 +12,7 @@ with open('analysis.txt', 'wt') as f:
     f.write(head)
 
 # Add column names
-iris.columns = ['sepal_length_cm', 'sepal_width_cm', 'petal_length_cm', 'petal_width_cm', 'species']
+iris.columns = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species']
 add_header = f'Checking that the column names are correct: \n {iris.head()}\n \n'
 
 with open('analysis.txt', 'a') as f:
@@ -52,7 +52,7 @@ versicolor_summary = f'Summary statistics for Iris versicolor are: \n{versicolor
 # Summary Statistics for Iris virginica
 virginica_summary = f'Summary statistics for Iris virginica are: \n{virginica.describe()} \n\n'
 
-# Writing summary statistics to analysis.txt
+# Write summary statistics to analysis.txt
 with open('analysis.txt', 'a') as f:
     f.write(info)
     f.write(data_types)
@@ -63,44 +63,68 @@ with open('analysis.txt', 'a') as f:
     f.write(versicolor_summary)
     f.write(virginica_summary)
 
-
 # Comparing summary statistics across the three species.
-fig, axes = plt.subplots(2,2, figsize = (8, 8))
-sns.boxplot(ax = axes[0, 0], x = 'species', y = 'sepal_length_cm', data = iris)
-sns.boxplot(ax = axes[0, 1], x = iris['species'], y= iris['sepal_width_cm'])
-sns.boxplot(ax = axes[1, 0], x = iris['species'], y = iris['petal_length_cm'])
-sns.boxplot(ax = axes[1, 1], x = iris['species'], y = iris['petal_width_cm'])
-plt.suptitle('Summary Statistics by Species for Each Variable')
+fig, axes = plt.subplots(2,2, figsize = (10, 10))
+sns.boxplot(ax = axes[0, 0], x = 'species', y = 'sepal_length', data = iris)
+sns.boxplot(ax = axes[0, 1], x = iris['species'], y= iris['sepal_width'])
+sns.boxplot(ax = axes[1, 0], x = iris['species'], y = iris['petal_length'])
+sns.boxplot(ax = axes[1, 1], x = iris['species'], y = iris['petal_width'])
+plt.suptitle('Box plot by Species for Each Variable')
 axes[0,0].set_title('Sepal Length')
 axes[0,1].set_title('Sepal Width')
 axes[1,0].set_title('Petal Length')
 axes[1,1].set_title('Petal Width')
-plt.savefig('Boxplot.png')
-#plt.show()
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Boxplot.png')
+plt.close()
 
+#### Histogram #####
 
 # Save a histogram of each variable to png files
 for col in iris:
     sns.set_palette("Set1")
     sns.histplot(x = col, data = iris, hue = 'species')
-    plt.title(f'Histogram of {col}')
-    plt.savefig(f'{col}.png')
-    plt.show()
+    plt.title(f"Histogram of {col.title().replace('_', ' ')}")
+    plt.xlabel(f"{col.replace('_', ' ')}")
+    plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Histogram_of_{col}.png')
+    #plt.show()
     plt.close()
+
+#### Scatter plot of each pair of variables
+for col1 in iris:
+    for col2 in iris:
+        if col1 == col2 or col1 == 'species' or col2 == 'species':
+            continue
+        else:
+            sns.scatterplot(data = iris, x = col1, y = col2, hue = 'species')
+            plt.title(f"Scatter plot of {col2} vs {col1}")
+            plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Scatterplot_{col2}_vs_{col1}.png')
 
 # Outputs a scatter plot of each pair of variables
 sns.pairplot(iris, hue = 'species')
 #fig.suptitle('Scatter plot of each variable in the dataset')
-plt.savefig('Scatter_plot.png')
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Scatter_plot.png')
 #plt.show()
+
+
+## Any other analysis 
+
+
+iris.drop(['species'], axis = 1).corr()
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Correlation_Matrix.png')
 
 
 # Heatmap of the Correlation Coefficients
 fig, ax = plt.subplots(2, 2, figsize = (12, 10))
 
-sns.heatmap(iris.drop(['Species'], axis = 1).corr(), annot = True, ax = ax[0, 0], vmin = -0.5, vmax=1)
-sns.heatmap(setosa.drop(['Species'], axis = 1).corr(), annot = True, ax = ax[0, 1], vmin = -0.5, vmax=1)
-sns.heatmap(versicolor.drop(['Species'], axis = 1).corr(), annot = True, ax = ax[1, 0], vmin = -0.5, vmax=1)
-sns.heatmap(virginica.drop(['Species'], axis = 1).corr(), annot = True, ax = ax[1,1], vmin = -0.5, vmax=1)
-plt.savefig('Heatmap_correlation_coefficients.png')
-plt.show()
+sns.heatmap(iris.drop(['species'], axis = 1).corr(), annot = True, ax = ax[0, 0], vmin = -0.5, vmax=1)
+ax[0,0].set_title('Overall')
+sns.heatmap(setosa.drop(['species'], axis = 1).corr(), annot = True, ax = ax[0, 1], vmin = -0.5, vmax=1)
+ax[0,1].set_title('Iris setosa')
+sns.heatmap(versicolor.drop(['species'], axis = 1).corr(), annot = True, ax = ax[1, 0], vmin = -0.5, vmax=1)
+ax[1,0].set_title('Iris versicolor')
+sns.heatmap(virginica.drop(['species'], axis = 1).corr(), annot = True, ax = ax[1,1], vmin = -0.5, vmax=1)
+ax[1,1].set_title('Iris virginica')
+
+
+plt.suptitle('Correlation Coefficients for the Iris Data Set')
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Heatmap_correlation_coefficients.png')
