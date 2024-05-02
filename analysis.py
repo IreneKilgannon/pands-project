@@ -98,6 +98,7 @@ for col1 in iris:
             sns.scatterplot(data = iris, x = col1, y = col2, hue = 'species')
             plt.title(f"Scatter plot of {col2} vs {col1}")
             plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Scatterplot_{col2}_vs_{col1}.png')
+            plt.close()
 
 # Outputs a scatter plot of each pair of variables
 sns.pairplot(iris, hue = 'species')
