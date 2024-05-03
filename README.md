@@ -8,7 +8,7 @@ This is my analysis of the Fisher's Iris data set for the programming and script
 1. decide if using readme or jupyter notebooks for comments
 2. background research
 3. write summary statistics to .txt file
-4. histograms
+4. histograms - created a function, Create a module with all the plotting files?
 5. scatter plot /pair plot between all the variables
 6. perhaps some linear regression plots
 7. calculate correlation coefficients
@@ -65,6 +65,8 @@ Each iris has three true petals and three sepals. The three petals are upright a
 ![Petals and sepals](https://www.fs.usda.gov/wildflowers/beauty/iris/images/flower/blueflagiris_flower_lg.jpg)
 
 https://www.integratedots.com/wp-content/uploads/2019/06/iris_petal-sepal-e1560211020463.png
+
+
 
 ![Boxplot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Boxplot.png)
 

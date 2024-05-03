@@ -103,14 +103,16 @@ for col1 in iris:
             continue
         else:
             sns.scatterplot(data = iris, x = col1, y = col2, hue = 'species')
-            plt.title(f"Scatter plot of {col2} vs {col1}")
+            plt.title(f"Scatter plot of {col2.title().replace('_', ' ')} vs {col1.title().replace('_', ' ')}")
+            plt.xlabel(f"{col1.title().replace('_', ' ')}")
+            plt.ylabel(f"{col2.title().replace('_', ' ')}")
             plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Scatterplot_{col2}_vs_{col1}.png')
             plt.close()
 
 # Outputs a scatter plot of each pair of variables
 sns.pairplot(iris, hue = 'species')
-#fig.suptitle('Scatter plot of each variable in the dataset')
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Scatter_plot.png')
+plt.suptitle('Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_plot.png')
 #plt.show()
 
 
