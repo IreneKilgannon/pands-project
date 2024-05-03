@@ -63,12 +63,14 @@ with open('analysis.txt', 'a') as f:
     f.write(versicolor_summary)
     f.write(virginica_summary)
 
+sns.set_palette("Set1")
+
 # Comparing summary statistics across the three species.
 fig, axes = plt.subplots(2,2, figsize = (10, 10))
 sns.boxplot(ax = axes[0, 0], x = 'species', y = 'sepal_length', data = iris)
-sns.boxplot(ax = axes[0, 1], x = iris['species'], y= iris['sepal_width'])
-sns.boxplot(ax = axes[1, 0], x = iris['species'], y = iris['petal_length'])
-sns.boxplot(ax = axes[1, 1], x = iris['species'], y = iris['petal_width'])
+sns.boxplot(ax = axes[0, 1], x = 'species', y= 'sepal_width', data = iris)
+sns.boxplot(ax = axes[1, 0], x = 'species', y = 'petal_length', data = iris)
+sns.boxplot(ax = axes[1, 1], x = 'species', y = 'petal_width', data = iris)
 plt.suptitle('Box plot by Species for Each Variable')
 axes[0,0].set_title('Sepal Length')
 axes[0,1].set_title('Sepal Width')
@@ -80,14 +82,17 @@ plt.close()
 #### Histogram #####
 
 # Save a histogram of each variable to png files
-for col in iris:
-    sns.set_palette("Set1")
-    sns.histplot(x = col, data = iris, hue = 'species')
-    plt.title(f"Histogram of {col.title().replace('_', ' ')}")
-    plt.xlabel(f"{col.replace('_', ' ')}")
-    plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Histogram_of_{col}.png')
-    #plt.show()
-    plt.close()
+def plot_hist(df):
+    for col in df:
+        #sns.set_palette("Set1")
+        sns.histplot(x = col, data = df, hue = 'species')
+        plt.title(f"Histogram of {col.title().replace('_', ' ')}")
+        plt.xlabel(f"{col.replace('_', ' ')}")
+        plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Histogram_of_{col}.png')
+        #plt.show()
+        plt.close()
+
+plot_hist(iris)
 
 #### Scatter plot of each pair of variables
 fig, ax = plt.subplots()
