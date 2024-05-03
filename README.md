@@ -73,6 +73,12 @@ https://www.integratedots.com/wp-content/uploads/2019/06/iris_petal-sepal-e15602
 
 ## Histogram of each variable saved to png files
 
+|||
+|---|---|
+|![Histogram of Sepal Length](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Histogram_of_sepal_length.png)|![Histogram of Sepal Width](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Histogram_of_sepal_width.png)|
+|![Histogram of Petal Length](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Histogram_of_petal_length.png)|![Histogram of Petal Width](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Histogram_of_petal_width.png)|
+
+
 ![Sepal Width](https://github.com/IreneKilgannon/pands-project/blob/main/Sepal%20Width%20(cm).png)
 
 ![Sepal length](https://github.com/IreneKilgannon/pands-project/blob/main/Sepal%20Length%20(cm).png)

@@ -90,6 +90,8 @@ for col in iris:
     plt.close()
 
 #### Scatter plot of each pair of variables
+fig, ax = plt.subplots()
+
 for col1 in iris:
     for col2 in iris:
         if col1 == col2 or col1 == 'species' or col2 == 'species':
