@@ -66,7 +66,7 @@ Each iris has three true petals and three sepals. The three petals are upright a
 
 https://www.integratedots.com/wp-content/uploads/2019/06/iris_petal-sepal-e1560211020463.png
 
-![Boxplot]([c:/Users/Martin/Desktop/pands/pands-project/plots/Boxplot.png](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Boxplot.png))
+![Boxplot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Boxplot.png)
 
  Who would have thought that nearly one hundred years later Anderson's data would be used by thousands of students worldwide who are learning statistics, data science or machine learning? https://www.sciencedirect.com/science/article/pii/S1877050919320836
 
