@@ -82,29 +82,31 @@ It is a small data set with 150 rows and five columns with each row correspondin
 
 ![iris](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YYiQed4kj_EZ2qfg_imDWA.png)
 
-The five variables are:
+The five variables in the data set are:
 * sepal_length (measured in cm)
 * sepal_width (measured in cm)
 * petal_length (measured in cm)
 * petal_width (measured in cm)
 * species
 
-Some Flower Biology to help understand what is being measured. 
+A basic description of the structure of an iris flower will help to understand the variable names. Each iris has three true petals and three sepals. The three petals are upright and are also known as standards. Sepals are a modified leaf and are usually green in colour and its function is to protect the developing flower bud. When the flower has bloomed the iris' sepal is described as "the landing pad for bumblebees" by the [US Forest Service](https://www.fs.usda.gov/wildflowers/beauty/iris/flower.shtml). This diagram from nicely illustrates the petals and the sepals. 
 
-Each iris has three true petals and three sepals. The three petals are upright and are also known as standards. Sepals are a modified leaf and are usually green in colour and its function is to protect the developing flower bud. When the flower has bloomed the iris' sepal is described as "the landing pad for bumblebees" by the [US Forest Service](https://www.fs.usda.gov/wildflowers/beauty/iris/flower.shtml). This diagram from nicely illustrates the petals and the sepals. 
-
-![Petals and sepals](https://www.fs.usda.gov/wildflowers/beauty/iris/images/flower/blueflagiris_flower_lg.jpg)
+![Petals and sepals]()
 
 This diagram illustrates the difference between the length and width measurements.
 
 ![Length vs Width](https://www.integratedots.com/wp-content/uploads/2019/06/iris_petal-sepal-e1560211020463.png)
 
-
-
-
-
  
 ## Summary Statistics for the data set
+
+
+```python
+# Summary statistics for the overall the data set
+summary_statistics = f'Overall summary statistics for the data set. \n{iris.describe()} \n\n'
+
+```
+The describe method is very used to collate summary statistics about the data set. It gives a count of 
 
 Overall summary statistics for the data set. 
 |      | sepal_length | sepal_width | petal_length | petal_width|
@@ -117,6 +119,38 @@ Overall summary statistics for the data set.
 |50%   |     5.800000 |    3.000000  |    4.350000  |   1.300000|
 |75%   |     6.400000 |    3.300000  |    5.100000  |   1.800000|
 |max   |     7.900000 |    4.400000  |    6.900000  |   2.500000| 
+
+A box plot is another method to display summary statistics about the data set. It gives a visual comparison between all
+
+<details>
+<summary>Box plot code</summary>
+
+```python
+# Create a box plot to visually compare the summary statistics across the three species in the data set.
+
+# Create a fig, ax plot
+fig, ax = plt.subplots(2,2, figsize = (10, 10))
+
+# Create a box plot for each variable, coloured by species.
+sns.boxplot(ax = ax[0, 0], x = 'species', y = 'sepal_length', data = iris)
+sns.boxplot(ax = ax[0, 1], x = 'species', y= 'sepal_width', data = iris)
+sns.boxplot(ax = ax[1, 0], x = 'species', y = 'petal_length', data = iris)
+sns.boxplot(ax = ax[1, 1], x = 'species', y = 'petal_width', data = iris)
+
+# Overall plot title
+plt.suptitle('Box plot by Species for Each Variable')
+
+# Label each plot
+ax[0,0].set_title('Sepal Length')
+ax[0,1].set_title('Sepal Width')
+ax[1,0].set_title('Petal Length')
+ax[1,1].set_title('Petal Width')
+
+# Save the created plot
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Box_plot.png')
+plt.close()
+```
+</details>
 
 
 ![Boxplot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Box_plot.png)
