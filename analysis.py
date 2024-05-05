@@ -35,6 +35,9 @@ missing_values = f'Checking to see if there is any missing data or NaN. \n{iris.
 # Uniques names in the species column.
 unique = f"The unique names in the species column are: \n {iris['species'].unique()} \n\n"
 
+# Value count of each species.
+count_species = f"A count of each species: \n {iris['species'].value_counts()} \n\n"
+
 # Summary statistics for the overall the data set
 summary_statistics = f'Overall summary statistics for the data set. \n{iris.describe()} \n\n'
 
@@ -62,6 +65,7 @@ with open('analysis.txt', 'a') as f:
     f.write(data_types)
     f.write(missing_values)
     f.write(unique)
+    f.write(count_species)
     f.write(summary_statistics)
     f.write(setosa_summary)
     f.write(versicolor_summary)
@@ -99,10 +103,13 @@ plt.close()
 
 def plot_hist(df):
     for x in df:
-        #sns.set_palette("Set1")
+        # Create a seaborn histogram, hue parameter is very useful to differentiate by another variable.
         sns.histplot(x = x, data = df, hue = 'species')
+        # Add title
         plt.title(f"Histogram of {x.title().replace('_', ' ')}")
+        # Label x-axis
         plt.xlabel(f"{x.replace('_', ' ')}")
+        plt.ylabel('Frequency')
         plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Histogram_of_{x}.png')
         #plt.show()
         plt.close()

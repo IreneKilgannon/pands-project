@@ -5,9 +5,9 @@ Author: Irene Kilgannon
 This is my analysis of the Fisher's Iris data set for the programming and scripting module.
 
 ## Making a plan
-1. Using a readme
-2. background research
-3. write summary statistics to .txt file
+1. Using a readme for discussion  done
+2. background research 
+3. write summary statistics to .txt file - done. Discussion next
 4. histograms - created a function, Create a module with all the plotting files?
 5. scatter plot /pair plot between all the variables
 6. perhaps some linear regression plots
@@ -30,9 +30,13 @@ Ideally I would create modules, with all the functions required for the file and
 
 ## Files in this project
 analysis.py
+
 analysis.ipynb
+
 iris.data
+
 README.md
+
 plots directory with all the plots generated for this analysis
 
 # Background to Fisher's Iris Data Set
@@ -45,16 +49,22 @@ The data set is commonly known as Fisher's Iris Data set after the statistician 
 
 Fisher's data set can viewed in his published paper but, in our computer age, the data set is available to download at [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris). The data set is very widely used with currently over 700,000 views of the data set on the UCI website.
 
-## Import the Required Modules and Load the Data Set.
-
-The data set was downloaded from [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris) and imported. The data set did not contain any column names so these were added when the data set was imported. 
+## Import the Required Modules.
 
 ```python
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+```
 
+## Load the Data Set
+
+The data set was downloaded from [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris) and imported. The csv file does not contain column names. These were added when the data set was imported and the column names were obtained from the variables table on the [information page of the iris data set](https://archive.ics.uci.edu/dataset/53/iris). They are sepal_length_cm, sepal_width_cm, petal_length_cm, petal_width_cm and species. 
+
+A number of methods were explored to add the column names [adding headers to a dataframe in pandas a comprehensive-guide](https://saturncloud.io/blog/adding-headers-to-a-dataframe-in-pandas-a-comprehensive-guide/)
+
+```python
 iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species'])
 ```
 
@@ -62,6 +72,13 @@ iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'pet
 ***
 
 [Analysis.txt](https://github.com/IreneKilgannon/pands-project/blob/main/analysis.txt) contains the output of [analysis.py](https://github.com/IreneKilgannon/pands-project/blob/main/analysis.py) and has provided the information used to summarise the data set.
+
+[Python File Write](https://www.w3schools.com/python/python_file_write.asp)
+[Writing to file in python](https://www.geeksforgeeks.org/writing-to-file-in-python/)
+
+Checked that the file uploaded correctly and generated a txt file in one step.
+
+Why did I save as a variable and not just add the code to the file? Wouldn't work otherwise. Add a reference to my inspiration. 
 
 ```python
 shape = f'The shape of the data set is {iris.shape}. \n\n'
@@ -89,26 +106,21 @@ The five variables in the data set are:
 * petal_width (measured in cm)
 * species
 
-A basic description of the structure of an iris flower will help to understand the variable names. Each iris has three true petals and three sepals. The three petals are upright and are also known as standards. Sepals are a modified leaf and are usually green in colour and its function is to protect the developing flower bud. When the flower has bloomed the iris' sepal is described as "the landing pad for bumblebees" by the [US Forest Service](https://www.fs.usda.gov/wildflowers/beauty/iris/flower.shtml). This diagram from nicely illustrates the petals and the sepals. 
-
-![Petals and sepals]()
-
-This diagram illustrates the difference between the length and width measurements.
+A basic description of the structure of an iris flower will help to understand the variable names. Each iris has three true petals and three sepals. The three petals are upright and are also known as standards. Sepals are a modified leaf and are usually green in colour and its function is to protect the developing flower bud. When the flower has bloomed the iris' sepal is described as "the landing pad for bumblebees" by the [US Forest Service](https://www.fs.usda.gov/wildflowers/beauty/iris/flower.shtml). This diagram nicely illustrates the difference between the petals and the sepals and also how the width and lenght of each were measured.
 
 ![Length vs Width](https://www.integratedots.com/wp-content/uploads/2019/06/iris_petal-sepal-e1560211020463.png)
 
  
 ## Summary Statistics for the data set
 
+Summary statistics for numeric data are easily obtained using the [describe method](https://www.w3schools.com/python/pandas/ref_df_describe.asp). It gives a count of each variable and some statistics such as the min, max, mean and std deviation for each variable.
 
 ```python
 # Summary statistics for the overall the data set
 summary_statistics = f'Overall summary statistics for the data set. \n{iris.describe()} \n\n'
-
 ```
-The describe method is very used to collate summary statistics about the data set. It gives a count of 
 
-Overall summary statistics for the data set. 
+Overall summary statistics for the data set.
 |      | sepal_length | sepal_width | petal_length | petal_width|
 |---|---|---|---|---|
 |count |   150.000000 |  150.000000  |  150.000000  | 150.000000|
@@ -120,7 +132,58 @@ Overall summary statistics for the data set.
 |75%   |     6.400000 |    3.300000  |    5.100000  |   1.800000|
 |max   |     7.900000 |    4.400000  |    6.900000  |   2.500000| 
 
-A box plot is another method to display summary statistics about the data set. It gives a visual comparison between all
+
+<details>
+<summary>Summary Statistics for Each Iris Species</summary>
+
+Summary statistics for Iris setosa are:
+
+|      | sepal_length | sepal_width | petal_length | petal_width|
+|---|---|---|---|---|
+|count  |    50.00000  |  50.000000   |  50.000000   |  50.00000|
+|mean   |     5.00600  |   3.418000   |   1.464000   |   0.24400|
+|std    |     0.35249  |   0.381024   |   0.173511   |   0.10721|
+|min    |     4.30000  |   2.300000   |   1.000000   |   0.10000|
+|25%    |     4.80000  |   3.125000   |   1.400000   |   0.20000|
+|50%    |     5.00000  |   3.400000   |   1.500000   |   0.20000|
+|75%    |     5.20000  |   3.675000   |   1.575000   |   0.30000|
+|max    |     5.80000  |   4.400000   |   1.900000   |   0.60000| 
+
+
+Summary statistics for Iris versicolor are: 
+|      | sepal_length | sepal_width | petal_length | petal_width|
+|---|---|---|---|---|
+|count  |   50.000000  |  50.000000   |  50.000000  |  50.000000|
+|mean   |    5.936000  |   2.770000   |   4.260000  |   1.326000|
+|std    |    0.516171  |   0.313798   |   0.469911  |   0.197753|
+|min    |    4.900000  |   2.000000   |   3.000000  |   1.000000|
+|25%    |    5.600000  |   2.525000   |   4.000000  |   1.200000|
+|50%    |    5.900000  |   2.800000   |   4.350000  |   1.300000|
+|75%    |    6.300000  |   3.000000   |   4.600000  |   1.500000|
+|max    |    7.000000  |   3.400000   |   5.100000  |   1.800000| 
+
+
+Summary statistics for Iris virginica are: 
+|      | sepal_length | sepal_width | petal_length | petal_width|
+|---|---|---|---|---|
+|count   |   50.00000   | 50.000000  |   50.000000   |  50.00000|
+|mean    |    6.58800   |  2.974000  |    5.552000   |   2.02600|
+|std     |    0.63588   |  0.322497  |    0.551895   |   0.27465|
+|min     |    4.90000   |  2.200000  |    4.500000   |   1.40000|
+|25%     |    6.22500   |  2.800000  |    5.100000   |   1.80000|
+|50%     |    6.50000   |  3.000000  |    5.550000   |   2.00000|
+|75%     |    6.90000   |  3.175000  |    5.875000   |   2.30000|
+|max     |    7.90000   |  3.800000  |    6.900000   |   2.50000|
+
+</details>
+
+
+A [seaborn boxplot](https://seaborn.pydata.org/generated/seaborn.boxplot.html) is nice visual method to display summary statistics about the data set. It gives us a lot of the same information that the describe method does but as it is visual it is to make comparisons.
+
+![diagram to explain box plot](https://builtin.com/sites/www.builtin.com/files/styles/ckeditor_optimize/public/inline-images/1_boxplots.jpg)
+
+_Different parts of a boxplot | Image: Michael Galarnyk_
+
 
 <details>
 <summary>Box plot code</summary>
@@ -155,7 +218,26 @@ plt.close()
 
 ![Boxplot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Box_plot.png)
 
+
+
 ## Histogram of each variable saved to png files
+
+<details>
+<summary>Histogram code</summary>
+
+```python
+def plot_hist(df):
+    for x in df:
+        sns.histplot(x = x, data = df, hue = 'species')
+        plt.title(f"Histogram of {x.title().replace('_', ' ')}")
+        plt.xlabel(f"{x.replace('_', ' ')}")
+        plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Histogram_of_{x}.png')
+        #plt.show()
+        plt.close()
+
+plot_hist(iris)
+```
+</details>
 
 
 |||
@@ -164,22 +246,43 @@ plt.close()
 |![Histogram of Petal Length](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Histogram_of_petal_length.png)|![Histogram of Petal Width](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Histogram_of_petal_width.png)|
 
 
-
 __Discussion of histogram__
+
+Reference to seaborn histogram, take from penguins file
+What does the histogram tell us?
+
 
 
 ## Scatter plot of each pair of variables
 
+Code used. 
+Reference to seaborn plot. 
+
 ![Scatter plot for each pair of variables](https://github.com/IreneKilgannon/pands-project/blob/main/Scatter_plot.png)
+
+![Pair plot]()
+
+#### Any Other Analysis ####
+
+## Regression line
+
+## Calculate correlation coefficients
+
+Short paragraph about correlation.
+
+Code used
 
 
 |             |sepal_length |sepal_width |petal_length | petal_width|
 | ---|---|---|  ---|---|          
-|sepal_length |  |  1.000000|   -0.109369|     0.871754|     0.81795|
-|sepal_width  |  | -0.109369|    1.000000|    -0.420516|    -0.35654|
-|petal_length |    0.871754 |  -0.420516 |    1.000000 |    0.962757|
-|petal_width  |    0.817954 |  -0.356544 |    0.962757 |    1.000000|
+|sepal_length |    1.000000|   -0.109369|     0.871754|     0.81795|
+|sepal_width  |   -0.109369|    1.000000|    -0.420516|    -0.35654|
+|petal_length |    0.871754|  -0.420516|    1.000000|    0.962757|
+|petal_width  |    0.817954|  -0.356544|    0.962757|    1.000000|
 
+Heat map of correlation coefficients
+
+Fix labels on heat map
 
 
 Who would have thought that nearly one hundred years later Anderson's data would be used by thousands of students worldwide who are learning statistics, data science or machine learning? https://www.sciencedirect.com/science/article/pii/S1877050919320836
@@ -188,3 +291,21 @@ Who would have thought that nearly one hundred years later Anderson's data would
 
 https://www.reddit.com/r/learnpython/comments/12emhsa/how_do_i_save_the_output_of_the_python_code_as_a/
 
+
+https://chrisfrew.in/blog/dropdowns-in-readmes/
+
+Plotting
+
+Figure-level vs axes-level functions https://seaborn.pydata.org/tutorial/function_overview.html#figure-level-vs-axes-level-functions
+
+Python Seaborn Tutorial for Beginners: Start Visualizing Data https://www.datacamp.com/tutorial/seaborn-python-tutorial
+
+Datacamp Introduction to Data Visualization with Matplotlib
+
+Datacamp Introduction to Data Visualization with Seaborn
+
+Understanding Boxplots https://builtin.com/data-science/boxplot
+
+Countplot using seaborn in python https://www.geeksforgeeks.org/countplot-using-seaborn-in-python/?ref=ml_lbp
+
+Seaborn catplot https://www.geeksforgeeks.org/python-seaborn-catplot/?ref=lbp
