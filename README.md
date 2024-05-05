@@ -61,7 +61,7 @@ iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'pet
 ## Summary of the Data Set
 ***
 
-Analysis.txt contains the output of analysis.py and has provided the information used to summarise the data set.
+[Analysis.txt](https://github.com/IreneKilgannon/pands-project/blob/main/analysis.txt) contains the output of [analysis.py](https://github.com/IreneKilgannon/pands-project/blob/main/analysis.py) and has provided the information used to summarise the data set.
 
 ```python
 shape = f'The shape of the data set is {iris.shape}. \n\n'
@@ -95,7 +95,7 @@ Each iris has three true petals and three sepals. The three petals are upright a
 
 ![Petals and sepals](https://www.fs.usda.gov/wildflowers/beauty/iris/images/flower/blueflagiris_flower_lg.jpg)
 
-This illustrates what is meant by the length and width measurements.
+This diagram illustrates the difference between the length and width measurements.
 
 ![Length vs Width](https://www.integratedots.com/wp-content/uploads/2019/06/iris_petal-sepal-e1560211020463.png)
 
@@ -119,7 +119,7 @@ Overall summary statistics for the data set.
 |max   |     7.900000 |    4.400000  |    6.900000  |   2.500000| 
 
 
-![Boxplot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Boxplot.png)
+![Boxplot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Box_plot.png)
 
 ## Histogram of each variable saved to png files
 
