@@ -42,7 +42,7 @@ Fisher's data set can be seen in his published paper but, in our computer age, t
 ## Summary of the Data Set
 ***
 
-Analysis.txt is the output of analysis.py provides the information I here to summarise the data set. IMPORVE
+Analysis.txt is the output of analysis.py provides the information that I have used to summarise the data set.
 
 ```python 
 print(f'Summary of the variables and the data types in the data set.')
@@ -71,6 +71,8 @@ https://www.integratedots.com/wp-content/uploads/2019/06/iris_petal-sepal-e15602
 ![Boxplot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Boxplot.png)
 
  Who would have thought that nearly one hundred years later Anderson's data would be used by thousands of students worldwide who are learning statistics, data science or machine learning? https://www.sciencedirect.com/science/article/pii/S1877050919320836
+## Summary Statistics for the data set
+
 
 
 ## Histogram of each variable saved to png files
@@ -90,6 +92,13 @@ __Discussion of histogram__
 
 ![Scatter plot for each pair of variables](https://github.com/IreneKilgannon/pands-project/blob/main/Scatter_plot.png)
 
+
+|             |sepal_length |sepal_width |petal_length | petal_width|
+| ---|---|---|  ---|---|          
+|sepal_length |  |  1.000000|   -0.109369|     0.871754|     0.81795|
+|sepal_width  |  | -0.109369|    1.000000|    -0.420516|    -0.35654|
+|petal_length |    0.871754 |  -0.420516 |    1.000000 |    0.962757|
+|petal_width  |    0.817954 |  -0.356544 |    0.962757 |    1.000000|
 
 ## References
 

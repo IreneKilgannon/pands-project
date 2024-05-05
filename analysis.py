@@ -153,7 +153,7 @@ plt.close
 
 # Create a correlation matrix between the numeric variables in the data set.
 correlation_matrix = iris.drop(['species'], axis = 1).corr()
-
+print(correlation_matrix)
 
 
 # Create a heatmap of the correlation coefficients between the variables in the data set.
