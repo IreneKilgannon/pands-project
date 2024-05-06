@@ -1,5 +1,6 @@
-# pands-project 
-![Banner](C:\Users\Martin\Desktop\pands\pands-project\Fisher’s Iris Data Set.png)
+# pands-project
+
+![Banner](https://github.com/IreneKilgannon/pands-project/blob/main/Fisher%E2%80%99s%20Iris%20Data%20Set.png)
 
 Author: Irene Kilgannon
 
