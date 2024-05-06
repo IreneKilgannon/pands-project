@@ -277,19 +277,59 @@ Reference to seaborn plot.
 
 Short paragraph about correlation.
 
-Code used
+<details>
+<summary>Code for Correlation Matrix</summary>
+
+```python
+correlation_matrix = iris.drop(['species'], axis = 1).corr()
+print(correlation_matrix)
+```
+</details>
 
 
 |             |sepal_length |sepal_width |petal_length | petal_width|
-| ---|---|---|  ---|---|          
+|---|---|---|---|---|          
 |sepal_length |    1.000000|   -0.109369|     0.871754|     0.81795|
 |sepal_width  |   -0.109369|    1.000000|    -0.420516|    -0.35654|
-|petal_length |    0.871754|  -0.420516|    1.000000|    0.962757|
-|petal_width  |    0.817954|  -0.356544|    0.962757|    1.000000|
+|petal_length |    0.871754|   -0.420516|     1.000000|    0.962757|
+|petal_width  |    0.817954|   -0.356544|     0.962757|     1.000000|
 
 Heat map of correlation coefficients
 
-Fix labels on heat map
+<details>
+<summary> Code for Heatmaps</summary>
+
+```python
+# Create a heatmap of the correlation coefficients between the variables in the data set.
+fig, ax = plt.subplots(2, 2, figsize = (15, 12))
+
+# Overall values  - not taking the flower species into account
+sns.heatmap(iris.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[0, 0], vmin = -0.5, vmax=1)
+ax[0,0].set_title('Overall')
+
+# Iris setosa
+sns.heatmap(setosa.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[0, 1], vmin = -0.5, vmax=1)
+ax[0,1].set_title('Iris setosa')
+
+# Iris versicolor
+sns.heatmap(versicolor.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[1, 0], vmin = -0.5, vmax=1)
+ax[1,0].set_title('Iris versicolor')
+
+# Iris virginica
+sns.heatmap(virginica.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[1,1], vmin = -0.5, vmax=1)
+ax[1,1].set_title('Iris virginica')
+
+# Add title
+plt.suptitle('Correlation Coefficients for the Iris Data Set')
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Heatmap_correlation_coefficients.png')
+plt.close()
+```
+
+</details>
+
+![Heat map](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Heatmap_correlation_coefficients.png)
+
+
 
 
 Who would have thought that nearly one hundred years later Anderson's data would be used by thousands of students worldwide who are learning statistics, data science or machine learning? https://www.sciencedirect.com/science/article/pii/S1877050919320836
