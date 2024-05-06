@@ -267,7 +267,7 @@ Reference to seaborn plot.
 
 ![Scatter plot for each pair of variables](https://github.com/IreneKilgannon/pands-project/blob/main/Scatter_plot.png)
 
-![Pair plot]()
+![Pair plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Pair_plot.png)
 
 #### Any Other Analysis ####
 
