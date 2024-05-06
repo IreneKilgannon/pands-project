@@ -1,4 +1,5 @@
 # pands-project 
+![Banner](C:\Users\Martin\Desktop\pands\pands-project\Fisher’s Iris Data Set.png)
 
 Author: Irene Kilgannon
 
@@ -7,11 +8,11 @@ This is my analysis of the Fisher's Iris data set for the programming and script
 ## Making a plan
 1. Using a readme for discussion  decided.
 2. background research add some images
-3. write summary statistics to .txt file - done. Discussion next
+3. write summary statistics to .txt file - [ ] done. Discussion next
 4. histograms - created a function, Create a module with all the plotting files?. Add discussion
 5. scatter plot /pair plot between all the variables. Add discussion
 6. perhaps some linear regression plots. Make a start today.
-7. calculate correlation coefficients, fix labels on heatmap. add discussion
+7. calculate correlation coefficients, ~~fix labels on heatmap~~. add discussion
 8. regression analysis https://campus.datacamp.com/courses/introduction-to-regression-with-statsmodels-in-python/simple-linear-regression-modeling?ex=1
 9. machine learning 
 
@@ -27,6 +28,9 @@ Ideally I would create modules, with all the functions required for the file and
     3. outputs a scatter plot of each pair of variables
     4. any other analysis - suggested machine learning or regression analysis?? LEARN about them.
 
+## How to install
+
+## How to use it
 
 ## Files in this project
 analysis.py
