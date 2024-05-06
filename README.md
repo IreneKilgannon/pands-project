@@ -5,15 +5,15 @@ Author: Irene Kilgannon
 This is my analysis of the Fisher's Iris data set for the programming and scripting module.
 
 ## Making a plan
-1. Using a readme for discussion  done
-2. background research 
+1. Using a readme for discussion  decided.
+2. background research add some images
 3. write summary statistics to .txt file - done. Discussion next
-4. histograms - created a function, Create a module with all the plotting files?
-5. scatter plot /pair plot between all the variables
-6. perhaps some linear regression plots
-7. calculate correlation coefficients
+4. histograms - created a function, Create a module with all the plotting files?. Add discussion
+5. scatter plot /pair plot between all the variables. Add discussion
+6. perhaps some linear regression plots. Make a start today.
+7. calculate correlation coefficients, fix labels on heatmap. add discussion
 8. regression analysis https://campus.datacamp.com/courses/introduction-to-regression-with-statsmodels-in-python/simple-linear-regression-modeling?ex=1
-9. machine learning
+9. machine learning 
 
 
 Ideally I would create modules, with all the functions required for the file and import them. Having trouble with this. Probably classes would be better but I don't understand, know enough about them!
@@ -51,6 +51,13 @@ Fisher's data set can viewed in his published paper but, in our computer age, th
 
 ## Import the Required Modules.
 
+Four modules are required for this analysis:
+
+* [pandas](https://www.w3schools.com/python/pandas/pandas_intro.asp) - for manipulating data and for performing data analysis.
+* [numpy](https://www.w3schools.com/python/numpy/default.asp) - performs a wide variety of mathematical calculations on arrays.
+* [matplotlib.pyplot](https://www.geeksforgeeks.org/python-introduction-matplotlib/) - used to create plots e.g. bar plots, scatter plots, histograms.
+* [seaborn](https://realpython.com/python-seaborn/) - a python data visualisation library based on matplotlib. Usually requires less code syntax than matplotlib.
+
 ```python
 import numpy as np
 import pandas as pd
@@ -60,9 +67,9 @@ import seaborn as sns
 
 ## Load the Data Set
 
-The data set was downloaded from [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris) and imported. The csv file does not contain column names. These were added when the data set was imported and the column names were obtained from the variables table on the [information page of the iris data set](https://archive.ics.uci.edu/dataset/53/iris). They are sepal_length_cm, sepal_width_cm, petal_length_cm, petal_width_cm and species. 
+The data set was downloaded from [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris) and imported. This csv file does not contain column names and the column names were obtained from the variables table on the [information page of the iris data set](https://archive.ics.uci.edu/dataset/53/iris). They column names are sepal_length_cm, sepal_width_cm, petal_length_cm, petal_width_cm and species.
 
-A number of methods were explored to add the column names [adding headers to a dataframe in pandas a comprehensive-guide](https://saturncloud.io/blog/adding-headers-to-a-dataframe-in-pandas-a-comprehensive-guide/)
+A number of methods were explored to add the column names [adding headers to a dataframe in pandas a comprehensive-guide](https://saturncloud.io/blog/adding-headers-to-a-dataframe-in-pandas-a-comprehensive-guide/). The simplest method is to add the column names when the data set was loaded.
 
 ```python
 iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species'])

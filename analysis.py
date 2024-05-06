@@ -164,22 +164,22 @@ print(correlation_matrix)
 
 
 # Create a heatmap of the correlation coefficients between the variables in the data set.
-fig, ax = plt.subplots(2, 2, figsize = (12, 10))
+fig, ax = plt.subplots(2, 2, figsize = (15, 12))
 
 # Overall values  - not taking the flower species into account
-sns.heatmap(iris.drop(['species'], axis = 1).corr(), annot = True, ax = ax[0, 0], vmin = -0.5, vmax=1)
+sns.heatmap(iris.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[0, 0], vmin = -0.5, vmax=1)
 ax[0,0].set_title('Overall')
 
 # Iris setosa
-sns.heatmap(setosa.drop(['species'], axis = 1).corr(), annot = True, ax = ax[0, 1], vmin = -0.5, vmax=1)
+sns.heatmap(setosa.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[0, 1], vmin = -0.5, vmax=1)
 ax[0,1].set_title('Iris setosa')
 
 # Iris versicolor
-sns.heatmap(versicolor.drop(['species'], axis = 1).corr(), annot = True, ax = ax[1, 0], vmin = -0.5, vmax=1)
+sns.heatmap(versicolor.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[1, 0], vmin = -0.5, vmax=1)
 ax[1,0].set_title('Iris versicolor')
 
 # Iris virginica
-sns.heatmap(virginica.drop(['species'], axis = 1).corr(), annot = True, ax = ax[1,1], vmin = -0.5, vmax=1)
+sns.heatmap(virginica.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[1,1], vmin = -0.5, vmax=1)
 ax[1,1].set_title('Iris virginica')
 
 # Add title
