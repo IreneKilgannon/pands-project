@@ -45,14 +45,23 @@ plots directory with all the plots generated for this analysis
 
 # Background to Fisher's Iris Data Set
 
-In 1928 Edgar Anderson published his paper entitled ['The Problem of Species in the Northern Blue Flags, _Iris versicolor_ and _Iris virginica_'](https://www.biodiversitylibrary.org/page/15997721). Anderson was a evolutionary biologist interested in answering two questions namely, what are species and how have they originated? Between 1923 and 1928 he and his team studied _Iris versicolor_, at a number of different sites from Ontario in Canada to Alabama in the United States, by measuring a number of different iris characteristics. Surprisingly his study found that there were actually two different iris species present, _Iris versicolor_ and _Iris virginia_ and that it was possible to differentiate between them by geographic location. 
+In 1928 Edgar Anderson published his paper entitled ['The Problem of Species in the Northern Blue Flags, _Iris versicolor_ and _Iris virginica_'](https://www.biodiversitylibrary.org/page/15997721). Anderson was a evolutionary biologist interested in answering two questions namely, what are species and how have they originated? Between 1923 and 1928 he and his team studied _Iris versicolor_, at a number of different sites from Ontario in Canada to Alabama in the United States, by measuring a number of different iris characteristics. Surprisingly his study found that there were actually two different iris species present, _Iris versicolor_ and _Iris virginia_ and that it was possible to differentiate between them by geographic location. This is reflected in the [common names of these two species of iris](https://hgic.clemson.edu/factsheet/rain-garden-plants-iris-versicolor-and-iris-virginica/). _Iris versicolor_ is commonly known as the Northern blue flag iris and _Iris virginica_ is commonly known as the Southern blue flag iris.
 
 ADD IMAGE TO BREAK UP THE TEXT
 
 The data set is commonly known as Fisher's Iris Data set after the statistician and biologist, Ronald Fisher. The data measurements for _Iris setosa_ and _Iris versicolor_ were collected by Anderson from the same colony of plants in the Gaspé Peninsula, Quebec in 1935. According to [Unwin and Kleinman](hhttps://academic.oup.com/jrssig/article/18/6/26/7038520) the _Iris virginica_ data samples were from Anderson's original research and were collected in Camden, Tennessee. Fisher collated and analysed the data and in 1936 published his results in the Annals of Eugenics [The Use of Multiple Measurements in Taxonomic Problems](https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.1469-1809.1936.tb02137.x). He used a statistical method, linear discriminant analysis to attempt to distinguish the different iris species from each other. He found that _Iris setosa_ was easily distinguishable from the other two iris species using this method. 
 
+![Image from Fisher's paper](https://github.com/IreneKilgannon/pands-project/blob/main/fisher_data_set_image.png)
 
 Fisher's data set can viewed in his published paper but, in our computer age, the data set is available to download at [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris). The data set is very widely used with currently over 700,000 views of the data set on the UCI website.
+
+Fisher and racism  -do i put it in?
+
+https://profjoecain.net/what-is-wrong-ronald-aylmer-fisher/
+
+https://www.newstatesman.com/long-reads/2020/07/ra-fisher-and-science-hatred
+
+https://www.nature.com/articles/s41437-020-00394-6
 
 ## Import the Required Modules.
 
@@ -74,7 +83,7 @@ import seaborn as sns
 
 The data set was downloaded from [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris) and imported. This csv file does not contain column names and the column names were obtained from the variables table on the [information page of the iris data set](https://archive.ics.uci.edu/dataset/53/iris). They column names are sepal_length_cm, sepal_width_cm, petal_length_cm, petal_width_cm and species.
 
-A number of methods were explored to add the column names [adding headers to a dataframe in pandas a comprehensive-guide](https://saturncloud.io/blog/adding-headers-to-a-dataframe-in-pandas-a-comprehensive-guide/). The simplest method is to add the column names when the data set was loaded.
+A number of methods were explored to add the column names [adding headers to a dataframe in pandas a comprehensive-guide](https://saturncloud.io/blog/adding-headers-to-a-dataframe-in-pandas-a-comprehensive-guide/). The simplest method is to add the column names using the name parameter when the data set was loaded.
 
 ```python
 iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species'])
@@ -85,15 +94,53 @@ iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'pet
 
 [Analysis.txt](https://github.com/IreneKilgannon/pands-project/blob/main/analysis.txt) contains the output of [analysis.py](https://github.com/IreneKilgannon/pands-project/blob/main/analysis.py) and has provided the information used to summarise the data set.
 
-[Python File Write](https://www.w3schools.com/python/python_file_write.asp)
-[Writing to file in python](https://www.geeksforgeeks.org/writing-to-file-in-python/)
+f.write will only write strings to a txt file. [This reddit post](https://www.reddit.com/r/learnpython/comments/12emhsa/how_do_i_save_the_output_of_the_python_code_as_a/) suggested saving the output to a variable and then result could be written to a txt file.  IMPROVE 
 
-Checked that the file uploaded correctly and generated a txt file in one step.
 
-Why did I save as a variable and not just add the code to the file? Wouldn't work otherwise. Add a reference to my inspiration. 
+<details>
+<summary>Code written to analysis.txt</summary>
 
 ```python
+ Collating the necessary infomation for analysis.txt
+
+# Get the number of rows and columns in the data set.
 shape = f'The shape of the data set is {iris.shape}. \n\n'
+
+# Get the variable names.
+column_names = f'Summary of the variable names in the data set are: \n {iris.columns} \n\n'
+
+# Get the data types of the variables.
+data_types = f'The data types in the data set are: \n{iris.dtypes}\n \n'
+
+# Look for missing data, NaN
+missing_values = f'Checking to see if there is any missing data or NaN. \n{iris.isna().sum()} \n \n'
+
+# Uniques names in the species column.
+unique = f"The unique names in the species column are: \n {iris['species'].unique()} \n\n"
+
+# Value count of each species.
+count_species = f"A count of each species: \n {iris['species'].value_counts()} \n\n"
+
+# Summary statistics for the overall the data set
+summary_statistics = f'Overall summary statistics for the data set. \n{iris.describe()} \n\n'
+
+# Create dataframes for each iris species.
+setosa = iris[iris['species'] == 'Iris-setosa']
+versicolor = iris[iris['species'] == 'Iris-versicolor']
+virginica = iris[iris['species'] == 'Iris-virginica']
+
+
+# Summary Statistics for Iris setosa
+setosa_summary = f'Summary statistics for Iris setosa are: \n{setosa.describe()} \n\n'
+
+# Summary Statistics for Iris versicolor
+versicolor_summary = f'Summary statistics for Iris versicolor are: \n{versicolor.describe()} \n\n'
+
+# Summary Statistics for Iris virginica
+virginica_summary = f'Summary statistics for Iris virginica are: \n{virginica.describe()} \n\n'
+
+# Write the summary statistics to analysis.txt
+# Append them to the analysis.txt file created previously
 
 with open('analysis.txt', 'a') as f:
     f.write(shape)
@@ -101,24 +148,27 @@ with open('analysis.txt', 'a') as f:
     f.write(data_types)
     f.write(missing_values)
     f.write(unique)
+    f.write(count_species)
     f.write(summary_statistics)
     f.write(setosa_summary)
     f.write(versicolor_summary)
     f.write(virginica_summary)
 ```
+</details>
+<br>
 
 It is a small data set with 150 rows and five columns with each row corresponding to a different flower sample. There are three different iris species, _Iris setosa_, _Iris versicolor_ and _Iris virginica_ with 50 samples for each species. There is no missing data.
 
 ![iris](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YYiQed4kj_EZ2qfg_imDWA.png)
 
-The five variables in the data set are:
+The five attributes(variables) in the data set are:
 * sepal_length (measured in cm)
 * sepal_width (measured in cm)
 * petal_length (measured in cm)
 * petal_width (measured in cm)
 * species
 
-A basic description of the structure of an iris flower will help to understand the variable names. Each iris has three true petals and three sepals. The three petals are upright and are also known as standards. Sepals are a modified leaf and are usually green in colour and its function is to protect the developing flower bud. When the flower has bloomed the iris' sepal is described as "the landing pad for bumblebees" by the [US Forest Service](https://www.fs.usda.gov/wildflowers/beauty/iris/flower.shtml). This diagram nicely illustrates the difference between the petals and the sepals and also how the width and lenght of each were measured.
+A basic description of the structure of an iris flower will help to understand the variable names. Each iris has three true petals and three sepals. The three petals are upright and are also known as standards. Sepals are a modified leaf and are usually green in colour and its function is to protect the developing flower bud. When the flower has bloomed the iris' sepal is described as "the landing pad for bumblebees" by the [US Forest Service](https://www.fs.usda.gov/wildflowers/beauty/iris/flower.shtml). This diagram nicely illustrates the difference between the petals and the sepals and also how the width and length of each were measured.
 
 ![Length vs Width](https://www.integratedots.com/wp-content/uploads/2019/06/iris_petal-sepal-e1560211020463.png)
 
@@ -189,8 +239,9 @@ Summary statistics for Iris virginica are:
 
 </details>
 
+<br>
 
-A [seaborn boxplot](https://seaborn.pydata.org/generated/seaborn.boxplot.html) is nice visual method to display summary statistics about the data set. It gives us a lot of the same information that the describe method does but as it is visual it is to make comparisons.
+A [seaborn boxplot](https://seaborn.pydata.org/generated/seaborn.boxplot.html) is nice visual method to display summary statistics about the data set. It gives us most of the same information that the describe method does but as it is visual it is easier and quicker to make comparisons. One difference between the describe method and a box plot is that describe gives us the mean, whereas a box plot displays the median value of the variable of interest.
 
 ![diagram to explain box plot](https://builtin.com/sites/www.builtin.com/files/styles/ckeditor_optimize/public/inline-images/1_boxplots.jpg)
 
@@ -234,6 +285,12 @@ plt.close()
 
 ## Histogram of each variable saved to png files
 
+Histograms are used to plot continouous numeric data. The four variables of sepal length, sepal width, petal length and petal width fulfill this criteria.
+
+Rather than create a plot for each of the variables by coding each of the variables seperately, I wrote function to plot each of the variables in the data set by looping through the column names, which I called x. The histograms were created using a [seaborn histplot](). Seaborn's hue parameter made it very easy to differentiate each of the variables by the categorical variable, species. 
+
+Currently the function is creating a histogram of the species column __NEED TO REFINE THE CODE SO THAT A HISTOGRAM OF SPECIES IS NOT CREATED__ Would also like to refine the code so that it could be used for any data set. The hue parameter is set to species for this data set but it would be nice if the user could select their own variable for hue. 
+
 <details>
 <summary>Histogram code</summary>
 
@@ -247,6 +304,7 @@ def plot_hist(df):
         #plt.show()
         plt.close()
 
+# Calling the plot_hist function on the iris data set.
 plot_hist(iris)
 ```
 </details>
@@ -256,6 +314,7 @@ plot_hist(iris)
 |---|---|
 |![Histogram of Sepal Length](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Histogram_of_sepal_length.png)|![Histogram of Sepal Width](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Histogram_of_sepal_width.png)|
 |![Histogram of Petal Length](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Histogram_of_petal_length.png)|![Histogram of Petal Width](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Histogram_of_petal_width.png)|
+
 
 
 __Discussion of histogram__
@@ -268,6 +327,46 @@ What does the histogram tell us?
 ## Scatter plot of each pair of variables
 
 Code used. 
+
+<details>
+<summary>Scatter plot code</summary>
+
+```python
+def plot_scatter(df):
+    for x in df:
+        for y in df:
+            # Do not create a scatter plot for the following conditions
+            if x == y or x == 'species' or y == 'species':
+                continue
+            else:
+                # Create a scatter plot
+                sns.scatterplot(data = df, x = x, y = y, hue = 'species')
+
+                # Add title to plot
+                plt.title(f"Scatter plot of {y.title().replace('_', ' ')} vs {x.title().replace('_', ' ')}")
+
+                # Label x and y-axis
+                plt.xlabel(f"{x.title().replace('_', ' ')}")
+                plt.ylabel(f"{y.title().replace('_', ' ')}")
+
+                # Save a scatter plot for each pair of variables
+                plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Scatterplot_{y}_vs_{x}.png')
+                plt.close()
+
+# Call the plot_scatter function on the iris data set.
+plot_scatter(iris)
+
+# Use a pair plot! Much simplier method to generate a scatter plot of each pair of variables
+g = sns.pairplot(iris, hue = 'species')
+g.fig.suptitle('Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_plot.png')
+plt.close
+#plt.show()
+```
+
+</details>
+<br>
+
 Reference to seaborn plot. 
 
 ![Scatter plot for each pair of variables](https://github.com/IreneKilgannon/pands-project/blob/main/Scatter_plot.png)
@@ -341,7 +440,14 @@ Who would have thought that nearly one hundred years later Anderson's data would
 
 ## References
 
-https://www.reddit.com/r/learnpython/comments/12emhsa/how_do_i_save_the_output_of_the_python_code_as_a/
+__Write output to a file in python__
+
+In the command line use of file_name.py > outout_file_name.txt https://www.reddit.com/r/learnpython/comments/12emhsa/how_do_i_save_the_output_of_the_python_code_as_a/
+
+Python File Write https://www.w3schools.com/python/python_file_write.asp
+
+Writing to file in python https://www.geeksforgeeks.org/writing-to-file-in-python/
+
 
 
 https://chrisfrew.in/blog/dropdowns-in-readmes/

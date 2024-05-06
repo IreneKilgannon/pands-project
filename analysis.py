@@ -113,7 +113,8 @@ def plot_hist(df):
         plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Histogram_of_{x}.png')
         #plt.show()
         plt.close()
-
+        
+# Call the plot_hist function on the iris data set.
 plot_hist(iris)
 
 #### Output a scatter plot of each pair of variables ####
@@ -146,6 +147,7 @@ def plot_scatter(df):
                 plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Scatterplot_{y}_vs_{x}.png')
                 plt.close()
 
+# Call the plot_scatter function on the iris data set.
 plot_scatter(iris)
 
 # Use a pair plot! Much simplier method to generate a scatter plot of each pair of variables
