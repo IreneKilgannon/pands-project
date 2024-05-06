@@ -321,12 +321,12 @@ __Discussion of histogram__
 
 Reference to seaborn histogram, take from penguins file
 What does the histogram tell us?
-
+Add comparison to literature. 
 
 
 ## Scatter plot of each pair of variables
 
-Code used. 
+The purpose of a scatter plot is to demonstrate? the relationship between two variables. 
 
 <details>
 <summary>Scatter plot code</summary>
@@ -376,6 +376,8 @@ Reference to seaborn plot.
 #### Any Other Analysis ####
 
 ## Regression line
+
+
 
 ## Calculate correlation coefficients
 
