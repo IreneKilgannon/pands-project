@@ -32,6 +32,13 @@ dtype: int64
 The unique names in the species column are: 
  ['Iris-setosa' 'Iris-versicolor' 'Iris-virginica'] 
 
+A count of each species: 
+ species
+Iris-setosa        50
+Iris-versicolor    50
+Iris-virginica     50
+Name: count, dtype: int64 
+
 Overall summary statistics for the data set. 
        sepal_length  sepal_width  petal_length  petal_width
 count    150.000000   150.000000    150.000000   150.000000
