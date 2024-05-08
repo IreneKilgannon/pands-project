@@ -189,7 +189,9 @@ plt.suptitle('Correlation Coefficients for the Iris Data Set')
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Heatmap_correlation_coefficients.png')
 plt.close()
 
-fig, ax = plt.subplots(2, 2, figsize = (12, 8))
+##### Regression Plots for Selected Variables
+
+fig, ax = plt.subplots(2, 2, figsize = (15, 10))
 
 # Regression plot between sepal length and sepal width
 sns.regplot(iris, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 0])
@@ -209,10 +211,10 @@ sns.regplot(virginica, x = 'petal_length', y = 'petal_width', ax = ax[1, 1])
 
 # Add title
 plt.suptitle('Some Regression Plots for Iris Data Set')
-ax[0, 0].set_title('Sepal Length vs Sepal Width')
-ax[0, 1].set_title('Sepal Length vs Sepal Width by Species')
-ax[1, 0].set_title('Petal Length vs Petal Width')
-ax[1, 1].set_title('Petal Length vs Petal Width by Species')
+ax[0, 0].set_title('Sepal Width vs Sepal Length')
+ax[0, 1].set_title('Sepal Width vs Sepal Length by Species')
+ax[1, 0].set_title('Petal Width vs Petal Length')
+ax[1, 1].set_title('Petal Width vs Petal Length by Species')
 
 # Set x-axis labels
 ax[0, 0].set_xlabel('Sepal Length (cm)')
