@@ -188,3 +188,45 @@ ax[1,1].set_title('Iris virginica')
 plt.suptitle('Correlation Coefficients for the Iris Data Set')
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Heatmap_correlation_coefficients.png')
 plt.close()
+
+fig, ax = plt.subplots(2, 2, figsize = (12, 8))
+
+# Regression plot between sepal length and sepal width
+sns.regplot(iris, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 0])
+
+# Regression plot between sepal width and sepal length by species
+sns.regplot(setosa, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1])
+sns.regplot(versicolor, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1])
+sns.regplot(virginica, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1])
+
+# Regression plot between petal length and petal width
+sns.regplot(iris, x = 'petal_length', y = 'petal_width', ax = ax[1, 0])
+
+# Regression plot between petal length and petal width by species
+sns.regplot(setosa, x = 'petal_length', y = 'petal_width', ax = ax[1, 1])
+sns.regplot(versicolor, x = 'petal_length', y = 'petal_width', ax = ax[1, 1])
+sns.regplot(virginica, x = 'petal_length', y = 'petal_width', ax = ax[1, 1])
+
+# Add title
+plt.suptitle('Some Regression Plots for Iris Data Set')
+ax[0, 0].set_title('Sepal Length vs Sepal Width')
+ax[0, 1].set_title('Sepal Length vs Sepal Width by Species')
+ax[1, 0].set_title('Petal Length vs Petal Width')
+ax[1, 1].set_title('Petal Length vs Petal Width by Species')
+
+# Set x-axis labels
+ax[0, 0].set_xlabel('Sepal Length (cm)')
+ax[0, 1].set_xlabel('Sepal Length (cm)')
+ax[1, 0].set_xlabel('Petal Length (cm)')
+ax[1, 1].set_xlabel('Petal Length (cm)')
+
+# Set y-axis labels
+ax[0, 0].set_ylabel('Sepal Width (cm)')
+ax[0, 1].set_ylabel('Sepal Width (cm)')
+ax[1, 0].set_ylabel('Petal Width (cm)')
+ax[1, 1].set_ylabel('Petal Width (cm)')
+
+# Save plots
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Regression_plots.png')
+plt.show()
+plt.close()

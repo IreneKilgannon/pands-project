@@ -381,7 +381,7 @@ Reference to seaborn plot.
 
 ## Calculate correlation coefficients
 
-Short paragraph about correlation.
+Correlation tells us how two variables are related. 
 
 <details>
 <summary>Code for Correlation Matrix</summary>
@@ -451,10 +451,11 @@ Python File Write https://www.w3schools.com/python/python_file_write.asp
 Writing to file in python https://www.geeksforgeeks.org/writing-to-file-in-python/
 
 
+__Markdown references__
 
 https://chrisfrew.in/blog/dropdowns-in-readmes/
 
-Plotting
+__Plotting__
 
 Figure-level vs axes-level functions https://seaborn.pydata.org/tutorial/function_overview.html#figure-level-vs-axes-level-functions
 
@@ -469,3 +470,6 @@ Understanding Boxplots https://builtin.com/data-science/boxplot
 Countplot using seaborn in python https://www.geeksforgeeks.org/countplot-using-seaborn-in-python/?ref=ml_lbp
 
 Seaborn catplot https://www.geeksforgeeks.org/python-seaborn-catplot/?ref=lbp
+
+__Correlation References__
+
