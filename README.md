@@ -375,13 +375,82 @@ Reference to seaborn plot.
 
 #### Any Other Analysis ####
 
-## Regression line
+__Adding a line for best fit for Selected Variables__
+
+
+
+[regplot](https://seaborn.pydata.org/generated/seaborn.regplot.html) [lmplot]()
+
+
+<details>
+<summary>Code for Regression Plots</summary>
+
+```python
+##### Regression Plots for Selected Variables
+
+fig, ax = plt.subplots(2, 2, figsize = (15, 10))
+
+# Regression plot between sepal length and sepal width
+sns.regplot(iris, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 0])
+
+# Regression plot between sepal width and sepal length by species
+sns.regplot(setosa, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1])
+sns.regplot(versicolor, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1])
+sns.regplot(virginica, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1])
+
+# Regression plot between petal length and petal width
+sns.regplot(iris, x = 'petal_length', y = 'petal_width', ax = ax[1, 0])
+
+# Regression plot between petal length and petal width by species
+sns.regplot(setosa, x = 'petal_length', y = 'petal_width', ax = ax[1, 1])
+sns.regplot(versicolor, x = 'petal_length', y = 'petal_width', ax = ax[1, 1])
+sns.regplot(virginica, x = 'petal_length', y = 'petal_width', ax = ax[1, 1])
+
+# Add title
+plt.suptitle('Some Regression Plots for Iris Data Set')
+ax[0, 0].set_title('Sepal Width vs Sepal Length')
+ax[0, 1].set_title('Sepal Width vs Sepal Length by Species')
+ax[1, 0].set_title('Petal Width vs Petal Length')
+ax[1, 1].set_title('Petal Width vs Petal Length by Species')
+
+# Set x-axis labels
+ax[0, 0].set_xlabel('Sepal Length (cm)')
+ax[0, 1].set_xlabel('Sepal Length (cm)')
+ax[1, 0].set_xlabel('Petal Length (cm)')
+ax[1, 1].set_xlabel('Petal Length (cm)')
+
+# Set y-axis labels
+ax[0, 0].set_ylabel('Sepal Width (cm)')
+ax[0, 1].set_ylabel('Sepal Width (cm)')
+ax[1, 0].set_ylabel('Petal Width (cm)')
+ax[1, 1].set_ylabel('Petal Width (cm)')
+
+# Save plots
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Regression_plots.png')
+plt.show()
+plt.close()
+```
+<details>
+
+
+
+![Regression plots](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Regression_plots.png)
 
 
 
 ## Calculate correlation coefficients
 
-Correlation tells us how two variables are related. 
+[Correlation](https://www.jmp.com/en_ca/statistics-knowledge-portal/what-is-correlation.html) tells us how two variables are related. The most commonly used method to calculate the value of the correlation coefficient, the Pearson method correlation is only suitable for linear plots so it is important to create a scatter plot of the variables before the correlation coefficient is calculated. The values of the correlation coefficient range from -1 to 1. The sign indicates the direction of the relationship, with -1 indicating a strong negative correlation (as x increases, y decreases), 0 indicates no correlation and +1 is a strong positive correlation (as x increases, y increases).
+
+When the pair plot is analysed we can see that there is a linear relationship between all the variables in the data set so the correlation coefficient can be calculated using the [corr() function](). This could also be carried out using numpy's np.corrcoeff().
+
+``` python
+# To calculate the correlation coefficient between two variables
+corr_SL_vs_SW = iris['sepal_length'].corr(iris['sepal_width'])
+print(f'The correlation coefficient between sepal length and sepal width is {corr_SL_vs_SW}')
+```
+
+Luckily there are a number of methods to calculate the correlation coefficent between all the numeric variables in one step. The first method uses the corr() and generates a correlation matrix. The second method involves creating a [seaborn heatmap](). A heatmap is a more visual method to display the same information as a correlation matrix. It is possible to create a [heatmap using matplotlib](https://www.geeksforgeeks.org/how-to-draw-2d-heatmap-using-matplotlib-in-python/) however it is not as simple or straight forward as a seaborn heatmap.
 
 <details>
 <summary>Code for Correlation Matrix</summary>
@@ -400,10 +469,10 @@ print(correlation_matrix)
 |petal_length |    0.871754|   -0.420516|     1.000000|    0.962757|
 |petal_width  |    0.817954|   -0.356544|     0.962757|     1.000000|
 
-Heat map of correlation coefficients
+__Heatmap of correlation coefficients__
 
 <details>
-<summary> Code for Heatmaps</summary>
+<summary> ADJUST TITLE Code to Calculate Correlation Coefficient using a Heatmap</summary>
 
 ```python
 # Create a heatmap of the correlation coefficients between the variables in the data set.
@@ -434,6 +503,7 @@ plt.close()
 </details>
 
 ![Heat map](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Heatmap_correlation_coefficients.png)
+
 
 
 
@@ -472,4 +542,5 @@ Countplot using seaborn in python https://www.geeksforgeeks.org/countplot-using-
 Seaborn catplot https://www.geeksforgeeks.org/python-seaborn-catplot/?ref=lbp
 
 __Correlation References__
+
 

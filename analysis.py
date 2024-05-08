@@ -160,6 +160,10 @@ plt.close
 
 #### Any other analysis ####
 
+# To calculate the correlation coefficient between two variables
+corr_SL_vs_SW = iris['sepal_length'].corr(iris['sepal_width'])
+print(f'The correlation coefficient between sepal lenght and sepal width is {corr_SL_vs_SW}')
+
 # Create a correlation matrix between the numeric variables in the data set.
 correlation_matrix = iris.drop(['species'], axis = 1).corr()
 print(correlation_matrix)
@@ -197,17 +201,17 @@ fig, ax = plt.subplots(2, 2, figsize = (15, 10))
 sns.regplot(iris, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 0])
 
 # Regression plot between sepal width and sepal length by species
-sns.regplot(setosa, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1])
-sns.regplot(versicolor, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1])
-sns.regplot(virginica, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1])
+sns.regplot(setosa, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1], label = 'setosa')
+sns.regplot(versicolor, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1], label = 'versicolor')
+sns.regplot(virginica, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1], label = 'virginica')
 
 # Regression plot between petal length and petal width
 sns.regplot(iris, x = 'petal_length', y = 'petal_width', ax = ax[1, 0])
 
 # Regression plot between petal length and petal width by species
-sns.regplot(setosa, x = 'petal_length', y = 'petal_width', ax = ax[1, 1])
-sns.regplot(versicolor, x = 'petal_length', y = 'petal_width', ax = ax[1, 1])
-sns.regplot(virginica, x = 'petal_length', y = 'petal_width', ax = ax[1, 1])
+sns.regplot(setosa, x = 'petal_length', y = 'petal_width', ax = ax[1, 1], label = 'setosa')
+sns.regplot(versicolor, x = 'petal_length', y = 'petal_width', ax = ax[1, 1], label = 'versicolor')
+sns.regplot(virginica, x = 'petal_length', y = 'petal_width', ax = ax[1, 1], label = 'virginica')
 
 # Add title
 plt.suptitle('Some Regression Plots for Iris Data Set')
@@ -228,7 +232,7 @@ ax[0, 1].set_ylabel('Sepal Width (cm)')
 ax[1, 0].set_ylabel('Petal Width (cm)')
 ax[1, 1].set_ylabel('Petal Width (cm)')
 
+
 # Save plots
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Regression_plots.png')
-plt.show()
 plt.close()
