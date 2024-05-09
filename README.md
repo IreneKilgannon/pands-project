@@ -320,13 +320,13 @@ plot_hist(iris)
 __Discussion of histogram__
 
 Reference to seaborn histogram, take from penguins file
-What does the histogram tell us?
+What does the histogram tell us? Shape of histogram, distribution. 
 Add comparison to literature. 
 
 
 ## Scatter plot of each pair of variables
 
-The purpose of a scatter plot is to demonstrate? the relationship between two variables. 
+The purpose of a scatter plot is to demonstrate the relationship between two variables. 
 
 <details>
 <summary>Scatter plot code</summary>
@@ -368,22 +368,78 @@ plt.close
 <br>
 
 Reference to seaborn plot. 
+COMMENT ON SCATTER PLOT
 
-![Scatter plot for each pair of variables](https://github.com/IreneKilgannon/pands-project/blob/main/Scatter_plot.png)
 
 ![Pair plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Pair_plot.png)
 
 #### Any Other Analysis ####
 
+## Correlation 
+
+
 __Adding a line for best fit for Selected Variables__
 
+Now that the data has been visualised with a scatter plot adding a line of best fit (also known as a regression line or a trend line) is useful to check if there is a linear or a non-linear relationship between the data points.
+
+Matplotlib/Seaborn/Numpy analyses the data and fits a line that it thinks fits the data points the best. __HOW DOES IT DECIDE THAT? OLS, residuals__ The equation of a line is $y = mx + c$, where m is the slope and c is the y-intercept. 
+
+```python
+sepal_length_array = iris['sepal_length'].to_numpy()
+
+sepal_width_array = iris['sepal_width'].to_numpy()
+
+# Use numpy polyfit to fit a straight line between x and y.
+# np.polyfit(x-axis, y-axis, deg). Deg = 1 for a linear equation.
+m, c = np.polyfit(sepal_length_array, sepal_width_array, 1)
+
+# Return values for the slope, m and y-intercept, c.
+print(f'The value of the slope is {m.round(3)}.')
+print(f'The value of the intercept is {c.round(3)}.')
+```
+
+    The value of the slope is -0.057.
+    The value of the intercept is 3.389.
 
 
-[regplot](https://seaborn.pydata.org/generated/seaborn.regplot.html) [lmplot]()
-
+These values can then be used to plot the line. The y-values for the line are generated from the values of m and c above. 
 
 <details>
-<summary>Code for Regression Plots</summary>
+<summary> Code to </summary>
+
+```python
+# Demonstrating how to plot a regression line on a scatter plot using numpy.
+fig, ax = plt.subplots()
+
+# A scatter plot of sepal Width vs sepal length using the numpy array generated in the previous cell.
+ax.scatter(sepal_length_array, sepal_width_array)
+
+# Plotting the trend line in green. The y-axis values are generated from the equation of the line, with m and c equal to the values generated above.
+ax.plot(sepal_length_array, m * sepal_length_array + c, 'g-')
+
+# Axis labels.
+plt.xlabel('Sepal Length (cm)')
+plt.ylabel('Sepal Width (cm)')
+
+# Title.
+plt.title('Sepal Width vs Sepal Length')
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Numpy_reg_plot.png')
+
+```
+</details>
+
+![Link to plot ]()
+
+Fortunately are faster ways to add a regression line. Two of the simplest are seaborn's [regplot](https://seaborn.pydata.org/generated/seaborn.regplot.html) (regression plot) and [lmplot](https://seaborn.pydata.org/generated/seaborn.lmplot.html) (linear model plot) functions. Regplot and lmplot generate very similiar plots but they have different parameters. Regplot is an axes-level function. Seaborn lmplot is a figure-level function with access to FacetGrid. FacetGrid means that multiple plots can be created in a grid with rows and columns. lmplot has the hue, col and row parameters __for categorical variables CHECK__. 
+
+It is not possible to to extract the values of m and c from a seaborn plot. Linear regression  blah blah(https://medium.com/@shuv.sdr/simple-linear-regression-in-python-a0069b325bf8  
+
+When creating plots it is very important to take any categorical variables into account. This will be demonstrated by creating some regression plots using regplot. To create side by side plots, regplot has the parameter of ax. The first plot will be a plot of the data and the second plot will take the flower species into account. 
+* sepal width vs sepal length
+* petal width vs petal length
+
+<details>
+<summary>Code for Regression Plot</summary>
 
 ```python
 ##### Regression Plots for Selected Variables
@@ -429,20 +485,32 @@ ax[1, 1].set_ylabel('Petal Width (cm)')
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Regression_plots.png')
 plt.show()
 plt.close()
-```
-<details>
 
+# Regression Line Pair Plot, kind = 'reg'
+sns.pairplot(iris, hue = 'species', kind = 'reg')
+plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_Regression_plots.png')
+
+```
+</details>
 
 
 ![Regression plots](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Regression_plots.png)
 
+Simpson's paradox. Negative
+
+![Pair regression plot](C:\Users\Martin\Desktop\pands\pands-project\plots\Pair_Regression_plots.png)
 
 
 ## Calculate correlation coefficients
 
 [Correlation](https://www.jmp.com/en_ca/statistics-knowledge-portal/what-is-correlation.html) tells us how two variables are related. The most commonly used method to calculate the value of the correlation coefficient, the Pearson method correlation is only suitable for linear plots so it is important to create a scatter plot of the variables before the correlation coefficient is calculated. The values of the correlation coefficient range from -1 to 1. The sign indicates the direction of the relationship, with -1 indicating a strong negative correlation (as x increases, y decreases), 0 indicates no correlation and +1 is a strong positive correlation (as x increases, y increases).
 
-When the pair plot is analysed we can see that there is a linear relationship between all the variables in the data set so the correlation coefficient can be calculated using the [corr() function](). This could also be carried out using numpy's np.corrcoeff().
+![Scatter plot and Correlation](https://files.realpython.com/media/py-corr-1.d13ed60a9b91.png)
+
+_Image from realpython.com_
+
+When the regression pair plot is analysed we can see that there is a linear relationship between all the variables in the data set so the correlation coefficient can be calculated using the [corr() function]() with the Pearson method. Correlation could also be carried out using numpy's np.corrcoeff().
 
 ``` python
 # To calculate the correlation coefficient between two variables
@@ -450,7 +518,7 @@ corr_SL_vs_SW = iris['sepal_length'].corr(iris['sepal_width'])
 print(f'The correlation coefficient between sepal length and sepal width is {corr_SL_vs_SW}')
 ```
 
-Luckily there are a number of methods to calculate the correlation coefficent between all the numeric variables in one step. The first method uses the corr() and generates a correlation matrix. The second method involves creating a [seaborn heatmap](). A heatmap is a more visual method to display the same information as a correlation matrix. It is possible to create a [heatmap using matplotlib](https://www.geeksforgeeks.org/how-to-draw-2d-heatmap-using-matplotlib-in-python/) however it is not as simple or straight forward as a seaborn heatmap.
+Luckily there are a number of methods to calculate the correlation coefficent between all the numeric variables in one step. The first method uses the corr() and generates a correlation matrix. The second method involves creating a [seaborn heatmap](). A heatmap is a more visual method to display the same information as a correlation matrix. It is possible to create a [heatmap using matplotlib](https://www.geeksforgeeks.org/how-to-draw-2d-heatmap-using-matplotlib-in-python/) however it is not as simple as a seaborn heatmap.
 
 <details>
 <summary>Code for Correlation Matrix</summary>
@@ -502,10 +570,11 @@ plt.close()
 
 </details>
 
+
+
 ![Heat map](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Heatmap_correlation_coefficients.png)
 
-
-
+The plot of sepal width vs sepal length is an example of Simpson's paradox. Wikipedia states that [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) is a phenomenon in probability and statistics in which a trend appears in several groups of data but disappears or reverses when the groups are combined. 
 
 
 Who would have thought that nearly one hundred years later Anderson's data would be used by thousands of students worldwide who are learning statistics, data science or machine learning? https://www.sciencedirect.com/science/article/pii/S1877050919320836

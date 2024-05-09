@@ -195,6 +195,38 @@ plt.close()
 
 ##### Regression Plots for Selected Variables
 
+sepal_length_array = iris['sepal_length'].to_numpy()
+
+sepal_width_array = iris['sepal_width'].to_numpy()
+
+# Use numpy polyfit to fit a straight line between x and y.
+# np.polyfit(x-axis, y-axis, deg). Deg = 1 for a linear equation.
+m, c = np.polyfit(sepal_length_array, sepal_width_array, 1)
+
+# Return values for the slope, m and y-intercept, c.
+print(f'The value of the slope is {m.round(3)}.')
+print(f'The value of the intercept is {c.round(3)}.')
+
+
+
+# Demonstrating how to plot a regression line on a scatter plot using numpy.
+fig, ax = plt.subplots()
+
+# A scatter plot of Sepal Width vs sepal length using the numpy array generated in the previous cell.
+ax.scatter(sepal_length_array, sepal_width_array)
+
+# Plotting the trend line. The y-axis values are generated from the equation of the line, with m and c equal to the values generated above.
+ax.plot(sepal_length_array, m * sepal_length_array + c, 'g-')
+
+# Axis labels.
+plt.xlabel('Sepal Length (cm)')
+plt.ylabel('Sepal Width (cm)')
+
+# Title.
+plt.title('Sepal Width vs Sepal Length')
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Numpy_reg_plot.png')
+
+
 fig, ax = plt.subplots(2, 2, figsize = (15, 10))
 
 # Regression plot between sepal length and sepal width
@@ -236,3 +268,7 @@ ax[1, 1].set_ylabel('Petal Width (cm)')
 # Save plots
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Regression_plots.png')
 plt.close()
+
+sns.pairplot(iris, hue = 'species', kind = 'reg')
+plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_Regression_plots.png')
