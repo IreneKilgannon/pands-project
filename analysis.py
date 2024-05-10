@@ -122,24 +122,33 @@ ax[1, 1].set_xlabel('Petal Width (cm)')
 plt.suptitle('Histogram of the Iris Data Set')
 
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Summary_Histogram.png')
+plt.close()
 
 
 # Save a histogram of each variable to png files.
 # Creating a function that iterated through the data set, would ideally like to generalise more so that it could in theory be used for any data set.
 
 def plot_hist(df):
-    for x in df:
-        # Create a seaborn histogram, hue parameter is very useful to differentiate by another variable.
-        sns.histplot(x = x, data = df, hue = 'species')
-        # Add title
-        plt.title(f"Histogram of {x.title().replace('_', ' ')}")
-        # Label x-axis
-        plt.xlabel(f"{x.replace('_', ' ')}")
-        plt.ylabel('Frequency')
-        plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Histogram_of_{x}.png')
-        #plt.show()
-        plt.close()
+    '''To plot a histogram of all the numeric variables in a data set
+        Args: a dataframe
         
+    '''
+    for x in df:
+
+        if df[x].dtype == 'O':
+            continue
+        # Create a seaborn histogram, hue parameter is very useful to differentiate by another variable.
+        else:
+            sns.histplot(x = x, data = df, hue = 'species')
+            # Add title
+            plt.title(f"Histogram of {x.title().replace('_', ' ')}")
+            # Label x-axis
+            plt.xlabel(f"{x.replace('_', ' ')}")
+            plt.ylabel('Frequency')
+            plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Histogram_of_{x}.png')
+            #plt.show()
+            plt.close()
+
 # Call the plot_hist function on the iris data set.
 plot_hist(iris)
 
@@ -251,7 +260,7 @@ plt.ylabel('Sepal Width (cm)')
 # Title.
 plt.title('Sepal Width vs Sepal Length')
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Numpy_reg_plot.png')
-
+plt.close()
 # 
 fig, ax = plt.subplots(2, 2, figsize = (15, 10))
 
@@ -304,3 +313,4 @@ plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_Regre
 sns.lmplot(iris, x = 'sepal_length', y = 'sepal_width', col = 'species')
 plt.suptitle('Sepal Width vs Sepal Length by Species', y = 1.05)
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\lmplot_example.png')
+plt.close()

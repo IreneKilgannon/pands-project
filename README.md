@@ -322,7 +322,8 @@ plt.show()
 ```
 </details>
 
-!Overall [Histogram]()
+![Overall Histogram](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Summary_Histogram.png)
+
 
 Rather than create a plot for each of the variables by coding each of the variables seperately, I wrote function to plot each of the variables in the data set by looping through the column names, which I called x. The histograms were created using a [seaborn histplot](). Seaborn's hue parameter made it very easy to differentiate each of the variables by the categorical variable, species. 
 

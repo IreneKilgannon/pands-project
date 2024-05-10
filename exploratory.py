@@ -1,3 +1,9 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
 def exploratory(df):
     head = f"The first five rows of the data set are: \n {df.head()}\n \n"
 
@@ -28,12 +34,13 @@ def exploratory(df):
     
         
 
-def plot_hist(df):
-    for col in df:
-        sns.histplot(x = col, data = df, hue = 'species')
-        plt.title(f"Histogram of {col.title().replace('_', ' ')}")
-        plt.xlabel(f"{col.replace('_', ' ')}")
-        plt.savefig(f'Histogram_of_{col}.png')
+def plot_hist(df, hue):
+    for x in df:
+        sns.histplot(x = x, data = df, hue = hue)
+        plt.title(f"Histogram of {x.title().replace('_', ' ')}")
+        plt.xlabel(f"{x.replace('_', ' ')}")
+        plt.savefig(f'Histogram_of_{x}.png')
         #plt.show()
         plt.close()
+
 
