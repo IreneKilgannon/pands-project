@@ -289,6 +289,41 @@ plt.close()
 
 Histograms are used to plot continouous numeric data. The four variables of sepal length, sepal width, petal length and petal width fulfill this criteria.
 
+<details>
+<summary>Histogram code</summary>
+
+```python
+fig, ax = plt.subplots(2, 2, figsize = (13, 13))
+
+sns.histplot(iris, x = 'sepal_length', ax = ax[0,0])
+ax[0, 0].set_title('Histogram of Sepal Length')
+ax[0, 0].set_xlabel('Sepal Length (cm)')
+
+
+sns.histplot(iris, x = 'sepal_width', ax = ax[0, 1])
+ax[0, 1].set_title('Histogram of Sepal Width')
+ax[0, 1].set_xlabel('Sepal Width (cm)')
+
+
+sns.histplot(iris, x = 'petal_length', ax = ax[1, 0])
+ax[1, 0].set_title('Histogram of Petal Length')
+ax[1, 0].set_xlabel('Petal Length (cm)')
+
+sns.histplot(iris, x = 'petal_width', ax = ax[1, 1])
+ax[1, 1].set_title('Histogram of Petal Width')
+ax[1, 1].set_xlabel('Petal Width (cm)')
+
+plt.suptitle('Histogram of the Iris Data Set')
+
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Summary_Histogram.png')
+
+plt.show()
+
+```
+</details>
+
+!Overall [Histogram]()
+
 Rather than create a plot for each of the variables by coding each of the variables seperately, I wrote function to plot each of the variables in the data set by looping through the column names, which I called x. The histograms were created using a [seaborn histplot](). Seaborn's hue parameter made it very easy to differentiate each of the variables by the categorical variable, species. 
 
 Currently the function is creating a histogram of the species column __NEED TO REFINE THE CODE SO THAT A HISTOGRAM OF SPECIES IS NOT CREATED__ Would also like to refine the code so that it could be used for any data set. The hue parameter is set to species for this data set but it would be nice if the user could select their own variable for hue. 
@@ -613,6 +648,8 @@ plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_Regre
 </details>
 
 ![Regression plots](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Regression_plots.png)
+
+ADD COMMENT ON DIFFERENCES
 
 The plot of sepal width vs sepal length is an example of Simpson's paradox. Wikipedia states that [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) is a phenomenon in probability and statistics in which a trend appears in several groups of data but disappears or reverses when the groups are combined. 
 

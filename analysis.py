@@ -98,8 +98,34 @@ plt.close()
 
 #### Save a histogram of each variable to png files #####
 
+# Create a histogram of each numeric variable. 
+fig, ax = plt.subplots(2, 2, figsize = (13, 13))
+
+sns.histplot(iris, x = 'sepal_length', ax = ax[0,0])
+ax[0, 0].set_title('Histogram of Sepal Length')
+ax[0, 0].set_xlabel('Sepal Length (cm)')
+
+
+sns.histplot(iris, x = 'sepal_width', ax = ax[0, 1])
+ax[0, 1].set_title('Histogram of Sepal Width')
+ax[0, 1].set_xlabel('Sepal Width (cm)')
+
+
+sns.histplot(iris, x = 'petal_length', ax = ax[1, 0])
+ax[1, 0].set_title('Histogram of Petal Length')
+ax[1, 0].set_xlabel('Petal Length (cm)')
+
+sns.histplot(iris, x = 'petal_width', ax = ax[1, 1])
+ax[1, 1].set_title('Histogram of Petal Width')
+ax[1, 1].set_xlabel('Petal Width (cm)')
+
+plt.suptitle('Histogram of the Iris Data Set')
+
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Summary_Histogram.png')
+
+
 # Save a histogram of each variable to png files.
-# Creating a function that iterateds through the data set, would ideally like to generalise more so that it could in theory be used for any data set.
+# Creating a function that iterated through the data set, would ideally like to generalise more so that it could in theory be used for any data set.
 
 def plot_hist(df):
     for x in df:
@@ -275,6 +301,6 @@ plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_Regression_plots.png')
 
 # lmplot example. Sepal Width vs Sepal Length
-sns.lmplot(iris, x = 'sepal_length_cm', y = 'sepal_width_cm', col = 'species')
+sns.lmplot(iris, x = 'sepal_length', y = 'sepal_width', col = 'species')
 plt.suptitle('Sepal Width vs Sepal Length by Species', y = 1.05)
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\lmplot_example.png')
