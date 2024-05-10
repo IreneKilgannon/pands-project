@@ -162,7 +162,7 @@ plt.close
 
 # To calculate the correlation coefficient between two variables
 corr_SL_vs_SW = iris['sepal_length'].corr(iris['sepal_width'])
-print(f'The correlation coefficient between sepal lenght and sepal width is {corr_SL_vs_SW}')
+print(f'The correlation coefficient between sepal length and sepal width is {corr_SL_vs_SW.round(3)}')
 
 # Create a correlation matrix between the numeric variables in the data set.
 correlation_matrix = iris.drop(['species'], axis = 1).corr()
@@ -226,7 +226,7 @@ plt.ylabel('Sepal Width (cm)')
 plt.title('Sepal Width vs Sepal Length')
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Numpy_reg_plot.png')
 
-
+# 
 fig, ax = plt.subplots(2, 2, figsize = (15, 10))
 
 # Regression plot between sepal length and sepal width
@@ -269,6 +269,12 @@ ax[1, 1].set_ylabel('Petal Width (cm)')
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Regression_plots.png')
 plt.close()
 
+# Pair regression plot
 sns.pairplot(iris, hue = 'species', kind = 'reg')
 plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_Regression_plots.png')
+
+# lmplot example. Sepal Width vs Sepal Length
+sns.lmplot(iris, x = 'sepal_length_cm', y = 'sepal_width_cm', col = 'species')
+plt.suptitle('Sepal Width vs Sepal Length by Species', y = 1.05)
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\lmplot_example.png')
