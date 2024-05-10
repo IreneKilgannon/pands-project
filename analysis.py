@@ -72,7 +72,7 @@ with open('analysis.txt', 'a') as f:
     f.write(virginica_summary)
 
 
-# Create a box plot to visually compare the summary statistics across the three species in the data set.
+# A box plot to visually compare the summary statistics across the three species in the data set.
 
 # Create a fig, ax plot
 fig, ax = plt.subplots(2,2, figsize = (10, 10))
@@ -96,61 +96,77 @@ ax[1,1].set_title('Petal Width')
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Box_plot.png')
 plt.close()
 
-#### Save a histogram of each variable to png files #####
+######################################
+# HISTOGRAM CODE
+
+# TASK: Save a histogram of each variable to png files #####
 
 # Create a histogram of each numeric variable. 
 fig, ax = plt.subplots(2, 2, figsize = (13, 13))
 
+# Histogram of sepal length
 sns.histplot(iris, x = 'sepal_length', ax = ax[0,0])
 ax[0, 0].set_title('Histogram of Sepal Length')
 ax[0, 0].set_xlabel('Sepal Length (cm)')
 
-
+# Histogram of sepal width
 sns.histplot(iris, x = 'sepal_width', ax = ax[0, 1])
 ax[0, 1].set_title('Histogram of Sepal Width')
 ax[0, 1].set_xlabel('Sepal Width (cm)')
 
-
+# Histogram of petal length
 sns.histplot(iris, x = 'petal_length', ax = ax[1, 0])
 ax[1, 0].set_title('Histogram of Petal Length')
 ax[1, 0].set_xlabel('Petal Length (cm)')
 
+# Histogram of petal width
 sns.histplot(iris, x = 'petal_width', ax = ax[1, 1])
 ax[1, 1].set_title('Histogram of Petal Width')
 ax[1, 1].set_xlabel('Petal Width (cm)')
 
+# Overall title for the plot
 plt.suptitle('Histogram of the Iris Data Set')
 
+# Histogram saved as png file
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Summary_Histogram.png')
 plt.close()
 
 
-# Save a histogram of each variable to png files.
-# Creating a function that iterated through the data set, would ideally like to generalise more so that it could in theory be used for any data set.
+# Creating a function to iterate through the numeric columns in the data set.
 
-def plot_hist(df):
-    '''To plot a histogram of all the numeric variables in a data set
-        Args: a dataframe
-        
+## 
+
+def plot_hist(df, hue = None):
+    '''To function plot a seaborn histogram of all the numeric variables in a dataframe.
+
+    Parameters
+    ----------
+    df : dataframe
+    hue : a categorical variable in the data set. Optional argument.
+    
+    Returns
+    -------
+    A saved histogram of the numeric variables in the data set as a png file.
     '''
     for x in df:
-
-        if df[x].dtype == 'O':
-            continue
-        # Create a seaborn histogram, hue parameter is very useful to differentiate by another variable.
-        else:
-            sns.histplot(x = x, data = df, hue = 'species')
+        # Histograms are for continuous numeric data of data type integer or float.
+        if df[x].dtype == 'int' or df[x].dtype == 'float':
+            # Create a seaborn histogram, hue parameter is very useful to differentiate by a categorical variable.
+            sns.histplot(x = x, data = df, hue = hue)
             # Add title
             plt.title(f"Histogram of {x.title().replace('_', ' ')}")
             # Label x-axis
             plt.xlabel(f"{x.replace('_', ' ')}")
             plt.ylabel('Frequency')
+            # Save the plots
             plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Histogram_of_{x}.png')
-            #plt.show()
             plt.close()
 
 # Call the plot_hist function on the iris data set.
-plot_hist(iris)
+plot_hist(iris, hue = 'species')
+
+######################################
+# SCATTER PLOT CODE
 
 #### Output a scatter plot of each pair of variables ####
 

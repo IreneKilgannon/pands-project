@@ -34,13 +34,27 @@ def exploratory(df):
     
         
 
-def plot_hist(df, hue):
+def plot_hist(df, hue = None):
+    '''To function plot a seaborn histogram of all the numeric variables in a dataframe.
+
+    Parameters
+    ----------
+    df : dataframe
+    hue : a categorical variable in the data set
+    
+    Returns
+    -------
+    A saved histogram of the numeric variables in the data set as a png file.
+    '''
     for x in df:
-        sns.histplot(x = x, data = df, hue = hue)
-        plt.title(f"Histogram of {x.title().replace('_', ' ')}")
-        plt.xlabel(f"{x.replace('_', ' ')}")
-        plt.savefig(f'Histogram_of_{x}.png')
-        #plt.show()
-        plt.close()
+        # Histograms are for continuous numeric data, continue to the next column if the datatype of the column is object.
+        if df[x].dtype == 'int' or df[x].dtype == 'float':
+        # Create a seaborn histogram, hue parameter is very useful to differentiate by another variable.
+            sns.histplot(x = x, data = df, hue = hue)
+            plt.title(f"Histogram of {x.title().replace('_', ' ')}")
+            plt.xlabel(f"{x.replace('_', ' ')}")
+            plt.savefig(f'Histogram_of_{x}.png')
+            #plt.show()
+            plt.close()
 
 

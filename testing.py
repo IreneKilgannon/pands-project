@@ -7,6 +7,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Import the data set, add headings to the columns.
-iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species'])
+penguins = pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv")
 
-plot_hist(iris, hue = 'species')
+plot_hist(penguins, hue = 'sex')

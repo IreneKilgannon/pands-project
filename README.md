@@ -13,7 +13,7 @@ This is my analysis of the Fisher's Iris data set for the programming and script
 3. write summary statistics to .txt file -  ~~done~~. Discussion next
 4. histograms - created a function, Create a module with all the plotting files?. Add discussion
 5. scatter plot /pair plot between all the variables. Add discussion
-6. perhaps some linear regression plots. Make a start today.
+6. perhaps some linear regression plots. DONE
 7. calculate correlation coefficients, ~~fix labels on heatmap~~. add discussion
 8. regression analysis https://campus.datacamp.com/courses/introduction-to-regression-with-statsmodels-in-python/simple-linear-regression-modeling?ex=1
 9. machine learning sklearn
@@ -283,7 +283,7 @@ plt.close()
 
 ![Boxplot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Box_plot.png)
 
-
+----
 
 ## Histogram of each variable saved to png files
 
@@ -295,20 +295,22 @@ Histograms are used to plot continouous numeric data. The four variables of sepa
 ```python
 fig, ax = plt.subplots(2, 2, figsize = (13, 13))
 
+# Histogram of sepal length
 sns.histplot(iris, x = 'sepal_length', ax = ax[0,0])
 ax[0, 0].set_title('Histogram of Sepal Length')
 ax[0, 0].set_xlabel('Sepal Length (cm)')
 
-
+# Histogram of sepal width
 sns.histplot(iris, x = 'sepal_width', ax = ax[0, 1])
 ax[0, 1].set_title('Histogram of Sepal Width')
 ax[0, 1].set_xlabel('Sepal Width (cm)')
 
-
+# Histogram of petal length
 sns.histplot(iris, x = 'petal_length', ax = ax[1, 0])
 ax[1, 0].set_title('Histogram of Petal Length')
 ax[1, 0].set_xlabel('Petal Length (cm)')
 
+# Histogram of petal width
 sns.histplot(iris, x = 'petal_width', ax = ax[1, 1])
 ax[1, 1].set_title('Histogram of Petal Width')
 ax[1, 1].set_xlabel('Petal Width (cm)')
@@ -318,35 +320,53 @@ plt.suptitle('Histogram of the Iris Data Set')
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Summary_Histogram.png')
 
 plt.show()
-
 ```
 </details>
 
 ![Overall Histogram](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Summary_Histogram.png)
 
+The four plots have an usual shape. The histograms should have a [normal distribution](https://www.youtube.com/watch?v=rzFX5NWojp0) and only one plot, the histogram of sepal width looks like it approaches a normal distribution. 
 
-Rather than create a plot for each of the variables by coding each of the variables seperately, I wrote function to plot each of the variables in the data set by looping through the column names, which I called x. The histograms were created using a [seaborn histplot](). Seaborn's hue parameter made it very easy to differentiate each of the variables by the categorical variable, species. 
+![Normal Distribution](https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Bellcurve.svg/320px-Bellcurve.svg.png)
 
-Currently the function is creating a histogram of the species column __NEED TO REFINE THE CODE SO THAT A HISTOGRAM OF SPECIES IS NOT CREATED__ Would also like to refine the code so that it could be used for any data set. The hue parameter is set to species for this data set but it would be nice if the user could select their own variable for hue. 
+_Normal Distribtuion_
+
+It is worth investigating to see if the species of the flower is affecting the shape of the curve. Rather than create a plot for each of the variables by coding each of the variables seperately (as I did above), I wrote function to plot each of the variables in the data set by looping through any column whose datatype is either integer or float. The histograms were created using a [seaborn histplot](). Seaborn's hue parameter makes it very easy to differentiate the data by the categorical variable, species. Hue is an optional argument for the function. 
 
 <details>
 <summary>Histogram code</summary>
 
 ```python
-def plot_hist(df):
-    for x in df:
-        sns.histplot(x = x, data = df, hue = 'species')
-        plt.title(f"Histogram of {x.title().replace('_', ' ')}")
-        plt.xlabel(f"{x.replace('_', ' ')}")
-        plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Histogram_of_{x}.png')
-        #plt.show()
-        plt.close()
+def plot_hist(df, hue = None):
+    '''Plot a seaborn histogram of all the numeric variables in a dataframe. Optional hue parameter for a categorical variable. 
 
-# Calling the plot_hist function on the iris data set.
-plot_hist(iris)
+    Parameters
+    ----------
+    df : dataframe
+    hue : a categorical variable in the data set. Optional argument.
+    
+    Returns
+    -------
+    A saved histogram of the numeric variables in the data set as a png file.
+    '''
+    for x in df:
+        # Histograms are for continuous numeric data of data type integer or float.
+        if df[x].dtype == 'int' or df[x].dtype == 'float':
+            # Create a seaborn histogram, hue parameter is very useful to differentiate by a categorical variable.
+            sns.histplot(x = x, data = df, hue = hue)
+            # Add title. Replacing '_' with a blank space.
+            plt.title(f"Histogram of {x.title().replace('_', ' ')}")
+            # Label x-axis
+            plt.xlabel(f"{x.replace('_', ' ')}")
+            plt.ylabel('Frequency')
+            # Save the plots
+            plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Histogram_of_{x}.png')
+            plt.close()
+
+# Call the plot_hist function on the iris data set.
+plot_hist(iris, hue = 'species')
 ```
 </details>
-
 
 |||
 |---|---|
@@ -354,12 +374,11 @@ plot_hist(iris)
 |![Histogram of Petal Length](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Histogram_of_petal_length.png)|![Histogram of Petal Width](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Histogram_of_petal_width.png)|
 
 
-
 __Discussion of histogram__
 
-Reference to seaborn histogram, take from penguins file
-What does the histogram tell us? Shape of histogram, distribution. 
-Add comparison to literature. 
+Now that the data has been classified by species we can see that the histogram better resembles a normal distribution for most of the histograms. As the data set only has 50 data points for each species, it would require many more data points to fully resemble a normal distribution as stated in the Central limit theorem. and the unusual shape of the previous histograms was due to the overlapping data points. 
+
+The histogram for petal length and petal width for Iris setosa is differnet to the other histograms as it is right skewed. It is also distinct cluster. This could be helpful for classification of the species. __PHRASE BETTER__
 
 
 ## Scatter plot of each pair of variables
