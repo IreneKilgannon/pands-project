@@ -445,13 +445,12 @@ plt.close
 
 ||||
 |---|---|---|
-|![PLvsPW]()|![PLvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_petal_length_vs_sepal_length.png)|![Pe]()|
-|![Pe]()|![Pe]()|![Pe]()|
+|![PLvsSW](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Length_vs_Sepal%20Width.png)|![PLvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Length_vs_Sepal%20Length.png)|![PWvsPL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Petal%20Length.png)|
+|![PWvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Sepal%20Length.png)|![PWvsSW](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Sepal%20Width.png)|![SWvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Sepal%20Width_vs_Sepal%20Length.png)|
 
 The scatter plots demonstrate clearly that Iris setosa is a distict cluster. It does not overlap with with Iris versicolor or Iris virginica in any of the scatter plots. There is one very obvious outlier in the sepal width data at approx. 2.3cm __CHECK__.
 
 The clusters of Iris versicolor and Iris virginica overlap in all the scatter plots. In the plot of sepal length vs sepal width there is a significant amount of overlap. The least amount of overlap appears to be in the scatterplots between petal length and petal width and between petal width and sepal width. One widely used technique for classification in machine learning is called [K-nearest neighbours(KNN)](https://www.datacamp.com/tutorial/k-nearest-neighbor-classification-scikit-learn). The K-nearest neighbours algorithm looks at the nearest data points to the data point of interest and decides which cluster the data point belongs to. Minimising the overlap of clusters will improve the chance of correct assignment.
-
 
 ![Pair plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Pair_plot.png)
 
