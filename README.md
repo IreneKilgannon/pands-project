@@ -360,7 +360,7 @@ def plot_hist(df, hue = None):
             plt.xlabel(f"{x.replace('_', ' ')}")
             plt.ylabel('Frequency')
             # Save the plots
-            plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Histogram_of_{x}.png')
+            plt.savefig(f'plots\\Histogram_of_{x}.png')
             plt.close()
 
 # Call the plot_hist function on the iris data set.
@@ -378,46 +378,64 @@ __Discussion of histogram__
 
 Now that the data has been classified by species we can see that the histogram better resembles a normal distribution for most of the histograms. As the data set only has 50 data points for each species, it would require many more data points to fully resemble a normal distribution as stated in the Central limit theorem. and the unusual shape of the previous histograms was due to the overlapping data points. 
 
-The histogram for petal length and petal width for Iris setosa is differnet to the other histograms as it is right skewed. It is also distinct cluster. This could be helpful for classification of the species. __PHRASE BETTER__ __add comparison to literature__
+The histogram for petal length and petal width for Iris setosa is different to the other histograms as it is right skewed. It is also distinct cluster. This could be helpful for classification of the species. __PHRASE BETTER__ __add comparison to literature__
 
 
 ## Scatter plot of each pair of variables
 
-The purpose of a scatter plot is to demonstrate the relationship between two variables. 
+The purpose of a scatter plot is to demonstrate the relationship between two variables. Scatter plots also indicate if there are any outlying points (outliers) away from the main data points that could disrupt accurate correlation.
+These were created using [seaborn scatter plots](https://www.geeksforgeeks.org/scatterplot-using-seaborn-in-python/). It is also possible to create scatter plots with [matplotlib's plt.scatter function](https://www.w3schools.com/python/python_ml_scatterplot.asp)
 
 <details>
 <summary>Scatter plot code</summary>
 
 ```python
-def plot_scatter(df):
+def plot_scatter(df, hue = None):
+    '''A function to plot a seaborn scatter plot of each pair of numeric variables in a dataframe.
+
+    Parameters
+    ----------
+    df : dataframe
+    hue : a categorical variable in the data set. Optional parameter/argument CHECK CORRECT TERM.
     
+    Returns
+    -------
+    Saved scatter plots between all the numeric variables in the data set as a png file.
+    '''
+    plotted_x = []
     for x in df:
-        for y in df:
-            # Do not create a scatter plot for the following conditions
-            if x == y or x == 'species' or y == 'species':
-                continue
-            else:
-                # Create a scatter plot
-                sns.scatterplot(data = df, x = x, y = y, hue = 'species')
+        plotted_x.append(x)
+        # Only want a scatter plot of the numeric variables
+        if df[x].dtype == 'int' or df[x].dtype == 'float':
+            for y in df:
+                # Only numeric data types will be plotted
+                if df[y].dtype == 'int' or df[y].dtype == 'float':
+                    # Do not create a plot if x and y are the same or if x has been used to create a plot previously.
+                    if x == y or y in plotted_x:
+                        continue
+                    else:
+                        # Create a scatter plot
+                        sns.scatterplot(data = df, x = x, y = y, hue = hue)
 
-                # Add title to plot
-                plt.title(f"Scatter plot of {y.title().replace('_', ' ')} vs {x.title().replace('_', ' ')}")
+                        # Add title to plot, removing any underscores and capitalizing it. 
+                        plt.title(f"Scatter plot of {y.title().replace('_', ' ')} vs {x.title().replace('_', ' ')}")
 
-                # Label x and y-axis
-                plt.xlabel(f"{x.title().replace('_', ' ')}")
-                plt.ylabel(f"{y.title().replace('_', ' ')}")
+                        # Label x and y-axis
+                        plt.xlabel(f"{x.title().replace('_', ' ')}")
+                        plt.ylabel(f"{y.title().replace('_', ' ')}")
 
-                # Save a scatter plot for each pair of variables
-                plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Scatterplot_{y}_vs_{x}.png')
-                plt.close()
-
+                        # Save a scatter plot for each pair of variables
+                        plt.savefig(f"plots\\Scatterplot_{y.title().replace('_', ' ')}_vs_{x.title().replace('_', ' ')}.png")
+                        
+                        plt.close()
+                        
 # Call the plot_scatter function on the iris data set.
-plot_scatter(iris)
+plot_scatter(iris, hue = 'species')
 
 # Use a pair plot! Much simplier method to generate a scatter plot of each pair of variables
 g = sns.pairplot(iris, hue = 'species')
 g.fig.suptitle('Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_plot.png')
+plt.savefig('plots\\Pair_plot.png')
 plt.close
 #plt.show()
 ```
@@ -425,8 +443,14 @@ plt.close
 </details>
 <br>
 
-Reference to seaborn plot. 
-COMMENT ON SCATTER PLOT, outliers, 
+||||
+|---|---|---|
+|![PLvsPW]()|![PLvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_petal_length_vs_sepal_length.png)|![Pe]()|
+|![Pe]()|![Pe]()|![Pe]()|
+
+The scatter plots demonstrate clearly that Iris setosa is a distict cluster. It does not overlap with with Iris versicolor or Iris virginica in any of the scatter plots. There is one very obvious outlier in the sepal width data at approx. 2.3cm __CHECK__.
+
+The clusters of Iris versicolor and Iris virginica overlap in all the scatter plots. In the plot of sepal length vs sepal width there is a significant amount of overlap. The least amount of overlap appears to be in the scatterplots between petal length and petal width and between petal width and sepal width. One widely used technique for classification in machine learning is called [K-nearest neighbours(KNN)](https://www.datacamp.com/tutorial/k-nearest-neighbor-classification-scikit-learn). The K-nearest neighbours algorithm looks at the nearest data points to the data point of interest and decides which cluster the data point belongs to. Minimising the overlap of clusters will improve the chance of correct assignment.
 
 
 ![Pair plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Pair_plot.png)

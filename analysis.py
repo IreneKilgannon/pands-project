@@ -93,7 +93,7 @@ ax[1,0].set_title('Petal Length')
 ax[1,1].set_title('Petal Width')
 
 # Save the created plot
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Box_plot.png')
+plt.savefig('plots\\Box_plot.png')
 plt.close()
 
 ######################################
@@ -101,7 +101,7 @@ plt.close()
 
 # TASK: Save a histogram of each variable to png files #####
 
-# Create a histogram of each numeric variable. 
+# Create a histogram of each numeric variable as a figure axes plot. 
 fig, ax = plt.subplots(2, 2, figsize = (13, 13))
 
 # Histogram of sepal length
@@ -173,8 +173,8 @@ plot_hist(iris, hue = 'species')
 # Creating a function
 
 # How would I improve it, 
-    # 1. generalise it more, if x or y are an object data type, skip 
-    # 2. only 1 of plot of each eg currently getting petal length vs petal width and then petal width vs petal length. One plot would do.
+    # 1. generalise it more, if x or y are an object data type, skip DONE!!!
+    # 2. only 1 of plot of each eg currently getting petal length vs petal width and then petal width vs petal length. One plot would do. DONE!!!! 
     # 
 
 def plot_scatter(df, hue = None):
@@ -189,13 +189,15 @@ def plot_scatter(df, hue = None):
     -------
     Saved scatter plots between all the numeric variables in the data set as a png file.
     '''
+    # Instantiate a list to keep track of the x-axis variables
     plotted_x = []
     for x in df:
+        # Add x to the list
         plotted_x.append(x)
-        # Only want a scatter plot of the numeric variables
+        # Only want a scatter plot of the numeric variables.
         if df[x].dtype == 'int' or df[x].dtype == 'float':
             for y in df:
-                # Only numeric data types will be plotted
+                # Only numeric data types will be plotted.
                 if df[y].dtype == 'int' or df[y].dtype == 'float':
                     # Do not create a plot if x and y are the same or if x has been used to create a plot previously.
                     if x == y or y in plotted_x:
@@ -211,8 +213,8 @@ def plot_scatter(df, hue = None):
                         plt.xlabel(f"{x.title().replace('_', ' ')}")
                         plt.ylabel(f"{y.title().replace('_', ' ')}")
 
-                        # Save a scatter plot for each pair of variables
-                        plt.savefig(f"C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Scatterplot_{y.title().replace('_', ' ')}_vs_{x.title().replace('_', ' ')}.png")
+                        # Save a scatter plot for each pair of variables in the plots folder.
+                        plt.savefig(f"plots\\Scatterplot_{y.title().replace('_', ' ')}_vs_{x.title().replace('_', ' ')}.png")
                         
                         plt.close()
                         
@@ -223,9 +225,9 @@ plot_scatter(iris, hue = 'species')
 # Use a pair plot! Much simplier method to generate a scatter plot of each pair of variables
 g = sns.pairplot(iris, hue = 'species')
 g.fig.suptitle('Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_plot.png')
+plt.savefig('plots\\Pair_plot.png')
 plt.close
-#plt.show()
+
 
 
 #### Any other analysis ####

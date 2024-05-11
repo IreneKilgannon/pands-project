@@ -44,7 +44,7 @@ def plot_hist(df, hue = None):
     
     Returns
     -------
-    A saved histogram of the numeric variables in the data set as a png file.
+    A saved histogram in the plots directory for the numeric variables in the data set as a png file.
     '''
     for x in df:
         # Histograms are for continuous numeric data, continue to the next column if the datatype of the column is object.
@@ -53,7 +53,7 @@ def plot_hist(df, hue = None):
             sns.histplot(x = x, data = df, hue = hue)
             plt.title(f"Histogram of {x.title().replace('_', ' ')}")
             plt.xlabel(f"{x.replace('_', ' ')}")
-            plt.savefig(f'Histogram_of_{x}.png')
+            plt.savefig(f'plots\\Histogram_of_{x}.png')
             #plt.show()
             plt.close()
 
@@ -93,7 +93,7 @@ def plot_scatter(df, hue = None):
                         plt.ylabel(f"{y.title().replace('_', ' ')}")
 
                         # Save a scatter plot for each pair of variables
-                        plt.savefig(f"Scatterplot_{y.title().replace('_', ' ')}_vs_{x.title().replace('_', ' ')}.png")
+                        plt.savefig(f"plots\\Scatterplot_{y.title().replace('_', ' ')}_vs_{x.title().replace('_', ' ')}.png")
 
                         plt.close()
 
