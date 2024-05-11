@@ -378,7 +378,7 @@ __Discussion of histogram__
 
 Now that the data has been classified by species we can see that the histogram better resembles a normal distribution for most of the histograms. As the data set only has 50 data points for each species, it would require many more data points to fully resemble a normal distribution as stated in the Central limit theorem. and the unusual shape of the previous histograms was due to the overlapping data points. 
 
-The histogram for petal length and petal width for Iris setosa is differnet to the other histograms as it is right skewed. It is also distinct cluster. This could be helpful for classification of the species. __PHRASE BETTER__
+The histogram for petal length and petal width for Iris setosa is differnet to the other histograms as it is right skewed. It is also distinct cluster. This could be helpful for classification of the species. __PHRASE BETTER__ __add comparison to literature__
 
 
 ## Scatter plot of each pair of variables
@@ -390,6 +390,7 @@ The purpose of a scatter plot is to demonstrate the relationship between two var
 
 ```python
 def plot_scatter(df):
+    
     for x in df:
         for y in df:
             # Do not create a scatter plot for the following conditions
