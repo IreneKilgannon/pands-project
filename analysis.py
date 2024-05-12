@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+import plotting as pt
+
 # Setting up seaborn palette of 'Set1'
 sns.set_palette("Set1")
 
@@ -134,92 +136,17 @@ plt.close()
 
 # Creating a function to iterate through the numeric columns in the data set.
 
-## 
 
-def plot_hist(df, hue = None):
-    '''To function plot a seaborn histogram of all the numeric variables in a dataframe.
-
-    Parameters
-    ----------
-    df : dataframe
-    hue : a categorical variable in the data set. Optional argument.
-    
-    Returns
-    -------
-    A saved histogram of the numeric variables in the data set as a png file.
-    '''
-    for x in df:
-        # Histograms are for continuous numeric data of data type integer or float.
-        if df[x].dtype == 'int' or df[x].dtype == 'float':
-            # Create a seaborn histogram, hue parameter is very useful to differentiate by a categorical variable.
-            sns.histplot(x = x, data = df, hue = hue)
-            # Add title
-            plt.title(f"Histogram of {x.title().replace('_', ' ')}")
-            # Label x-axis
-            plt.xlabel(f"{x.replace('_', ' ')}")
-            plt.ylabel('Frequency')
-            # Save the plots
-            plt.savefig(f'C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Histogram_of_{x}.png')
-            plt.close()
-
-# Call the plot_hist function on the iris data set.
-plot_hist(iris, hue = 'species')
+# Call the plot_hist function from the plotting module on the iris data set.
+pt.plot_hist(iris, hue = 'species')
 
 ######################################
 # SCATTER PLOT CODE
 
 #### Output a scatter plot of each pair of variables ####
 
-# Creating a function
-
-# How would I improve it, 
-    # 1. generalise it more, if x or y are an object data type, skip DONE!!!
-    # 2. only 1 of plot of each eg currently getting petal length vs petal width and then petal width vs petal length. One plot would do. DONE!!!! 
-    # 
-
-def plot_scatter(df, hue = None):
-    '''To function plot a seaborn scatter plots of all the numeric variables in a dataframe.
-
-    Parameters
-    ----------
-    df : dataframe
-    hue : a categorical variable in the data set. Optional parameter/argument CHECK CORRECT TERM.
-    
-    Returns
-    -------
-    Saved scatter plots between all the numeric variables in the data set as a png file.
-    '''
-    # Instantiate a list to keep track of the x-axis variables
-    plotted_x = []
-    for x in df:
-        # Add x to the list
-        plotted_x.append(x)
-        # Only want a scatter plot of the numeric variables.
-        if df[x].dtype == 'int' or df[x].dtype == 'float':
-            for y in df:
-                # Only numeric data types will be plotted.
-                if df[y].dtype == 'int' or df[y].dtype == 'float':
-                    # Do not create a plot if x and y are the same or if x has been used to create a plot previously.
-                    if x == y or y in plotted_x:
-                        continue
-                    else:
-                        # Create a scatter plot
-                        sns.scatterplot(data = df, x = x, y = y, hue = hue)
-
-                        # Add title to plot, removing any underscores and capitalizing it. 
-                        plt.title(f"Scatter plot of {y.title().replace('_', ' ')} vs {x.title().replace('_', ' ')}")
-
-                        # Label x and y-axis
-                        plt.xlabel(f"{x.title().replace('_', ' ')}")
-                        plt.ylabel(f"{y.title().replace('_', ' ')}")
-
-                        # Save a scatter plot for each pair of variables in the plots folder.
-                        plt.savefig(f"plots\\Scatterplot_{y.title().replace('_', ' ')}_vs_{x.title().replace('_', ' ')}.png")
-                        
-                        plt.close()
-                        
-# Call the plot_scatter function on the iris data set.
-plot_scatter(iris, hue = 'species')
+# Call the plot_scatter function from the plotting module on the iris data set.
+pt.plot_scatter(iris, hue = 'species')
 
 
 # Use a pair plot! Much simplier method to generate a scatter plot of each pair of variables

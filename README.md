@@ -79,6 +79,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+
+import plotting as pt
 ```
 
 ## Load the Data Set
@@ -319,7 +321,6 @@ plt.suptitle('Histogram of the Iris Data Set')
 
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Summary_Histogram.png')
 
-plt.show()
 ```
 </details>
 
@@ -363,8 +364,8 @@ def plot_hist(df, hue = None):
             plt.savefig(f'plots\\Histogram_of_{x}.png')
             plt.close()
 
-# Call the plot_hist function on the iris data set.
-plot_hist(iris, hue = 'species')
+# Call the plot_hist function from the plotting module on the iris data set.
+pt.plot_hist(iris, hue = 'species')
 ```
 </details>
 
@@ -429,8 +430,8 @@ def plot_scatter(df, hue = None):
                         
                         plt.close()
                         
-# Call the plot_scatter function on the iris data set.
-plot_scatter(iris, hue = 'species')
+# Call the plot_scatter function from the plotting module on the iris data set.
+pt.plot_scatter(iris, hue = 'species')
 
 # Use a pair plot! Much simplier method to generate a scatter plot of each pair of variables
 g = sns.pairplot(iris, hue = 'species')
@@ -443,17 +444,19 @@ plt.close
 </details>
 <br>
 
-||||
-|---|---|---|
+|Scatter plots between all the variables in the Iris data set||
+|---|---|
 |![PLvsSW](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Length_vs_Sepal%20Width.png)|![PLvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Length_vs_Sepal%20Length.png)|
 |![PWvsPL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Petal%20Length.png)|![PWvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Sepal%20Length.png)|
 |![PWvsSW](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Sepal%20Width.png)|![SWvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Sepal%20Width_vs_Sepal%20Length.png)|
 
-The scatter plots demonstrate clearly that Iris setosa is a distict cluster. It does not overlap with with Iris versicolor or Iris virginica in any of the scatter plots. There is one very obvious outlier in the sepal width data at approx. 2.3cm __CHECK__.
+The scatter plots demonstrate clearly that Iris setosa is a distict cluster. It does not overlap with with Iris versicolor or Iris virginica in any of the scatter plots. It is important to always cross check what appears to be an outlier in the scatter plot with the box plot. What I thought was an obvious outlier in the scatter plot for Iris setosa with a sepal width at 2.3 cm, is in the box plot the minimium value in the sepal width range for Iris setosa!
 
-The clusters of Iris versicolor and Iris virginica overlap in all the scatter plots. In the plot of sepal length vs sepal width there is a significant amount of overlap. The least amount of overlap appears to be in the scatterplots between petal length and petal width and between petal width and sepal width. One widely used technique for classification in machine learning is called [K-nearest neighbours(KNN)](https://www.datacamp.com/tutorial/k-nearest-neighbor-classification-scikit-learn). The K-nearest neighbours algorithm looks at the nearest data points to the data point of interest and decides which cluster the data point belongs to. Minimising the overlap of clusters will improve the chance of correct assignment.
+The clusters of Iris versicolor and Iris virginica overlap in all the scatter plots. In the plot of sepal length vs sepal width there is a significant amount of overlap. The least amount of overlap appears to be in the scatterplots between petal length and petal width and between petal width and sepal width. One widely used technique for classification in machine learning is called [K-nearest neighbours(KNN)](https://www.datacamp.com/tutorial/k-nearest-neighbor-classification-scikit-learn). The K-nearest neighbours algorithm looks at the nearest data points to the data point of interest and decides which cluster the data point belongs to. Minimising the overlap of clusters will improve the chance of correct cluster assignment.
+
 
 ![Pair plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Pair_plot.png)
+
 
 #### Any Other Analysis ####
 
@@ -698,6 +701,16 @@ ADD COMMENT ON DIFFERENCES
 
 The plot of sepal width vs sepal length is an example of Simpson's paradox. Wikipedia states that [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) is a phenomenon in probability and statistics in which a trend appears in several groups of data but disappears or reverses when the groups are combined. 
 
+__COmparison with other's work__
+
+https://zion-oladiran.medium.com/exploratory-data-analysis-iris-dataset-68897497b120
+
+https://www.kaggle.com/code/danalexandru/simple-analysis-of-iris-dataset
+
+https://www.hackersrealm.net/post/iris-dataset-analysis-using-python
+
+https://www.angela1c.com/projects/iris_project/investigating-the-iris-dataset/
+
 
 ## Conclusion
 
@@ -739,6 +752,27 @@ __Correlation References__
 Pearson's correlation, clearly explained https://www.youtube.com/watch?v=xZ_z8KWkhXE
 
 r-squared https://statisticsbyjim.com/regression/interpret-r-squared-regression/
+
+__Machine Learning__
+
+https://www.kaggle.com/code/ash316/ml-from-scratch-with-iris
+
+__ Literature search Recent uses of the iris data set__ 
+
+https://www.sciencedirect.com/science/article/pii/S1877050919320836
+
+https://ijece.iaescore.com/index.php/IJECE/article/view/33889
+
+https://iopscience.iop.org/article/10.1088/1742-6596/2068/1/012004/pdf
+
+
+
+__name__ https://www.youtube.com/watch?v=sugvnHA7ElY&t=357s
+
+modules references
+
+
+/https://www.youtube.com/watch?v=CqvZ3vGoGs0&t=965s
 
 
 ***

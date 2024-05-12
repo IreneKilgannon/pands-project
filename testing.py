@@ -1,5 +1,5 @@
-from exploratory import plot_scatter
 
+import plotting
 
 import numpy as np
 import pandas as pd
@@ -9,4 +9,4 @@ import seaborn as sns
 # Import the data set, add headings to the columns.
 penguins = pd.read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/penguins.csv")
 
-plot_scatter(penguins, hue = 'sex')
+plotting.plot_hist(penguins)
