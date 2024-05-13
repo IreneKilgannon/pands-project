@@ -278,3 +278,64 @@ sns.lmplot(iris, x = 'sepal_length', y = 'sepal_width', col = 'species')
 plt.suptitle('Sepal Width vs Sepal Length by Species', y = 1.05)
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\lmplot_example.png')
 plt.close()
+
+
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import cross_val_score, KFold
+
+# Instantiate the model
+reg = LinearRegression()
+
+# Select the columns of interest from the dataset
+X = iris['petal_length'].values
+y = iris['petal_width'].values
+
+# 
+X = X.reshape(-1, 1)
+
+# Split the data into training set and test set data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size= 0.3, random_state= 47)
+
+# Fit the training data to the model
+reg.fit(X_train, y_train)
+
+# Predict the y data points by using the predict function on the X_test data.
+y_pred = reg.predict(X_test)
+
+# Print out the predictions and the actual values of the y_test data.
+print(f'Predictions: {y_pred[:5]}, Actual values: {y_test[:5]}')
+
+# r_squared measures the accuracy of the results.
+r_squared = reg.score(X_test, y_test)
+
+#
+rmse = mean_squared_error(y_test, y_pred, squared= False)
+
+print(f"R^2: {r_squared}")
+print(f"RMSE: {rmse}")
+print(f'slope:' , reg.coef_)
+print(f'intercept:' , reg.intercept_)
+
+# Scatter plot of petal width vs petal lenght and line plot of the predicted values.
+plt.scatter(X_train, y_train, color = 'b')
+plt.plot(X_test, y_pred, color = 'r')
+
+# Label the x-axis and y-axis
+plt.xlabel('Petal Length (cm)')
+plt.ylabel('Petal width (cm)')
+plt.savefig('plots\\linear_regression_analysis.png')
+
+
+
+
+kf = KFold(n_splits = 5, shuffle = True, random_state=47)
+reg = LinearRegression()
+cv_results = cross_val_score(reg, X, y, cv = kf)
+
+print(f'cv results are {cv_results}')
+print(np.mean(cv_results))
+print(np.std(cv_results))
+print(np.quantile(cv_results, [0.025, 0.975]))
+

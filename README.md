@@ -716,6 +716,9 @@ https://www.angela1c.com/projects/iris_project/investigating-the-iris-dataset/
 
 Who would have thought that nearly one hundred years later Anderson's data would be used by thousands of students worldwide who are learning statistics, data science or machine learning? https://www.sciencedirect.com/science/article/pii/S1877050919320836
 
+
+https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/
+
 ## References
 
 __Write output to a file in python__
