@@ -5,22 +5,21 @@ import seaborn as sns
 
 import plotting as pt
 
-# Set up seaborn colour palette. #5A4FCF is the colour code for iris. 
+# Set up seaborn colour palette. #5A4FCF is the colour code for the colour iris. 
 colors = ['#5A4FCF', '#4ECF99', '#CF4E99']
 sns.set_palette(colors)
 
 # Import the data set, add headings to the columns.
 iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species'])
 
-# Check that the data set has loaded. 
+# Check that the data set has loaded by displaying the first five rows. 
 head = f'The first five rows of the data set are: \n {iris.head()}\n \n'
 
-# Open and write the head of the data set to analysis.txt.
+# Create analysis.txt and write the head of the data set to it.
 with open('analysis.txt', 'wt') as f:
     f.write(head)
 
 #### Output a summary of each variable to a single txt file, analysis.txt ####
-
 # Collating the necessary infomation for analysis.txt
 
 # Get the number of rows and columns in the data set.
@@ -41,7 +40,7 @@ unique = f"The unique names in the species column are: \n {iris['species'].uniqu
 # Value count of each species.
 count_species = f"A count of each species: \n {iris['species'].value_counts()} \n\n"
 
-# Summary statistics for the overall the data set
+# Summary statistics for the overall data set
 summary_statistics = f'Overall summary statistics for the data set. \n{iris.describe()} \n\n'
 
 # Create dataframes for each iris species.
@@ -49,6 +48,8 @@ setosa = iris[iris['species'] == 'Iris-setosa']
 versicolor = iris[iris['species'] == 'Iris-versicolor']
 virginica = iris[iris['species'] == 'Iris-virginica']
 
+# Summary statistics grouped by species. Transpose the result to for an easier read. 
+summary_by_species = f"Summary statistics grouped by species \n{iris.groupby('species').describe().transpose()} \n\n"
 
 # Summary Statistics for Iris setosa
 setosa_summary = f'Summary statistics for Iris setosa are: \n{setosa.describe()} \n\n'
@@ -70,6 +71,7 @@ with open('analysis.txt', 'a') as f:
     f.write(unique)
     f.write(count_species)
     f.write(summary_statistics)
+    f.write(summary_by_species)
     f.write(setosa_summary)
     f.write(versicolor_summary)
     f.write(virginica_summary)
@@ -131,14 +133,12 @@ ax[1, 1].set_xlabel('Petal Width (cm)')
 plt.suptitle('Histogram of the Iris Data Set')
 
 # Histogram saved as png file
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Summary_Histogram.png')
+plt.savefig('plots\\Summary_Histogram.png')
 plt.close()
 
 
-# Creating a function to iterate through the numeric columns in the data set.
-
-
 # Call the plot_hist function from the plotting module on the iris data set.
+# Hue is the species column to separate the species by colour. 
 pt.plot_hist(iris, hue = 'species')
 
 ######################################
@@ -146,7 +146,7 @@ pt.plot_hist(iris, hue = 'species')
 
 #### Output a scatter plot of each pair of variables ####
 
-# Call the plot_scatter function from the plotting module on the iris data set.
+# Call the plot_scatter function from the plotting module.
 pt.plot_scatter(iris, hue = 'species')
 
 
@@ -190,7 +190,7 @@ ax[1,1].set_title('Iris virginica')
 
 # Add title
 plt.suptitle('Correlation Coefficients for the Iris Data Set')
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Heatmap_correlation_coefficients.png')
+plt.savefig('plots\\Heatmap_correlation_coefficients.png')
 plt.close()
 
 ##### Regression Plots for Selected Variables
@@ -208,7 +208,6 @@ print(f'The value of the slope is {m.round(3)}.')
 print(f'The value of the intercept is {c.round(3)}.')
 
 
-
 # Demonstrating how to plot a regression line on a scatter plot using numpy.
 fig, ax = plt.subplots()
 
@@ -224,9 +223,11 @@ plt.ylabel('Sepal Width (cm)')
 
 # Title.
 plt.title('Sepal Width vs Sepal Length')
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Numpy_reg_plot.png')
+plt.savefig('plots\\Numpy_reg_plot.png')
 plt.close()
-# 
+
+
+#
 fig, ax = plt.subplots(2, 2, figsize = (15, 10))
 
 # Regression plot between sepal length and sepal width
@@ -272,13 +273,13 @@ plt.close()
 # Pair regression plot
 sns.pairplot(iris, hue = 'species', kind = 'reg')
 plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_Regression_plots.png')
+plt.savefig('plots\\Pair_Regression_plots.png')
 plt.close()
 
 # lmplot example. Sepal Width vs Sepal Length
 sns.lmplot(iris, x = 'sepal_length', y = 'sepal_width', ci = None, col = 'species')
 plt.suptitle('Sepal Width vs Sepal Length by Species', y = 1.05)
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\lmplot_example.png')
+plt.savefig('\plots\\lmplot_example.png')
 plt.close()
 
 
@@ -320,16 +321,15 @@ print(f"RMSE: {rmse}")
 print(f'slope:' , reg.coef_)
 print(f'intercept:' , reg.intercept_)
 
-# Scatter plot of petal width vs petal lenght and line plot of the predicted values.
+# Scatter plot of petal width vs petal length and line plot of the predicted values.
 plt.scatter(X_train, y_train)
 plt.plot(X_test, y_pred, color = '#CF4E99')
 
 # Label the x-axis and y-axis
 plt.xlabel('Petal Length (cm)')
 plt.ylabel('Petal Width (cm)')
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\lg_analysis.png')
+plt.savefig('plots\\lg_analysis.png')
 plt.close()
-
 
 
 kf = KFold(n_splits = 5, shuffle = True, random_state=47)

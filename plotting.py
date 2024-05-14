@@ -24,7 +24,6 @@ def plot_hist(df, hue = None):
             plt.title(f"Histogram of {x.title().replace('_', ' ')}")
             plt.xlabel(f"{x.replace('_', ' ')}")
             plt.savefig(f'plots\\Histogram_of_{x}.png')
-            #plt.show()
             plt.close()
 
 def plot_scatter(df, hue = None):
@@ -64,7 +63,6 @@ def plot_scatter(df, hue = None):
 
                         # Save a scatter plot for each pair of variables
                         plt.savefig(f"plots\\Scatterplot_{y.title().replace('_', ' ')}_vs_{x.title().replace('_', ' ')}.png")
-
                         plt.close()
 
 ## DO i actually need this?

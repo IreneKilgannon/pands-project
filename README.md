@@ -11,13 +11,11 @@ This is my analysis of the Fisher's Iris data set for the programming and script
 ## Left to do
 
 NB add literature comparison, add more references where ever needed. 
-1. background research  images
-2. Get started section
-4. Summary statistics. use groubpy by, Improve Discussion
-5. histograms. review
-6. scatter plot. review
-7. correlation coefficients, review 
-8. regression analysis and machine learning https://campus.datacamp.com/courses/introduction-to-regression-with-statsmodels-in-python/simple-linear-regression-modeling?ex=1  add code comments, discussion, 
+1. Summary statistics. use groubpy by, Improve Discussion
+2. histograms. review
+3. scatter plot. review
+4. correlation coefficients, review 
+5. regression analysis and machine learning https://campus.datacamp.com/courses/introduction-to-regression-with-statsmodels-in-python/simple-linear-regression-modeling?ex=1  add code comments, discussion, 
 
 ## Project Statement
 * Research the data set and summarise it in a [README](https://github.com/IreneKilgannon/pands-project/blob/main/README.md).
@@ -31,8 +29,8 @@ NB add literature comparison, add more references where ever needed.
 ## Getting Started
 
 __Step 1__ Download and install [Anaconda](https://www.anaconda.com/download). Anaconda is a Python distributon package and comes with pre-installed packages such as [pandas](https://pandas.pydata.org/docs/user_guide/index.html#user-guide), [NumPy](https://numpy.org/doc/stable/user/whatisnumpy.html), [Matplotlib](https://matplotlib.org/) and [Seaborn](https://seaborn.pydata.org/) which are required for this project. Please note that when installing Anaconda it is important to check the two boxes for:
-  * Add Anaconda3 to my PATH environment 
-  * Make this version your default Python
+  * Add Anaconda3 to my PATH environment variable
+  * Register Anaconda3 as my default Python 3.9
   
 ![Anaconda](Anaconda.png)
 
@@ -56,21 +54,13 @@ If you have any questions or queries you can contact me at g00220627@atu.ie or a
 
 In 1928 Edgar Anderson published his paper entitled ['The Problem of Species in the Northern Blue Flags, _Iris versicolor_ and _Iris virginica_'](https://www.biodiversitylibrary.org/page/15997721). Anderson was a evolutionary biologist interested in answering two questions namely, what are species and how have they originated? Between 1923 and 1928 he and his team studied _Iris versicolor_, at a number of different sites from Ontario in Canada to Alabama in the United States, by measuring a number of different iris characteristics. Surprisingly his study found that there were actually two iris species present, _Iris versicolor_ and _Iris virginia_ and that it was possible to differentiate between them by geographic location. This is reflected in the [common names of these two species of iris](https://hgic.clemson.edu/factsheet/rain-garden-plants-iris-versicolor-and-iris-virginica/). _Iris versicolor_ is commonly known as the Northern blue flag iris and _Iris virginica_ is commonly known as the Southern blue flag iris.
 
-![Ronald Fisher in 1913](https://en.wikipedia.org/wiki/Ronald_Fisher#/media/File:Youngronaldfisher2.JPG)
+![iris](images//Iris_images.png)
 
 The data set is commonly known as Fisher's Iris Data set after the statistician and biologist, [Ronald Fisher](https://en.wikipedia.org/wiki/Ronald_Fisher). The data measurements for _Iris setosa_ and _Iris versicolor_ were collected by Anderson from the same colony of plants in the Gaspé Peninsula, Quebec in 1935. According to [Unwin and Kleinman](hhttps://academic.oup.com/jrssig/article/18/6/26/7038520) the _Iris virginica_ data samples were from Anderson's original research and were collected in Camden, Tennessee. Fisher collated and analysed the data and in 1936 published his results in the Annals of Eugenics [The Use of Multiple Measurements in Taxonomic Problems](https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.1469-1809.1936.tb02137.x). He used a statistical method, linear discriminant analysis to attempt to distinguish the different iris species from each other. He found that _Iris setosa_ was easily distinguishable from the other two iris species using this method. 
 
-![Image from Fisher's paper](fisher_data_set_image.png)
+![Image from Fisher's paper](images\fisher_data_set_image.png)
 
-Fisher's data set can viewed in his published paper but, in our computer age, the data set is available to download at [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris). The data set is still very widely used with currently over 700,000 views of the data set on the UCI website. It is worth mentioning that there is a move away from using this data set 
-
-Fisher and racism  -do i put it in?
-
-https://profjoecain.net/what-is-wrong-ronald-aylmer-fisher/
-
-https://www.newstatesman.com/long-reads/2020/07/ra-fisher-and-science-hatred
-
-https://www.nature.com/articles/s41437-020-00394-6  
+Fisher's data set can viewed in his published paper but, in our computer age, the data set is available to download at [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris). The data set is still very widely used with currently over 700,000 views of the data set on the UCI website. It is worth mentioning that there is a move away from using this data set due to Fisher's work in eugenics.
 
 ## Import the Required Modules.
 
@@ -95,7 +85,7 @@ import plotting as pt
 
 The data set was downloaded from [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris) and imported. This csv file does not contain column names and the column names were obtained from the variables table on the [information page of the iris data set](https://archive.ics.uci.edu/dataset/53/iris). The column names are sepal_length_cm, sepal_width_cm, petal_length_cm, petal_width_cm and species.
 
-A number of methods were explored to add the column names [adding headers to a dataframe in pandas a comprehensive-guide](https://saturncloud.io/blog/adding-headers-to-a-dataframe-in-pandas-a-comprehensive-guide/). The simplest method is to add the column names using the name parameter when the data set was loaded.
+A number of methods were explored to add the column names [adding headers to a dataframe in pandas a comprehensive-guide](https://saturncloud.io/blog/adding-headers-to-a-dataframe-in-pandas-a-comprehensive-guide/). The quickest method is to add the column names using the name parameter when the data set is loaded. I did not add "_cm" to the columm names.
 
 ```python
 iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species'])
@@ -104,16 +94,24 @@ iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'pet
 ## Summary of the Data Set
 ***
 
-[Analysis.txt](https://github.com/IreneKilgannon/pands-project/blob/main/analysis.txt) contains the output of [analysis.py](https://github.com/IreneKilgannon/pands-project/blob/main/analysis.py) and has provided the information used to summarise the data set.
+_Task:_ Output a summary of each variable to a single text file, [analysis.txt](https://github.com/IreneKilgannon/pands-project/blob/main/analysis.txt)
 
-f.write will only write strings to a txt file. [This reddit post](https://www.reddit.com/r/learnpython/comments/12emhsa/how_do_i_save_the_output_of_the_python_code_as_a/) suggested saving the output to a variable and then result could be written to a txt file.  IMPROVE 
+_Background_
 
+```python
+    with open('analysis.txt', 'wt') as f:
+        f.write(head)
+```
+
+[With open()](https://ioflood.com/blog/python-open-file/#:~:text=Python-,Different%20File%20Modes,reading%20and%20writing%20text%20files) is used to open a file and the mode will then tell python what to do with the file. Two modes were used in this analysis. First write text, `'wt'` was used to both to create the analysis.txt file and to write to it. The append mode, `'a'` was used to append the results of the exploratory data analysis to analysis.txt. One major advantage of using with open() is that the file will automatically close.
+
+`f.write()` will only write strings to a txt file. [This reddit post](https://www.reddit.com/r/learnpython/comments/12emhsa/how_do_i_save_the_output_of_the_python_code_as_a/) suggested saving the output to a variable and then result could be written to a txt file. 
 
 <details>
 <summary>Code written to analysis.txt</summary>
 
 ```python
- Collating the necessary infomation for analysis.txt
+# Investigating the variables to provide a summary for analysis.txt
 
 # Get the number of rows and columns in the data set.
 shape = f'The shape of the data set is {iris.shape}. \n\n'
@@ -136,6 +134,9 @@ count_species = f"A count of each species: \n {iris['species'].value_counts()} \
 # Summary statistics for the overall the data set
 summary_statistics = f'Overall summary statistics for the data set. \n{iris.describe()} \n\n'
 
+# Summary statistics grouped by species. Transpose the result to for an easier read. 
+summary_by_species = f"Summary statistics grouped by species \n{iris.groupby('species').describe().transpose()} \n\n"
+
 # Create dataframes for each iris species.
 setosa = iris[iris['species'] == 'Iris-setosa']
 versicolor = iris[iris['species'] == 'Iris-versicolor']
@@ -151,9 +152,7 @@ versicolor_summary = f'Summary statistics for Iris versicolor are: \n{versicolor
 # Summary Statistics for Iris virginica
 virginica_summary = f'Summary statistics for Iris virginica are: \n{virginica.describe()} \n\n'
 
-# Write the summary statistics to analysis.txt
-# Append them to the analysis.txt file created previously
-
+# Append the to the analysis.txt file created previously
 with open('analysis.txt', 'a') as f:
     f.write(shape)
     f.write(column_names)
@@ -162,6 +161,7 @@ with open('analysis.txt', 'a') as f:
     f.write(unique)
     f.write(count_species)
     f.write(summary_statistics)
+    f.write(summary_by_species)
     f.write(setosa_summary)
     f.write(versicolor_summary)
     f.write(virginica_summary)
@@ -169,28 +169,29 @@ with open('analysis.txt', 'a') as f:
 </details>
 <br>
 
-It is a small data set with 150 rows and five columns with each row corresponding to a different flower sample. There are three different iris species, _Iris setosa_, _Iris versicolor_ and _Iris virginica_ with 50 samples for each species. There is no missing data.
+_Discussion_
 
-![iris](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YYiQed4kj_EZ2qfg_imDWA.png)
+The iris data set is a small data set with 150 rows and five columns with each row corresponding to a different flower sample. There is no missing data.
 
-The five attributes(variables) in the data set are:
-* sepal_length (measured in cm)
-* sepal_width (measured in cm)
-* petal_length (measured in cm)
-* petal_width (measured in cm)
-* species
+The five variables in the data set are:
+* sepal_length
+* sepal_width 
+* petal_length
+* petal_width 
+* species 
 
-A basic description of the structure of an iris flower will help to understand the variable names. Each iris has three true petals and three sepals. The three petals are upright and are also known as standards. Sepals are a modified leaf and are usually green in colour and its function is to protect the developing flower bud. When the flower has bloomed the iris' sepal is described as "the landing pad for bumblebees" by the [US Forest Service](https://www.fs.usda.gov/wildflowers/beauty/iris/flower.shtml). This diagram nicely illustrates the difference between the petals and the sepals and also how the width and length of each were measured.
+There are three iris species, _Iris setosa_, _Iris versicolor_ and _Iris virginica_ in the species column with 50 samples for each species. The data type of the species column is object. 
+
+The sepal length, sepal width, petal length and petal width columns are continuous numeric data of data type float(floating point number), which means that they are decimal numbers. They were all measured in cm to one decimal place.
+
+A basic description of the structure of an iris flower will help to understand what each of the variable names are. Each iris has three true petals and three sepals. The three petals are upright and are sometimes known as standards. Sepals are a modified leaf, usually green in colour and its function is to protect the developing flower bud. When the flower has bloomed the iris's sepal is described as "the landing pad for bumblebees" by the [US Forest Service](https://www.fs.usda.gov/wildflowers/beauty/iris/flower.shtml). This diagram nicely illustrates the difference between the petals and the sepals and also how the width and length of each were measured.
 
 ![Length vs Width](https://www.integratedots.com/wp-content/uploads/2019/06/iris_petal-sepal-e1560211020463.png)
-
- 
-## Summary Statistics for the data set
 
 Summary statistics for numeric data are easily obtained using the [describe method](https://www.w3schools.com/python/pandas/ref_df_describe.asp). It gives a count of each variable and some statistics such as the min, max, mean and std deviation for each variable.
 
 ```python
-# Summary statistics for the overall the data set
+# Summary statistics for the overall data set
 summary_statistics = f'Overall summary statistics for the data set. \n{iris.describe()} \n\n'
 ```
 
@@ -206,11 +207,58 @@ Overall summary statistics for the data set.
 |75%   |     6.400000 |    3.300000  |    5.100000  |   1.800000|
 |max   |     7.900000 |    4.400000  |    6.900000  |   2.500000| 
 
+The summary statistics reveal that petal lengths and petal widths are smaller than the sepal length and sepal width. Petal width is the smallest variable with the min length of 0.1 cm, a mean of 1.20 cm with max size of 2.5 mm. Sepal length is the largest of the four variables with a mean of 5.8 mm. I would imagine that the size difference between the sepal and petals would help an amateur botanist distinguish between the sepals and petals. __REPHRASE__
 
-<details>
-<summary>Summary Statistics for Each Iris Species</summary>
 
-Summary statistics for Iris setosa are:
+Summary Statistics for Each Iris Species
+
+```python
+# Summary statistics grouped by species. Transpose the result to for an easier read.
+summary_by_species = f"Summary statistics grouped by species \n{iris.groupby('species').describe().transpose()} \n\n"
+```
+Transposing the results of the summary statistics grouped by species gives a more readable form of the table. Without  transposing the results a table of 3 rows and 32 columns was created! The transposed table is much more readable and making direct comparisons is easier. 
+
+COMMENT 
+
+Summary statistics grouped by species
+||||||
+|---|--- |---|---|---|
+|species      |      | Iris-setosa | Iris-versicolor  |Iris-virginica|
+|sepal_length| count |   50.000000 |       50.000000  |     50.000000|
+|            | mean  |    5.006000 |        5.936000  |      6.588000|
+|            | std   |    0.352490 |        0.516171  |      0.635880|
+|            | min   |    4.300000 |        4.900000  |      4.900000|
+|            | 25%   |    4.800000 |        5.600000  |      6.225000|
+|            | 50%   |    5.000000 |        5.900000  |      6.500000|
+|            | 75%   |    5.200000 |        6.300000  |      6.900000|
+|            | max   |    5.800000 |        7.000000  |      7.900000|
+|sepal_width | count |   50.000000 |       50.000000  |     50.000000|
+|            | mean  |    3.418000 |        2.770000  |      2.974000|
+|            | std   |    0.381024 |        0.313798  |      0.322497|
+|            | min   |    2.300000 |        2.000000  |      2.200000|
+|            | 25%   |    3.125000 |        2.525000  |      2.800000|
+|            | 50%   |    3.400000 |        2.800000  |      3.000000|
+|            | 75%   |    3.675000 |        3.000000  |      3.175000|
+|            | max   |    4.400000 |        3.400000  |      3.800000|
+|petal_length| count |   50.000000 |       50.000000  |     50.000000|
+|            | mean  |    1.464000 |        4.260000  |      5.552000|
+|            | std   |    0.173511 |        0.469911  |      0.551895|
+|            | min   |    1.000000 |        3.000000  |      4.500000|
+|            | 25%   |    1.400000 |        4.000000  |      5.100000|
+|            | 50%   |    1.500000 |        4.350000  |      5.550000|
+|            | 75%   |    1.575000 |        4.600000  |      5.875000|
+|            | max   |    1.900000 |        5.100000  |      6.900000|
+|petal_width | count |   50.000000 |       50.000000  |     50.000000|
+|            | mean  |    0.244000 |        1.326000  |      2.026000|
+|            | std   |    0.107210 |        0.197753  |      0.274650|
+|            | min   |    0.100000 |        1.000000  |      1.400000|
+|            | 25%   |    0.200000 |        1.200000  |      1.800000|
+|            | 50%   |    0.200000 |        1.300000  |      2.000000|
+|            | 75%   |    0.300000 |        1.500000  |      2.300000|
+|            | max   |    0.600000 |        1.800000  |      2.500000|
+
+# PROBABLY DELETE THIS NOW, not required.
+Summary statistics for _Iris setosa_ are:
 
 |      | sepal_length | sepal_width | petal_length | petal_width|
 |---|---|---|---|---|
@@ -224,7 +272,7 @@ Summary statistics for Iris setosa are:
 |max    |     5.80000  |   4.400000   |   1.900000   |   0.60000| 
 
 
-Summary statistics for Iris versicolor are: 
+Summary statistics for _Iris versicolor_ are: 
 |      | sepal_length | sepal_width | petal_length | petal_width|
 |---|---|---|---|---|
 |count  |   50.000000  |  50.000000   |  50.000000  |  50.000000|
@@ -237,7 +285,7 @@ Summary statistics for Iris versicolor are:
 |max    |    7.000000  |   3.400000   |   5.100000  |   1.800000| 
 
 
-Summary statistics for Iris virginica are: 
+Summary statistics for _Iris virginica_ are: 
 |      | sepal_length | sepal_width | petal_length | petal_width|
 |---|---|---|---|---|
 |count   |   50.00000   | 50.000000  |   50.000000   |  50.00000|
@@ -249,9 +297,6 @@ Summary statistics for Iris virginica are:
 |75%     |    6.90000   |  3.175000  |    5.875000   |   2.30000|
 |max     |    7.90000   |  3.800000  |    6.900000   |   2.50000|
 
-</details>
-
-<br>
 
 A [seaborn boxplot](https://seaborn.pydata.org/generated/seaborn.boxplot.html) is nice visual method to display summary statistics about the data set. It gives us most of the same information that the describe method does but as it is visual it is easier and quicker to make comparisons. One difference between the describe method and a box plot is that describe gives us the mean, whereas a box plot displays the median value of the variable of interest.
 
@@ -285,13 +330,15 @@ ax[1,0].set_title('Petal Length')
 ax[1,1].set_title('Petal Width')
 
 # Save the created plot
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Box_plot.png')
+plt.savefig('plots\\Box_plot.png')
 plt.close()
 ```
 </details>
 
 
-![Boxplot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Box_plot.png)
+![Boxplot](plots/Box_plot.png)
+
+The box plot clearly demonstrate that the petal lengths and petal widths of _Iris setosa_ is distincly different from the other two iris species. The petal length and widths are much smaller than _Iris versicolor_ and _Iris virginica_. This will aid in classifying _Iris setosa_.
 
 ----
 
@@ -327,8 +374,7 @@ ax[1, 1].set_xlabel('Petal Width (cm)')
 
 plt.suptitle('Histogram of the Iris Data Set')
 
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Summary_Histogram.png')
-
+plt.savefig('plots\\Summary_Histogram.png')
 ```
 </details>
 
@@ -387,7 +433,7 @@ __Discussion of histogram__
 
 Now that the data has been classified by species we can see that the histogram better resembles a normal distribution for most of the histograms. As the data set only has 50 data points for each species, it would require many more data points to fully resemble a normal distribution as stated in the Central limit theorem. and the unusual shape of the previous histograms was due to the overlapping data points. 
 
-The histogram for petal length and petal width for Iris setosa is different to the other histograms as it is right skewed. It is also distinct cluster. This could be helpful for classification of the species. __PHRASE BETTER__ __add comparison to literature__
+The histogram for petal length and petal width for _Iris setosa_ is different to the other histograms as it is right skewed. It is also distinct cluster. This could be helpful for classification of the species. __PHRASE BETTER__ __add comparison to literature__
 
 
 ## Scatter plot of each pair of variables
@@ -458,9 +504,9 @@ plt.close
 |![PWvsPL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Petal%20Length.png)|![PWvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Sepal%20Length.png)|
 |![PWvsSW](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Sepal%20Width.png)|![SWvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Sepal%20Width_vs_Sepal%20Length.png)|
 
-The scatter plots demonstrate clearly that Iris setosa is a distict cluster. It does not overlap with with Iris versicolor or Iris virginica in any of the scatter plots. It is important to always cross check what appears to be an outlier in the scatter plot with the box plot. What I thought was an obvious outlier in the scatter plot for Iris setosa with a sepal width at 2.3 cm, is in the box plot the minimium value in the sepal width range for Iris setosa!
+The scatter plots demonstrate clearly that _Iris setosa_ is a distict cluster. It does not overlap with with _Iris versicolor_ or _Iris virginica_ in any of the scatter plots. It is important to always cross check what appears to be an outlier in the scatter plot with the box plot. What I thought was an obvious outlier in the scatter plot for _Iris setosa_ with a sepal width at 2.3 cm, is in the box plot the minimium value in the sepal width range for _Iris setosa_!
 
-The clusters of Iris versicolor and Iris virginica overlap in all the scatter plots. In the plot of sepal length vs sepal width there is a significant amount of overlap. The least amount of overlap appears to be in the scatterplots between petal length and petal width and between petal width and sepal width. One widely used technique for classification in machine learning is called [K-nearest neighbours(KNN)](https://www.datacamp.com/tutorial/k-nearest-neighbor-classification-scikit-learn). The K-nearest neighbours algorithm looks at the nearest data points to the data point of interest and decides which cluster the data point belongs to. Minimising the overlap of clusters will improve the chance of correct cluster assignment.
+The clusters of _Iris versicolor_ and _Iris virginica_ overlap in all the scatter plots. In the plot of sepal length vs sepal width there is a significant amount of overlap. The least amount of overlap appears to be in the scatterplots between petal length and petal width and between petal width and sepal width. One widely used technique for classification in machine learning is called [K-nearest neighbours(KNN)](https://www.datacamp.com/tutorial/k-nearest-neighbor-classification-scikit-learn). The K-nearest neighbours algorithm looks at the nearest data points to the data point of interest and decides which cluster the data point belongs to. Minimising the overlap of clusters will improve the chance of correct cluster assignment.
 
 
 ![Pair plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Pair_plot.png)
@@ -641,7 +687,7 @@ plt.close()
 
 ![Heat map](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Heatmap_correlation_coefficients.png)
 
-These heatmaps demonstrate the importance of taking the categorical variables into account. For example the overall correlation coefficient between petal width and petal width was 0.96. When the coefficients of the indiviual species is taken into account the values range from 0.31 for Iris setosa, 0.79 for Iris versicolor and 0.32 for Iris virginica. Another interesting pairing is petal width and petal length. 
+These heatmaps demonstrate the importance of taking the categorical variables into account. For example the overall correlation coefficient between petal width and petal width was 0.96. When the coefficients of the indiviual species is taken into account the values range from 0.31 for _Iris setosa_, 0.79 for _Iris versicolor_ and 0.32 for _Iris virginica_. Another interesting pairing is petal width and petal length. 
 
 This will be demonstrated by creating some regression plots using regplot. To create side by side plots, regplot has the parameter of ax. The first plot will be a plot of the overall data and the second plot will take the flower species into account. 
 * sepal width vs sepal length
@@ -733,6 +779,17 @@ www.canva.com
 
 https://blog.hubspot.com/website/center-an-image-in-html#why-center-images-in-html-and-css
 
+pandas transpose()  https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.transpose.html
+
+__Fisher and racism__
+
+What is wrong with Ronald Aylmer Fisher https://profjoecain.net/what-is-wrong-ronald-aylmer-fisher/
+
+The outstanding scientist, R.A. Fisher: his views on eugenics and race https://www.nature.com/articles/s41437-020-00394-6
+
+RA Fisher and the science of hatred https://www.newstatesman.com/long-reads/2020/07/ra-fisher-and-science-hatred
+
+
 __Write output to a file in python__
 
 In the command line use of file_name.py > outout_file_name.txt https://www.reddit.com/r/learnpython/comments/12emhsa/how_do_i_save_the_output_of_the_python_code_as_a/
@@ -782,7 +839,7 @@ https://ijece.iaescore.com/index.php/IJECE/article/view/33889
 
 https://iopscience.iop.org/article/10.1088/1742-6596/2068/1/012004/pdf
 
-
+https://peaceadegbite1.medium.com/iris-flower-classification-60790e9718a1#:~:text=The%20figures%20above%20show%20that,not%20greater%20than%203.8%20cm.
 
 __name__ https://www.youtube.com/watch?v=sugvnHA7ElY&t=357s
 
