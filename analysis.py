@@ -5,8 +5,9 @@ import seaborn as sns
 
 import plotting as pt
 
-# Setting up seaborn palette of 'Set1'
-sns.set_palette("Set1")
+# Set up seaborn colour palette. #5A4FCF is the colour code for iris. 
+colors = ['#5A4FCF', '#4ECF99', '#CF4E99']
+sns.set_palette(colors)
 
 # Import the data set, add headings to the columns.
 iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species'])
@@ -153,7 +154,7 @@ pt.plot_scatter(iris, hue = 'species')
 g = sns.pairplot(iris, hue = 'species')
 g.fig.suptitle('Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
 plt.savefig('plots\\Pair_plot.png')
-plt.close
+plt.close()
 
 
 
@@ -215,7 +216,7 @@ fig, ax = plt.subplots()
 ax.scatter(sepal_length_array, sepal_width_array)
 
 # Plotting the trend line. The y-axis values are generated from the equation of the line, with m and c equal to the values generated above.
-ax.plot(sepal_length_array, m * sepal_length_array + c, 'g-')
+ax.plot(sepal_length_array, m * sepal_length_array + c, '#CF4E99')
 
 # Axis labels.
 plt.xlabel('Sepal Length (cm)')
@@ -229,20 +230,20 @@ plt.close()
 fig, ax = plt.subplots(2, 2, figsize = (15, 10))
 
 # Regression plot between sepal length and sepal width
-sns.regplot(iris, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 0])
+sns.regplot(iris, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 0], ci = None)
 
 # Regression plot between sepal width and sepal length by species
-sns.regplot(setosa, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1], label = 'setosa')
-sns.regplot(versicolor, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1], label = 'versicolor')
-sns.regplot(virginica, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1], label = 'virginica')
+sns.regplot(setosa, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1], label = 'setosa', ci = None)
+sns.regplot(versicolor, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1], label = 'versicolor', ci = None)
+sns.regplot(virginica, x = 'sepal_length', y = 'sepal_width', ax = ax[0, 1], label = 'virginica', ci = None)
 
 # Regression plot between petal length and petal width
-sns.regplot(iris, x = 'petal_length', y = 'petal_width', ax = ax[1, 0])
+sns.regplot(iris, x = 'petal_length', y = 'petal_width', ax = ax[1, 0], ci = None)
 
 # Regression plot between petal length and petal width by species
-sns.regplot(setosa, x = 'petal_length', y = 'petal_width', ax = ax[1, 1], label = 'setosa')
-sns.regplot(versicolor, x = 'petal_length', y = 'petal_width', ax = ax[1, 1], label = 'versicolor')
-sns.regplot(virginica, x = 'petal_length', y = 'petal_width', ax = ax[1, 1], label = 'virginica')
+sns.regplot(setosa, x = 'petal_length', y = 'petal_width', ax = ax[1, 1], label = 'setosa', ci = None)
+sns.regplot(versicolor, x = 'petal_length', y = 'petal_width', ax = ax[1, 1], label = 'versicolor', ci = None)
+sns.regplot(virginica, x = 'petal_length', y = 'petal_width', ax = ax[1, 1], label = 'virginica', ci = None)
 
 # Add title
 plt.suptitle('Some Regression Plots for Iris Data Set')
@@ -272,9 +273,10 @@ plt.close()
 sns.pairplot(iris, hue = 'species', kind = 'reg')
 plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_Regression_plots.png')
+plt.close()
 
 # lmplot example. Sepal Width vs Sepal Length
-sns.lmplot(iris, x = 'sepal_length', y = 'sepal_width', col = 'species')
+sns.lmplot(iris, x = 'sepal_length', y = 'sepal_width', ci = None, col = 'species')
 plt.suptitle('Sepal Width vs Sepal Length by Species', y = 1.05)
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\lmplot_example.png')
 plt.close()
@@ -319,14 +321,14 @@ print(f'slope:' , reg.coef_)
 print(f'intercept:' , reg.intercept_)
 
 # Scatter plot of petal width vs petal lenght and line plot of the predicted values.
-plt.scatter(X_train, y_train, color = 'b')
-plt.plot(X_test, y_pred, color = 'r')
+plt.scatter(X_train, y_train)
+plt.plot(X_test, y_pred, color = '#CF4E99')
 
 # Label the x-axis and y-axis
 plt.xlabel('Petal Length (cm)')
-plt.ylabel('Petal width (cm)')
-plt.savefig('plots\\linear_regression_analysis.png')
-
+plt.ylabel('Petal Width (cm)')
+plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\lg_analysis.png')
+plt.close()
 
 
 

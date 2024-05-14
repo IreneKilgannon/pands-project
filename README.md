@@ -1,61 +1,68 @@
 
-![Banner](https://github.com/IreneKilgannon/pands-project/blob/main/Fisher%E2%80%99s%20Iris%20Data%20Set.png)
+<center><img src = "Fisher’s Iris Data Set.png" alt = "iris banner"></center>
+
 
 Author: Irene Kilgannon
 
-Student ID G00220627
+Student ID: G00220627
 
-This is my analysis of the Fisher's Iris data set for the programming and scripting module.
+This is my analysis of the Fisher's Iris data set for the programming and scripting module for the [Higher Diploma in Science in Computing in Data Analytics](https://www.gmit.ie/higher-diploma-in-science-in-computing-in-data-analytics) at Atlantic Technological University.
 
-## Making a plan
-1. Using a readme for discussion  ~~decided~~.
-2. background research add some images
-3. write summary statistics to .txt file -  ~~done~~. Discussion next
-4. histograms - created a function, Create a module with all the plotting files?. Add discussion
-5. scatter plot /pair plot between all the variables. Add discussion
-6. perhaps some linear regression plots. DONE
-7. calculate correlation coefficients, ~~fix labels on heatmap~~. add discussion
-8. regression analysis https://campus.datacamp.com/courses/introduction-to-regression-with-statsmodels-in-python/simple-linear-regression-modeling?ex=1
-9. machine learning sklearn
+## Left to do
 
-
-Ideally I would create modules, with all the functions required for the file and import them. Having trouble with this. Probably classes would be better but I don't understand, know enough about them!
+NB add literature comparison, add more references where ever needed. 
+1. background research  images
+2. Get started section
+4. Summary statistics. use groubpy by, Improve Discussion
+5. histograms. review
+6. scatter plot. review
+7. correlation coefficients, review 
+8. regression analysis and machine learning https://campus.datacamp.com/courses/introduction-to-regression-with-statsmodels-in-python/simple-linear-regression-modeling?ex=1  add code comments, discussion, 
 
 ## Project Statement
-* Research the data set and summarise it in a README.
-* Download the data set and add it to my repository.
-* Write a program called analysis.py: 
-    1. outputs a summary of each variable to a single text file
-    2. saves a histogram of each variable to png files
-    3. outputs a scatter plot of each pair of variables
-    4. any other analysis - suggested machine learning or regression analysis?? LEARN about them.
+* Research the data set and summarise it in a [README](https://github.com/IreneKilgannon/pands-project/blob/main/README.md).
+* Download the data set and add it to my [GitHub repository](https://github.com/IreneKilgannon/pands-project).
+* Write a program called [analysis.py](https://github.com/IreneKilgannon/pands-project/blob/main/analysis.py): 
+    1. outputs a summary of each variable to a single text file, [analysis.txt](https://github.com/IreneKilgannon/pands-project/blob/main/analysis.txt)
+    2. saves a histogram of each variable to png files.
+    3. outputs a scatter plot of each pair of variables.
+    4. any other analysis.
 
-## How to install
+## Getting Started
 
-## How to use it
+__Step 1__ Download and install [Anaconda](https://www.anaconda.com/download). Anaconda is a Python distributon package and comes with pre-installed packages such as [pandas](https://pandas.pydata.org/docs/user_guide/index.html#user-guide), [NumPy](https://numpy.org/doc/stable/user/whatisnumpy.html), [Matplotlib](https://matplotlib.org/) and [Seaborn](https://seaborn.pydata.org/) which are required for this project. Please note that when installing Anaconda it is important to check the two boxes for:
+  * Add Anaconda3 to my PATH environment 
+  * Make this version your default Python
+  
+![Anaconda](Anaconda.png)
 
-## Files in this project
-analysis.py
+__Step 2__ Download and install [Visual Studio Code](https://code.visualstudio.com/).
 
-analysis.ipynb
+__Step 3__ Each file was written in VScode and pushed to [my GitHub account](https://github.com/IreneKilgannon) for assessment.
 
-iris.data
+__Step 4__ To clone from GitHub enter the following in the command line:
 
-README.md
+    git clone https://github.com/IreneKilgannon/pands-project.git
 
-plots directory with all the plots generated for this analysis
+
+## Get Help
+
+If you have any questions or queries you can contact me at g00220627@atu.ie or alternatively [submit an issue](https://github.com/IreneKilgannon/pands-project/issues).
+
+
+***
 
 # Background to Fisher's Iris Data Set
 
-In 1928 Edgar Anderson published his paper entitled ['The Problem of Species in the Northern Blue Flags, _Iris versicolor_ and _Iris virginica_'](https://www.biodiversitylibrary.org/page/15997721). Anderson was a evolutionary biologist interested in answering two questions namely, what are species and how have they originated? Between 1923 and 1928 he and his team studied _Iris versicolor_, at a number of different sites from Ontario in Canada to Alabama in the United States, by measuring a number of different iris characteristics. Surprisingly his study found that there were actually two different iris species present, _Iris versicolor_ and _Iris virginia_ and that it was possible to differentiate between them by geographic location. This is reflected in the [common names of these two species of iris](https://hgic.clemson.edu/factsheet/rain-garden-plants-iris-versicolor-and-iris-virginica/). _Iris versicolor_ is commonly known as the Northern blue flag iris and _Iris virginica_ is commonly known as the Southern blue flag iris.
+In 1928 Edgar Anderson published his paper entitled ['The Problem of Species in the Northern Blue Flags, _Iris versicolor_ and _Iris virginica_'](https://www.biodiversitylibrary.org/page/15997721). Anderson was a evolutionary biologist interested in answering two questions namely, what are species and how have they originated? Between 1923 and 1928 he and his team studied _Iris versicolor_, at a number of different sites from Ontario in Canada to Alabama in the United States, by measuring a number of different iris characteristics. Surprisingly his study found that there were actually two iris species present, _Iris versicolor_ and _Iris virginia_ and that it was possible to differentiate between them by geographic location. This is reflected in the [common names of these two species of iris](https://hgic.clemson.edu/factsheet/rain-garden-plants-iris-versicolor-and-iris-virginica/). _Iris versicolor_ is commonly known as the Northern blue flag iris and _Iris virginica_ is commonly known as the Southern blue flag iris.
 
-ADD IMAGE TO BREAK UP THE TEXT
+![Ronald Fisher in 1913](https://en.wikipedia.org/wiki/Ronald_Fisher#/media/File:Youngronaldfisher2.JPG)
 
-The data set is commonly known as Fisher's Iris Data set after the statistician and biologist, Ronald Fisher. The data measurements for _Iris setosa_ and _Iris versicolor_ were collected by Anderson from the same colony of plants in the Gaspé Peninsula, Quebec in 1935. According to [Unwin and Kleinman](hhttps://academic.oup.com/jrssig/article/18/6/26/7038520) the _Iris virginica_ data samples were from Anderson's original research and were collected in Camden, Tennessee. Fisher collated and analysed the data and in 1936 published his results in the Annals of Eugenics [The Use of Multiple Measurements in Taxonomic Problems](https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.1469-1809.1936.tb02137.x). He used a statistical method, linear discriminant analysis to attempt to distinguish the different iris species from each other. He found that _Iris setosa_ was easily distinguishable from the other two iris species using this method. 
+The data set is commonly known as Fisher's Iris Data set after the statistician and biologist, [Ronald Fisher](https://en.wikipedia.org/wiki/Ronald_Fisher). The data measurements for _Iris setosa_ and _Iris versicolor_ were collected by Anderson from the same colony of plants in the Gaspé Peninsula, Quebec in 1935. According to [Unwin and Kleinman](hhttps://academic.oup.com/jrssig/article/18/6/26/7038520) the _Iris virginica_ data samples were from Anderson's original research and were collected in Camden, Tennessee. Fisher collated and analysed the data and in 1936 published his results in the Annals of Eugenics [The Use of Multiple Measurements in Taxonomic Problems](https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.1469-1809.1936.tb02137.x). He used a statistical method, linear discriminant analysis to attempt to distinguish the different iris species from each other. He found that _Iris setosa_ was easily distinguishable from the other two iris species using this method. 
 
-![Image from Fisher's paper](https://github.com/IreneKilgannon/pands-project/blob/main/fisher_data_set_image.png)
+![Image from Fisher's paper](fisher_data_set_image.png)
 
-Fisher's data set can viewed in his published paper but, in our computer age, the data set is available to download at [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris). The data set is very widely used with currently over 700,000 views of the data set on the UCI website.
+Fisher's data set can viewed in his published paper but, in our computer age, the data set is available to download at [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris). The data set is still very widely used with currently over 700,000 views of the data set on the UCI website. It is worth mentioning that there is a move away from using this data set 
 
 Fisher and racism  -do i put it in?
 
@@ -63,16 +70,17 @@ https://profjoecain.net/what-is-wrong-ronald-aylmer-fisher/
 
 https://www.newstatesman.com/long-reads/2020/07/ra-fisher-and-science-hatred
 
-https://www.nature.com/articles/s41437-020-00394-6
+https://www.nature.com/articles/s41437-020-00394-6  
 
 ## Import the Required Modules.
 
-Four modules are required for this analysis:
+The following modules are required for this analysis:
 
 * [pandas](https://www.w3schools.com/python/pandas/pandas_intro.asp) - for manipulating data and for performing data analysis.
 * [numpy](https://www.w3schools.com/python/numpy/default.asp) - performs a wide variety of mathematical calculations on arrays.
 * [matplotlib.pyplot](https://www.geeksforgeeks.org/python-introduction-matplotlib/) - used to create plots e.g. bar plots, scatter plots, histograms.
 * [seaborn](https://realpython.com/python-seaborn/) - a python data visualisation library based on matplotlib. Usually requires less code syntax than matplotlib.
+* [plotting](https://github.com/IreneKilgannon/pands-project/blob/main/plotting.py) - a module I developed that will create and save seaborn histograms and seaborn scatter plots for all the numeric data in a data set. __IF I CAN DEVELOP FURTHER TO PRINT FIG, AX PLOTS.__
 
 ```python
 import numpy as np
@@ -721,6 +729,10 @@ https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/
 
 ## References
 
+www.canva.com
+
+https://blog.hubspot.com/website/center-an-image-in-html#why-center-images-in-html-and-css
+
 __Write output to a file in python__
 
 In the command line use of file_name.py > outout_file_name.txt https://www.reddit.com/r/learnpython/comments/12emhsa/how_do_i_save_the_output_of_the_python_code_as_a/
@@ -759,6 +771,8 @@ r-squared https://statisticsbyjim.com/regression/interpret-r-squared-regression/
 __Machine Learning__
 
 https://www.kaggle.com/code/ash316/ml-from-scratch-with-iris
+
+
 
 __ Literature search Recent uses of the iris data set__ 
 
