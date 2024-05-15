@@ -22,6 +22,8 @@ with open('analysis.txt', 'wt') as f:
 #### Output a summary of each variable to a single txt file, analysis.txt ####
 # Collating the necessary infomation for analysis.txt
 
+#### Overall information about the data set
+
 # Get the number of rows and columns in the data set.
 shape = f'The shape of the data set is {iris.shape}. \n\n'
 
@@ -34,11 +36,16 @@ data_types = f'The data types in the data set are: \n{iris.dtypes}\n \n'
 # Look for missing data, NaN
 missing_values = f'Checking to see if there is any missing data or NaN. \n{iris.isna().sum()} \n \n'
 
+#### Summary information for the species column
+
 # Uniques names in the species column.
 unique = f"The unique names in the species column are: \n {iris['species'].unique()} \n\n"
 
 # Value count of each species.
 count_species = f"A count of each species: \n {iris['species'].value_counts()} \n\n"
+
+
+#### Summary information for the numeric columns
 
 # Summary statistics for the overall data set
 summary_statistics = f'Overall summary statistics for the data set. \n{iris.describe()} \n\n'
@@ -62,7 +69,6 @@ virginica_summary = f'Summary statistics for Iris virginica are: \n{virginica.de
 
 # Write the summary statistics to analysis.txt
 # Append them to the analysis.txt file created previously
-
 with open('analysis.txt', 'a') as f:
     f.write(shape)
     f.write(column_names)
@@ -91,7 +97,7 @@ sns.boxplot(ax = ax[1, 1], x = 'species', y = 'petal_width', data = iris)
 # Overall plot title
 plt.suptitle('Box plot by Species for Each Variable')
 
-# Label each plot
+# Label each subplot title
 ax[0,0].set_title('Sepal Length')
 ax[0,1].set_title('Sepal Width')
 ax[1,0].set_title('Petal Length')
@@ -104,27 +110,27 @@ plt.close()
 ######################################
 # HISTOGRAM CODE
 
-# TASK: Save a histogram of each variable to png files #####
+# TASK: Save a histogram of each variable to png files
 
-# Create a histogram of each numeric variable as a figure axes plot. 
+# Create a histogram of each numeric variable as a figure axes plot.
 fig, ax = plt.subplots(2, 2, figsize = (13, 13))
 
-# Histogram of sepal length
+# Histogram of sepal length, with title and x-axis label
 sns.histplot(iris, x = 'sepal_length', ax = ax[0,0])
 ax[0, 0].set_title('Histogram of Sepal Length')
 ax[0, 0].set_xlabel('Sepal Length (cm)')
 
-# Histogram of sepal width
+# Histogram of sepal width, with title and x-axis label
 sns.histplot(iris, x = 'sepal_width', ax = ax[0, 1])
 ax[0, 1].set_title('Histogram of Sepal Width')
 ax[0, 1].set_xlabel('Sepal Width (cm)')
 
-# Histogram of petal length
+# Histogram of petal length, with title and x-axis label
 sns.histplot(iris, x = 'petal_length', ax = ax[1, 0])
 ax[1, 0].set_title('Histogram of Petal Length')
 ax[1, 0].set_xlabel('Petal Length (cm)')
 
-# Histogram of petal width
+# Histogram of petal width, with title and x-axis label
 sns.histplot(iris, x = 'petal_width', ax = ax[1, 1])
 ax[1, 1].set_title('Histogram of Petal Width')
 ax[1, 1].set_xlabel('Petal Width (cm)')
@@ -150,14 +156,14 @@ pt.plot_hist(iris, hue = 'species')
 pt.plot_scatter(iris, hue = 'species')
 
 
-# Use a pair plot! Much simplier method to generate a scatter plot of each pair of variables
+# Use of a pairplot.
 g = sns.pairplot(iris, hue = 'species')
 g.fig.suptitle('Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
 plt.savefig('plots\\Pair_plot.png')
 plt.close()
 
 
-
+######################################
 #### Any other analysis ####
 
 # To calculate the correlation coefficient between two variables
