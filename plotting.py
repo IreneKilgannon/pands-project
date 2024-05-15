@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-
+# A function to plot a histogram
 def plot_hist(df, hue = None):
     '''To function plot a seaborn histogram of all the numeric variables in a dataframe.
 
@@ -14,18 +14,23 @@ def plot_hist(df, hue = None):
     
     Returns
     -------
-    A saved histogram in the plots directory for the numeric variables in the data set as a png file.
+    Histograms in the plots directory for each of the numeric variables in the data set as a png files.
     '''
     for x in df:
-        # Histograms are for continuous numeric data, continue to the next column if the datatype of the column is object.
+        # Histograms are for continuous numeric data, continue to the next column if the datatype is not integer or float.
         if df[x].dtype == 'int' or df[x].dtype == 'float':
         # Create a seaborn histogram, hue parameter is very useful to differentiate by another variable.
             sns.histplot(x = x, data = df, hue = hue)
+            # Add title, capitalizing the heading and replacing '_' with a blank space.
             plt.title(f"Histogram of {x.title().replace('_', ' ')}")
+            # Label x-axis,  y-axis will be automatically labelled as 'Count' by seaborn
             plt.xlabel(f"{x.replace('_', ' ')}")
+            # Save the histogam in the plots directory
             plt.savefig(f'plots\\Histogram_of_{x}.png')
+            # Close the plot when it has been saved
             plt.close()
 
+# A function to create a scatter plot
 def plot_scatter(df, hue = None):
     '''To function plot a seaborn scatter plots of all the numeric variables in a dataframe.
 
@@ -38,7 +43,7 @@ def plot_scatter(df, hue = None):
     -------
     Saved scatter plots between all the numeric variables in the data set as a png file.
     '''
-    # Initialize an empty list for plotted x columns
+    # Initialize an empty list for plotted x variables
     plotted_x = []
     for x in df:
         plotted_x.append(x)

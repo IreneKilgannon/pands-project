@@ -50,13 +50,13 @@ count_species = f"A count of each species: \n {iris['species'].value_counts()} \
 # Summary statistics for the overall data set
 summary_statistics = f'Overall summary statistics for the data set. \n{iris.describe()} \n\n'
 
+# Summary statistics grouped by species. Transpose the result to for an easier read. 
+summary_by_species = f"Summary statistics grouped by species \n{iris.groupby('species').describe().transpose()} \n\n"
+
 # Create dataframes for each iris species.
 setosa = iris[iris['species'] == 'Iris-setosa']
 versicolor = iris[iris['species'] == 'Iris-versicolor']
 virginica = iris[iris['species'] == 'Iris-virginica']
-
-# Summary statistics grouped by species. Transpose the result to for an easier read. 
-summary_by_species = f"Summary statistics grouped by species \n{iris.groupby('species').describe().transpose()} \n\n"
 
 # Summary Statistics for Iris setosa
 setosa_summary = f'Summary statistics for Iris setosa are: \n{setosa.describe()} \n\n'
@@ -163,7 +163,7 @@ plt.savefig('plots\\Pair_plot.png')
 plt.close()
 
 
-######################################
+
 #### Any other analysis ####
 
 # To calculate the correlation coefficient between two variables

@@ -11,11 +11,10 @@ This is my analysis of the Fisher's Iris data set for the programming and script
 ## Left to do
 
 NB add literature comparison, add more references where ever needed. 
-1. Summary statistics. Improve Discussion
-2. histograms. review
-3. scatter plot. review
-4. correlation coefficients, review 
-5. regression analysis and machine learning https://campus.datacamp.com/courses/introduction-to-regression-with-statsmodels-in-python/simple-linear-regression-modeling?ex=1  add code comments, discussion, 
+1. histograms. review
+2. scatter plot. review
+3. correlation coefficients, review 
+4. regression analysis and machine learning https://campus.datacamp.com/courses/introduction-to-regression-with-statsmodels-in-python/simple-linear-regression-modeling?ex=1  add code comments, discussion, 
 
 ## Project Statement
 * Research the data set and summarise it in a [README](https://github.com/IreneKilgannon/pands-project/blob/main/README.md).
@@ -32,7 +31,7 @@ __Step 1__ Download and install [Anaconda](https://www.anaconda.com/download). A
   * Add Anaconda3 to my PATH environment variable
   * Register Anaconda3 as my default Python 3.9
   
-![Anaconda](https://github.com/IreneKilgannon/pands-project/blob/main/images/Anaconda.png)
+![Anaconda](https://github.com/IreneKilgannon/pands-project/blob/main/images/Anaconda.png))
 
 __Step 2__ Download and install [Visual Studio Code](https://code.visualstudio.com/).
 
@@ -50,7 +49,7 @@ If you have any questions or queries you can contact me at g00220627@atu.ie or a
 
 ***
 
-# Background to Fisher's Iris Data Set
+## Background to Fisher's Iris Data Set
 
 In 1928 Edgar Anderson published his paper entitled ['The Problem of Species in the Northern Blue Flags, _Iris versicolor_ and _Iris virginica_'](https://www.biodiversitylibrary.org/page/15997721). Anderson was a evolutionary biologist interested in answering two questions namely, what are species and how have they originated? Between 1923 and 1928 he and his team studied _Iris versicolor_, at a number of different sites from Ontario in Canada to Alabama in the United States, by measuring a number of different iris characteristics. Surprisingly his study found that there were actually two iris species present, _Iris versicolor_ and _Iris virginia_ and that it was possible to differentiate between them by geographic location. This is reflected in the [common names of these two species of iris](https://hgic.clemson.edu/factsheet/rain-garden-plants-iris-versicolor-and-iris-virginica/). _Iris versicolor_ is commonly known as the Northern blue flag iris and _Iris virginica_ is commonly known as the Southern blue flag iris.
 
@@ -85,7 +84,7 @@ import plotting as pt
 
 The data set was downloaded from [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris) and imported. This csv file does not contain column names and the column names were obtained from the variables table on the [information page of the iris data set](https://archive.ics.uci.edu/dataset/53/iris). The column names are sepal_length_cm, sepal_width_cm, petal_length_cm, petal_width_cm and species.
 
-A number of methods were explored to add the column names [adding headers to a dataframe in pandas a comprehensive-guide](https://saturncloud.io/blog/adding-headers-to-a-dataframe-in-pandas-a-comprehensive-guide/). The quickest method is to add the column names using the name parameter when the data set is loaded. I did not add "_cm" to the columm names.
+A number of methods were explored to add the column names. This reference, [adding headers to a dataframe in pandas a comprehensive-guide](https://saturncloud.io/blog/adding-headers-to-a-dataframe-in-pandas-a-comprehensive-guide/) was particularily helpful. The quickest method is to add the column names using the name parameter when the data set is loaded. I did not add "_cm" to the columm names.
 
 ```python
 iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species'])
@@ -111,7 +110,10 @@ _Background_
 <summary>Code written to analysis.txt</summary>
 
 ```python
-# Investigating the variables to provide a summary for analysis.txt
+#### Output a summary of each variable to a single txt file, analysis.txt ####
+# Collating the necessary infomation for analysis.txt
+
+#### Overall information about the data set
 
 # Get the number of rows and columns in the data set.
 shape = f'The shape of the data set is {iris.shape}. \n\n'
@@ -125,11 +127,15 @@ data_types = f'The data types in the data set are: \n{iris.dtypes}\n \n'
 # Look for missing data, NaN
 missing_values = f'Checking to see if there is any missing data or NaN. \n{iris.isna().sum()} \n \n'
 
+#### Summary information for the species column
+
 # Uniques names in the species column.
 unique = f"The unique names in the species column are: \n {iris['species'].unique()} \n\n"
 
 # Value count of each species.
 count_species = f"A count of each species: \n {iris['species'].value_counts()} \n\n"
+
+#### Summary information for the numeric columns
 
 # Summary statistics for the overall the data set
 summary_statistics = f'Overall summary statistics for the data set. \n{iris.describe()} \n\n'
@@ -141,7 +147,6 @@ summary_by_species = f"Summary statistics grouped by species \n{iris.groupby('sp
 setosa = iris[iris['species'] == 'Iris-setosa']
 versicolor = iris[iris['species'] == 'Iris-versicolor']
 virginica = iris[iris['species'] == 'Iris-virginica']
-
 
 # Summary Statistics for Iris setosa
 setosa_summary = f'Summary statistics for Iris setosa are: \n{setosa.describe()} \n\n'
@@ -167,9 +172,8 @@ with open('analysis.txt', 'a') as f:
     f.write(virginica_summary)
 ```
 </details>
-<br>
 
-_Discussion_
+__Summary of the data set__
 
 The iris data set is a small data set with 150 rows and five columns with each row corresponding to a different flower sample. There is no missing data.
 
@@ -182,9 +186,9 @@ The five variables in the data set are:
 
 There are three iris species, _Iris setosa_, _Iris versicolor_ and _Iris virginica_ in the species column with 50 samples for each species. The data type of the species column is object. 
 
-The sepal length, sepal width, petal length and petal width columns are continuous numeric data of data type float(floating point number), which means that they are decimal numbers. They were all measured in cm to one decimal place.
+The sepal length, sepal width, petal length and petal width columns are all continuous numeric data. They were all measured in cm to one decimal place and they have been correctly assigned the datatype of float (floating point number). 
 
-A basic description of the structure of an iris flower will help to understand what each of the variable names are. Each iris has three true petals and three sepals. The three petals are upright and are sometimes known as standards. Sepals are a modified leaf, usually green in colour and its function is to protect the developing flower bud. When the flower has bloomed the iris's sepal is described as "the landing pad for bumblebees" by the [US Forest Service](https://www.fs.usda.gov/wildflowers/beauty/iris/flower.shtml). This diagram nicely illustrates the difference between the petals and the sepals and also how the width and length of each were measured.
+A brief description of an iris flower will help give meaning to the variable names. Each iris has three true petals and three sepals. The three petals are upright and are sometimes known as standards. Sepals are a modified leaf, known as falls and its function is to protect the developing flower bud. When the flower has bloomed the iris' sepal is described as "the landing pad for bumblebees" by the [US Forest Service](https://www.fs.usda.gov/wildflowers/beauty/iris/flower.shtml). This diagram nicely illustrates the difference between the petals and the sepals and how the width and length of each were measured.
 
 ![Length vs Width](https://www.integratedots.com/wp-content/uploads/2019/06/iris_petal-sepal-e1560211020463.png)
 
@@ -207,7 +211,7 @@ Overall summary statistics for the data set.
 |75%   |     6.400000 |    3.300000  |    5.100000  |   1.800000|
 |max   |     7.900000 |    4.400000  |    6.900000  |   2.500000| 
 
-The summary statistics reveal that petal lengths and petal widths are smaller than the sepal length and sepal width. Petal width is the smallest variable with the min length of 0.1 cm, a mean of 1.20 cm with max size of 2.5 mm. Sepal length is the largest of the four variables with a mean of 5.8 mm. I would imagine that the size difference between the sepal and petals would help an amateur botanist distinguish between the sepals and petals. __REPHRASE__
+The summary statistics reveal that petal lengths and petal widths are smaller than the sepal length and sepal width. Petal width is the smallest variable with the min length of 0.1 cm, a mean of 1.20 cm with max size of 2.5 mm. Sepal length is the largest of the four variables with a mean of 5.8 mm. I would imagine that the size difference between the sepals and petals would help an amateur botanist distinguish between them if they could not do so by looking at the flower.
 
 
 Summary Statistics for Each Iris Species
@@ -216,9 +220,8 @@ Summary Statistics for Each Iris Species
 # Summary statistics grouped by species. Transpose the result to make easier comparisons between the species.
 summary_by_species = f"Summary statistics grouped by species \n{iris.groupby('species').describe().transpose()} \n\n"
 ```
-Transposing the results of the summary statistics grouped by species gives a more readable form of the table. Without  transposing the results a table of 3 rows and 32 columns was created! The transposed table is much more readable and making direct comparisons is easier. 
 
-COMMENT 
+The [groupby method](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html) is used to group by the results of a method, such as describe() by a specific column or list of columns. When groupby was used on the species column, the result was a difficult to read table of 3 rows and 32 columns. This [blog](https://www.angela1c.com/projects/iris_project/investigating-the-iris-dataset/) suggested transposing the results of the groupby species to give more readable results. The [transpose method](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.transpose.html) converts rows into columns and vice-versa. Now it is much easier to make direct comparisons between the species for each variable. 
 
 Summary statistics grouped by species
 ||||||
@@ -257,48 +260,9 @@ Summary statistics grouped by species
 |            | 75%   |    0.300000 |        1.500000  |      2.300000|
 |            | max   |    0.600000 |        1.800000  |      2.500000|
 
-# PROBABLY DELETE THIS NOW, not required.
-Summary statistics for _Iris setosa_ are:
+Analysing these results we can see that _Iris setosa_ is the smallest flower in the data set. _Iris virginica_ is the largest flower species. _Iris setosa_ has the smallest measurements for three out of the four variables. Surprisingly the sepal width of _Iris setosa_ is larger than the sepal width for both _Iris versicolor_ and _Iris virginica_. The petal width and petal length measurements of _Iris setosa_ are substantially smaller than the corresponding measurements for _Iris versicolor_ and _Iris virginica_.
 
-|      | sepal_length | sepal_width | petal_length | petal_width|
-|---|---|---|---|---|
-|count  |    50.00000  |  50.000000   |  50.000000   |  50.00000|
-|mean   |     5.00600  |   3.418000   |   1.464000   |   0.24400|
-|std    |     0.35249  |   0.381024   |   0.173511   |   0.10721|
-|min    |     4.30000  |   2.300000   |   1.000000   |   0.10000|
-|25%    |     4.80000  |   3.125000   |   1.400000   |   0.20000|
-|50%    |     5.00000  |   3.400000   |   1.500000   |   0.20000|
-|75%    |     5.20000  |   3.675000   |   1.575000   |   0.30000|
-|max    |     5.80000  |   4.400000   |   1.900000   |   0.60000| 
-
-
-Summary statistics for _Iris versicolor_ are: 
-|      | sepal_length | sepal_width | petal_length | petal_width|
-|---|---|---|---|---|
-|count  |   50.000000  |  50.000000   |  50.000000  |  50.000000|
-|mean   |    5.936000  |   2.770000   |   4.260000  |   1.326000|
-|std    |    0.516171  |   0.313798   |   0.469911  |   0.197753|
-|min    |    4.900000  |   2.000000   |   3.000000  |   1.000000|
-|25%    |    5.600000  |   2.525000   |   4.000000  |   1.200000|
-|50%    |    5.900000  |   2.800000   |   4.350000  |   1.300000|
-|75%    |    6.300000  |   3.000000   |   4.600000  |   1.500000|
-|max    |    7.000000  |   3.400000   |   5.100000  |   1.800000| 
-
-
-Summary statistics for _Iris virginica_ are: 
-|      | sepal_length | sepal_width | petal_length | petal_width|
-|---|---|---|---|---|
-|count   |   50.00000   | 50.000000  |   50.000000   |  50.00000|
-|mean    |    6.58800   |  2.974000  |    5.552000   |   2.02600|
-|std     |    0.63588   |  0.322497  |    0.551895   |   0.27465|
-|min     |    4.90000   |  2.200000  |    4.500000   |   1.40000|
-|25%     |    6.22500   |  2.800000  |    5.100000   |   1.80000|
-|50%     |    6.50000   |  3.000000  |    5.550000   |   2.00000|
-|75%     |    6.90000   |  3.175000  |    5.875000   |   2.30000|
-|max     |    7.90000   |  3.800000  |    6.900000   |   2.50000|
-
-
-A [seaborn boxplot](https://seaborn.pydata.org/generated/seaborn.boxplot.html) is nice visual method to display summary statistics about the data set. It gives us most of the same information that the describe method does but as it is visual it is easier and quicker to make comparisons. One difference between the describe method and a box plot is that describe gives us the mean, whereas a box plot displays the median value of the variable of interest.
+A [seaborn boxplot](https://seaborn.pydata.org/generated/seaborn.boxplot.html) is nice method to visually compare summary statistics about a data set. It gives us most of the same information that the describe method does but as it is visual it is easier and quicker to make comparisons. One difference between the describe method and a box plot is that describe gives us the mean, whereas a box plot displays the median value of the variable.
 
 ![diagram to explain box plot](https://builtin.com/sites/www.builtin.com/files/styles/ckeditor_optimize/public/inline-images/1_boxplots.jpg)
 
@@ -338,13 +302,14 @@ plt.close()
 
 ![Boxplot](plots/Box_plot.png)
 
-The box plot clearly demonstrate that the petal lengths and petal widths of _Iris setosa_ is distincly different from the other two iris species. The petal length and widths are much smaller than _Iris versicolor_ and _Iris virginica_. This will aid in classifying _Iris setosa_.
+The box plot confirms the analysis from the summary statistcs. It clearly demonstrates that the petal lengths and petal widths of _Iris setosa_ are distinctly different to the other two iris species. Their petal lengths and widths are much smaller than _Iris versicolor_ and _Iris virginica_. This will aid in classifying _Iris setosa_. _Iris virginica_ is the largest species in the data set and has larger sepal length, petal length and petal widths than the other flower species. 
 
-----
 
-## Histogram of each variable saved to png files
+## Histogram of Each Variable
 
-Histograms are used to plot continouous numeric data. The four variables of sepal length, sepal width, petal length and petal width fulfill this criteria.
+_Task_: Save a histogram of each variable to png files
+
+[Histograms](https://thirdspacelearning.com/gcse-maths/statistics/histogram/) are used to plot continuous numeric data. The four variables of sepal length, sepal width, petal length and petal width fulfill this criteria.
 
 <details>
 <summary>Histogram code</summary>
@@ -380,18 +345,24 @@ plt.savefig('plots\\Summary_Histogram.png')
 
 ![Overall Histogram](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Summary_Histogram.png)
 
-The four plots have an usual shape. The histograms should have a [normal distribution](https://www.youtube.com/watch?v=rzFX5NWojp0) and only one plot, the histogram of sepal width looks like it approaches a normal distribution. 
+The four histograms all have an surprisingly different shapes and are comparable to the plots obtained in this journal [article](https://www.researchgate.net/figure/The-histograms-on-each-feature-of-the-Iris-data-set_fig4_309515576). The histograms should have a [normal distribution](https://www.youtube.com/watch?v=rzFX5NWojp0) and only one plot, the histogram of sepal width looks like it approaches a normal distribution. 
 
 ![Normal Distribution](https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Bellcurve.svg/320px-Bellcurve.svg.png)
 
-_Normal Distribtuion_
+_Normal Distribution_
 
-It is worth investigating to see if the species of the flower is affecting the shape of the curve. Rather than create a plot for each of the variables by coding each of the variables seperately (as I did above), I wrote function to plot each of the variables in the data set by looping through any column whose datatype is either integer or float. The histograms were created using a [seaborn histplot](). Seaborn's hue parameter makes it very easy to differentiate the data by the categorical variable, species. Hue is an optional argument for the function. 
+It is worth investigating to see if the species of the flower is affecting the shape of the curve. Rather than create a plot for each of the variables by coding each of the variables seperately (as I did above), I wrote function to plot each of the variables in the data set by looping through any column whose datatype is either integer or float. The histograms were created using a [seaborn histplot](). Seaborn's hue parameter makes it very easy to differentiate the data by a categorical variable, which in this case is species. Hue is an optional argument for the function. The plotted function will create the histograms created above but as individual histograms and not as the figure, axes plot created above. 
+
+```python
+# To plot the histograms created previously using the plotting module.
+plot_hist(iris)
+```
 
 <details>
 <summary>Histogram code</summary>
 
 ```python
+# Function to plot histograms for all the numeric variable in a dataframe
 def plot_hist(df, hue = None):
     '''Plot a seaborn histogram of all the numeric variables in a dataframe. Optional hue parameter for a categorical variable. 
 
@@ -402,26 +373,29 @@ def plot_hist(df, hue = None):
     
     Returns
     -------
-    A saved histogram of the numeric variables in the data set as a png file.
+    Histograms in the plots directory for each of the numeric variables in the data set as a png files.
     '''
     for x in df:
-        # Histograms are for continuous numeric data of data type integer or float.
+        # Histograms are for continuous numeric data, continue to the next column if the datatype of is not an integer or float.
         if df[x].dtype == 'int' or df[x].dtype == 'float':
             # Create a seaborn histogram, hue parameter is very useful to differentiate by a categorical variable.
             sns.histplot(x = x, data = df, hue = hue)
-            # Add title. Replacing '_' with a blank space.
+            # Add title, capitalizing the heading and replacing '_' with a blank space.
             plt.title(f"Histogram of {x.title().replace('_', ' ')}")
-            # Label x-axis
+            # Label x-axis,  y-axis will be automatically labelled as 'Count' by seaborn
             plt.xlabel(f"{x.replace('_', ' ')}")
-            plt.ylabel('Frequency')
-            # Save the plots
+            # Save the histogam in the plots directory
             plt.savefig(f'plots\\Histogram_of_{x}.png')
+            # Close the plot when it has been saved
             plt.close()
 
+# plotting has been imported as pt 
 # Call the plot_hist function from the plotting module on the iris data set.
 pt.plot_hist(iris, hue = 'species')
 ```
 </details>
+
+To make a side by side comparison of the histograms I have displayed them in the table below. I would like to make figure, axes plot of the histograms so that there are all plotted in the same figure but to date I have been unable to figure out how to do this.
 
 |||
 |---|---|
@@ -429,16 +403,16 @@ pt.plot_hist(iris, hue = 'species')
 |![Histogram of Petal Length](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Histogram_of_petal_length.png)|![Histogram of Petal Width](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Histogram_of_petal_width.png)|
 
 
-__Discussion of histogram__
+Now that the data has been classified by species we can see that the histogram better resembles a normal distribution for most of the histograms. As the data set only has 50 data points for each species, it would require more data points to fully resemble a normal distribution. The unusual shape of the previous histograms is due to the overlapping data points. 
 
-Now that the data has been classified by species we can see that the histogram better resembles a normal distribution for most of the histograms. As the data set only has 50 data points for each species, it would require many more data points to fully resemble a normal distribution as stated in the Central limit theorem. and the unusual shape of the previous histograms was due to the overlapping data points. 
+The histogram for petal length and petal width for _Iris setosa_ is different to the other histograms as it is right skewed. It is also distinct cluster. This could be helpful for classification of the species. 
 
-The histogram for petal length and petal width for _Iris setosa_ is different to the other histograms as it is right skewed. It is also distinct cluster. This could be helpful for classification of the species. __PHRASE BETTER__ __add comparison to literature__
+https://medium.com/@nirajan.acharya666/exploratory-data-analysis-of-iris-dataset-9c0df76771df
 
 
 ## Scatter plot of each pair of variables
 
-The purpose of a scatter plot is to demonstrate the relationship between two variables. Scatter plots also indicate if there are any outlying points (outliers) away from the main data points that could disrupt accurate correlation.
+The purpose of a [scatter plot](https://www.atlassian.com/data/charts/what-is-a-scatter-plot#:~:text=A%20scatter%20plot%20(aka%20scatter,to%20observe%20relationships%20between%20variables.)) is to demonstrate the relationship between two numeric variables. Scatter plots also indicate if there are any outlying points (outliers) away from the main data points that could disrupt accurate correlation.
 These were created using [seaborn scatter plots](https://www.geeksforgeeks.org/scatterplot-using-seaborn-in-python/). It is also possible to create scatter plots with [matplotlib's plt.scatter function](https://www.w3schools.com/python/python_ml_scatterplot.asp)
 
 <details>
@@ -457,6 +431,7 @@ def plot_scatter(df, hue = None):
     -------
     Saved scatter plots between all the numeric variables in the data set as a png file.
     '''
+    # Initialize an empty list for plotted x variables
     plotted_x = []
     for x in df:
         plotted_x.append(x)
@@ -487,16 +462,14 @@ def plot_scatter(df, hue = None):
 # Call the plot_scatter function from the plotting module on the iris data set.
 pt.plot_scatter(iris, hue = 'species')
 
-# Use a pair plot! Much simplier method to generate a scatter plot of each pair of variables
+# Use of pairplot
 g = sns.pairplot(iris, hue = 'species')
 g.fig.suptitle('Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
 plt.savefig('plots\\Pair_plot.png')
-plt.close
-#plt.show()
+plt.close()
 ```
-
 </details>
-<br>
+
 
 |Scatter plots between all the variables in the Iris data set||
 |---|---|
@@ -504,15 +477,15 @@ plt.close
 |![PWvsPL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Petal%20Length.png)|![PWvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Sepal%20Length.png)|
 |![PWvsSW](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Sepal%20Width.png)|![SWvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Sepal%20Width_vs_Sepal%20Length.png)|
 
-The scatter plots demonstrate clearly that _Iris setosa_ is a distict cluster. It does not overlap with with _Iris versicolor_ or _Iris virginica_ in any of the scatter plots. It is important to always cross check what appears to be an outlier in the scatter plot with the box plot. What I thought was an obvious outlier in the scatter plot for _Iris setosa_ with a sepal width at 2.3 cm, is in the box plot the minimium value in the sepal width range for _Iris setosa_!
+The scatter plots demonstrate clearly that _Iris setosa_ is a distinct cluster. It does not overlap with with _Iris versicolor_ or _Iris virginica_ in any of the scatter plots. It is important to always cross check what appears to be an outlier in the scatter plot with the box plot. What I thought was an obvious outlier in the scatter plot for _Iris setosa_ with a sepal width at approx 2.3 cm, is in the box plot the minimium value in the sepal width range for _Iris setosa_!
 
-The clusters of _Iris versicolor_ and _Iris virginica_ overlap in all the scatter plots. In the plot of sepal length vs sepal width there is a significant amount of overlap. The least amount of overlap appears to be in the scatterplots between petal length and petal width and between petal width and sepal width. One widely used technique for classification in machine learning is called [K-nearest neighbours(KNN)](https://www.datacamp.com/tutorial/k-nearest-neighbor-classification-scikit-learn). The K-nearest neighbours algorithm looks at the nearest data points to the data point of interest and decides which cluster the data point belongs to. Minimising the overlap of clusters will improve the chance of correct cluster assignment.
+The clusters of _Iris versicolor_ and _Iris virginica_ overlap in all the scatter plots. In the plot of sepal length vs sepal width there is a significant amount of overlap. The least amount of overlap appears to be in the scatter plots between petal length and petal width and between petal width and sepal width. One widely used technique for classification in machine learning is called [K-nearest neighbours(KNN)](https://www.datacamp.com/tutorial/k-nearest-neighbor-classification-scikit-learn). The K-nearest neighbours algorithm looks at the nearest data points to the data point of interest and decides which cluster the data point belongs to. Minimising the overlap of clusters will improve the chance of correct cluster assignment.
 
 
 ![Pair plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Pair_plot.png)
 
 
-#### Any Other Analysis ####
+## Any Other Analysis
 
 ## Correlation Analysis
 
@@ -763,7 +736,7 @@ https://www.kaggle.com/code/danalexandru/simple-analysis-of-iris-dataset
 
 https://www.hackersrealm.net/post/iris-dataset-analysis-using-python
 
-https://www.angela1c.com/projects/iris_project/investigating-the-iris-dataset/
+
 
 
 ## Conclusion
