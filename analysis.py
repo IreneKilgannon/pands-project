@@ -157,23 +157,47 @@ pt.plot_scatter(iris, hue = 'species')
 
 
 # Use of a pairplot.
-g = sns.pairplot(iris, hue = 'species')
+g = sns.pairplot(iris)
 g.fig.suptitle('Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
 plt.savefig('plots\\Pair_plot.png')
 plt.close()
 
 
+# Minimium value in Sepal Width columns for Iris setosa
+min = setosa['sepal_width'].min()
+
+# Identifying outliers
+# Calculating the range for outliers for the sepal width for Iris setosa.
+
+# Calculate the 75th percentile
+seventy_fifth = setosa['sepal_width'].quantile(0.75)
+twenty_fifth = setosa['sepal_width'].quantile(0.25)
+
+# IQR (interquartile range) Difference between the 75th and 25th percentile
+s_width_iqr = seventy_fifth - twenty_fifth
+
+# Upper Outliers, points outside the 75th percentile plus 1.5 times the IQR
+upper_limit = seventy_fifth + (1.5 * s_width_iqr)
+
+# Lower Outliers, points outside the 25th percentile minus 1.5 times the IQR
+lower_limit = twenty_fifth - (1.5 * s_width_iqr)
+
+with open('analysis.txt', 'a') as f:
+    f.write(f'The minimium value in the sepal width column for Iris setosa is {min}\n')
+    f.write(f'The lower limit for outliers in the sepal width column for Iris setosa is {lower_limit.round(2)}.\n')
+    f.write(f'The upper limit for outliers in the sepal width column for Iris setosa is {upper_limit.round(2)}.\n')
 
 #### Any other analysis ####
 
 # To calculate the correlation coefficient between two variables
 corr_SL_vs_SW = iris['sepal_length'].corr(iris['sepal_width'])
-print(f'The correlation coefficient between sepal length and sepal width is {corr_SL_vs_SW.round(3)}')
 
 # Create a correlation matrix between the numeric variables in the data set.
 correlation_matrix = iris.drop(['species'], axis = 1).corr()
-print(correlation_matrix)
 
+with open('analysis.txt', 'a') as f:
+    f.write(f'The correlation coefficient between sepal length and sepal width is {corr_SL_vs_SW.round(3)}.\n\n')
+    f.write(f'The correlation matrix for the variables in the iris data set. \n{correlation_matrix}\n\n')
 
 # Create a heatmap of the correlation coefficients between the variables in the data set.
 fig, ax = plt.subplots(2, 2, figsize = (15, 12))
@@ -210,9 +234,10 @@ sepal_width_array = iris['sepal_width'].to_numpy()
 m, c = np.polyfit(sepal_length_array, sepal_width_array, 1)
 
 # Return values for the slope, m and y-intercept, c.
-print(f'The value of the slope is {m.round(3)}.')
-print(f'The value of the intercept is {c.round(3)}.')
 
+with open('analysis.txt', 'a') as f:
+    f.write(f'The value of the slope is {m.round(3)}.\n')
+    f.write(f'The value of the intercept is {c.round(3)}.\n\n')
 
 # Demonstrating how to plot a regression line on a scatter plot using numpy.
 fig, ax = plt.subplots()
@@ -273,10 +298,10 @@ ax[1, 1].set_ylabel('Petal Width (cm)')
 
 
 # Save plots
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Regression_plots.png')
+plt.savefig('plots\\Regression_plots.png')
 plt.close()
 
-# Pair regression plot
+# Pair regression plot 
 sns.pairplot(iris, hue = 'species', kind = 'reg')
 plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
 plt.savefig('plots\\Pair_Regression_plots.png')
@@ -285,7 +310,7 @@ plt.close()
 # lmplot example. Sepal Width vs Sepal Length
 sns.lmplot(iris, x = 'sepal_length', y = 'sepal_width', ci = None, col = 'species')
 plt.suptitle('Sepal Width vs Sepal Length by Species', y = 1.05)
-plt.savefig('\plots\\lmplot_example.png')
+plt.savefig('plots\\lmplot_example.png')
 plt.close()
 
 
@@ -314,18 +339,23 @@ reg.fit(X_train, y_train)
 y_pred = reg.predict(X_test)
 
 # Print out the predictions and the actual values of the y_test data.
-print(f'Predictions: {y_pred[:5]}, Actual values: {y_test[:5]}')
+with open('analysis.txt', 'a') as f:
+    f.write(f'Predictions: {y_pred[:5].round(3)}\nActual values: {y_test[:5]}\n\n')
+
 
 # r_squared measures the accuracy of the results.
 r_squared = reg.score(X_test, y_test)
 
 #
 rmse = mean_squared_error(y_test, y_pred, squared= False)
+coefficent = reg.coef_
+intercept = reg.intercept_
 
-print(f"R^2: {r_squared}")
-print(f"RMSE: {rmse}")
-print(f'slope:' , reg.coef_)
-print(f'intercept:' , reg.intercept_)
+with open('analysis.txt', 'a') as f:
+    f.write(f"The value of R^2: {r_squared.round(3)}\n")
+    f.write(f"The RMSE is : {rmse.round(3)}\n")
+    f.write(f'The slope of the regression line is: {coefficent.round(3)}\n')
+    f.write(f'The intercept is {intercept.round(3)}\n\n')
 
 # Scatter plot of petal width vs petal length and line plot of the predicted values.
 plt.scatter(X_train, y_train)
@@ -342,8 +372,8 @@ kf = KFold(n_splits = 5, shuffle = True, random_state=47)
 reg = LinearRegression()
 cv_results = cross_val_score(reg, X, y, cv = kf)
 
-print(f'cv results are {cv_results}')
-print(np.mean(cv_results))
-print(np.std(cv_results))
-print(np.quantile(cv_results, [0.025, 0.975]))
-
+with open('analysis.txt', 'a') as f:
+    f.write(f'{cv_results.round(3)}\n')
+    f.write(f'{np.mean(cv_results).round(3)}\n')
+    f.write(f'{np.std(cv_results).round(3)}\n')
+    f.write(f'{np.quantile(cv_results, [0.025, 0.975]).round(3)}\n\n')

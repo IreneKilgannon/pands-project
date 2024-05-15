@@ -10,11 +10,10 @@ This is my analysis of the Fisher's Iris data set for the programming and script
 
 ## Left to do
 
-NB add literature comparison, add more references where ever needed. 
-1. histograms. review
-2. scatter plot. review
-3. correlation coefficients, review 
-4. regression analysis and machine learning https://campus.datacamp.com/courses/introduction-to-regression-with-statsmodels-in-python/simple-linear-regression-modeling?ex=1  add code comments, discussion, 
+__NB add literature comparison, add more references where ever needed.__
+   
+1. correlation coefficients, review 
+2. regression analysis and machine learning https://campus.datacamp.com/courses/introduction-to-regression-with-statsmodels-in-python/simple-linear-regression-modeling?ex=1  add code comments, discussion, 
 
 ## Project Statement
 * Research the data set and summarise it in a [README](https://github.com/IreneKilgannon/pands-project/blob/main/README.md).
@@ -95,14 +94,17 @@ iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'pet
 
 _Task:_ Output a summary of each variable to a single text file, [analysis.txt](https://github.com/IreneKilgannon/pands-project/blob/main/analysis.txt)
 
-_Background_
+[With open()](https://ioflood.com/blog/python-open-file/#:~:text=Python-,Different%20File%20Modes,
+reading%20and%20writing%20text%20files) is used to open a file and the mode will then tell python what 
+to do with the file. Two modes were used in this analysis. First write text, `'wt'` was used to both to 
+create the analysis.txt file and to write to it. The append mode, `'a'` was used to append the results 
+of the exploratory data analysis to analysis.txt. One major advantage of using with open() is that the 
+file will automatically close.
 
 ```python
     with open('analysis.txt', 'wt') as f:
         f.write(head)
 ```
-
-[With open()](https://ioflood.com/blog/python-open-file/#:~:text=Python-,Different%20File%20Modes,reading%20and%20writing%20text%20files) is used to open a file and the mode will then tell python what to do with the file. Two modes were used in this analysis. First write text, `'wt'` was used to both to create the analysis.txt file and to write to it. The append mode, `'a'` was used to append the results of the exploratory data analysis to analysis.txt. One major advantage of using with open() is that the file will automatically close.
 
 `f.write()` will only write strings to a txt file. [This reddit post](https://www.reddit.com/r/learnpython/comments/12emhsa/how_do_i_save_the_output_of_the_python_code_as_a/) suggested saving the output to a variable and then result could be written to a txt file. 
 
@@ -175,7 +177,7 @@ with open('analysis.txt', 'a') as f:
 
 __Summary of the data set__
 
-The iris data set is a small data set with 150 rows and five columns with each row corresponding to a different flower sample. There is no missing data.
+The iris data set is a small data set with 150 rows and five columns with each row corresponding to a different flower sample. There is no missing data in the data set.
 
 The five variables in the data set are:
 * sepal_length
@@ -262,7 +264,7 @@ Summary statistics grouped by species
 
 Analysing these results we can see that _Iris setosa_ is the smallest flower in the data set. _Iris virginica_ is the largest flower species. _Iris setosa_ has the smallest measurements for three out of the four variables. Surprisingly the sepal width of _Iris setosa_ is larger than the sepal width for both _Iris versicolor_ and _Iris virginica_. The petal width and petal length measurements of _Iris setosa_ are substantially smaller than the corresponding measurements for _Iris versicolor_ and _Iris virginica_.
 
-A [seaborn boxplot](https://seaborn.pydata.org/generated/seaborn.boxplot.html) is nice method to visually compare summary statistics about a data set. It gives us most of the same information that the describe method does but as it is visual it is easier and quicker to make comparisons. One difference between the describe method and a box plot is that describe gives us the mean, whereas a box plot displays the median value of the variable.
+A [seaborn boxplot](https://seaborn.pydata.org/generated/seaborn.boxplot.html) is a nice method to visually compare summary statistics about a data set. It gives us most of the same information that the describe method does but as it is visual it is easier and quicker to make comparisons. One difference between the describe method and a box plot is that describe gives us the mean, whereas a box plot displays the median value of the variable.
 
 ![diagram to explain box plot](https://builtin.com/sites/www.builtin.com/files/styles/ckeditor_optimize/public/inline-images/1_boxplots.jpg)
 
@@ -477,7 +479,42 @@ plt.close()
 |![PWvsPL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Petal%20Length.png)|![PWvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Sepal%20Length.png)|
 |![PWvsSW](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Sepal%20Width.png)|![SWvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Sepal%20Width_vs_Sepal%20Length.png)|
 
-The scatter plots demonstrate clearly that _Iris setosa_ is a distinct cluster. It does not overlap with with _Iris versicolor_ or _Iris virginica_ in any of the scatter plots. It is important to always cross check what appears to be an outlier in the scatter plot with the box plot. What I thought was an obvious outlier in the scatter plot for _Iris setosa_ with a sepal width at approx 2.3 cm, is in the box plot the minimium value in the sepal width range for _Iris setosa_!
+The scatter plots demonstrate clearly that _Iris setosa_ is a distinct cluster. It does not overlap with with _Iris versicolor_ or _Iris virginica_ in any of the scatter plots. It is important to always cross check what appears to be an outlier in the scatter plot with the box plot. What I thought was an obvious outlier in the scatter plot for _Iris setosa_ with a sepal width at approx 2.3 cm, is in the box plot the minimium value in the sepal width range for _Iris setosa_! As the data point is so far from the main set of data points I calculated the upper and lower limits for outliers as shown in this data camp course, [handling outliers](https://campus.datacamp.com/courses/exploratory-data-analysis-in-python/data-cleaning-and-imputation?ex=12). As the lower limit for outliers for Iris setosa for sepal width is 2.3 is the same value as the minimium data point it is not considered an outlier as it is not lower than the lower limit __REPHRASE__.
+
+<details>
+<summary> Calculating lower and upper limit of outliers. </summary>
+
+```python
+# Minimium value in sepal width column for Iris setosa
+min = setosa['sepal_width'].min()
+
+# Identifying outliers
+# Calculating the range for outliers for the sepal width for Iris setosa.
+
+# Calculate the 75th percentile
+seventy_fifth = setosa['sepal_width'].quantile(0.75)
+twenty_fifth = setosa['sepal_width'].quantile(0.25)
+
+# IQR (interquartile range) Difference between the 75th and 25th percentile
+s_width_iqr = seventy_fifth - twenty_fifth
+
+# Upper Outliers, points outside the 75th percentile plus 1.5 times the IQR
+upper_limit = seventy_fifth + (1.5 * s_width_iqr)
+
+# Lower Outliers, points outside the 25th percentile minus 1.5 times the IQR
+lower_limit = twenty_fifth - (1.5 * s_width_iqr)
+
+with open('analysis.txt', 'a') as f:
+    f.write(f'The minimium value in the sepal width column for Iris setosa is {min}\n')
+    f.write(f'The lower limit for outliers in the sepal width column for Iris setosa is {lower_limit.round(2)}.\n')
+    f.write(f'The upper limit for outliers in the sepal width column for Iris setosa is {upper_limit.round(2)}.\n\n')
+
+```
+    The minimium value in the sepal width column for Iris setosa is 2.3
+    The lower limit for outliers in the sepal width column for Iris setosa is 2.3.
+    The upper limit for outliers in the sepal width column for Iris setosa is 4.5.
+
+</details>
 
 The clusters of _Iris versicolor_ and _Iris virginica_ overlap in all the scatter plots. In the plot of sepal length vs sepal width there is a significant amount of overlap. The least amount of overlap appears to be in the scatter plots between petal length and petal width and between petal width and sepal width. One widely used technique for classification in machine learning is called [K-nearest neighbours(KNN)](https://www.datacamp.com/tutorial/k-nearest-neighbor-classification-scikit-learn). The K-nearest neighbours algorithm looks at the nearest data points to the data point of interest and decides which cluster the data point belongs to. Minimising the overlap of clusters will improve the chance of correct cluster assignment.
 
@@ -559,7 +596,7 @@ plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Numpy_reg_
 
 Fortunately are faster ways to add a regression line. Two of the simplest are seaborn's [regplot](https://seaborn.pydata.org/generated/seaborn.regplot.html) (regression plot) and [lmplot](https://seaborn.pydata.org/generated/seaborn.lmplot.html) (linear model plot) functions. Regplot and lmplot generate very similiar plots but they have different parameters. Regplot is an axes-level function. Seaborn lmplot is a figure-level function with access to FacetGrid. FacetGrid means that multiple plots can be created in a grid with rows and columns. lmplot has the hue, col and row parameters __for categorical variables CHECK__. It is also possible to use the pair plot function with the kind parameter equal to reg to create a plot of all the numeric variables.
 
-It is not possible to to extract the values of m and c from a seaborn plot. [Linear regression analysis](https://medium.com/@shuv.sdr/simple-linear-regression-in-python-a0069b325bf8 ) is required.
+It is not possible to to extract the values of m and c from a seaborn plot. [Linear regression analysis](https://medium.com/@shuv.sdr/simple-linear-regression-in-python-a0069b325bf8) is required.
 
 
 <details>
@@ -578,7 +615,7 @@ plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_Regre
 ```
 </details>
 
-![lmplot example, hue = species]()
+![lmplot example, hue = species](https://github.com/IreneKilgannon/pands-project/blob/main/plots/lmplot_example.png)
 
 
 ![Pair regression plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Pair_Regression_plots.png)
@@ -662,7 +699,7 @@ plt.close()
 
 These heatmaps demonstrate the importance of taking the categorical variables into account. For example the overall correlation coefficient between petal width and petal width was 0.96. When the coefficients of the indiviual species is taken into account the values range from 0.31 for _Iris setosa_, 0.79 for _Iris versicolor_ and 0.32 for _Iris virginica_. Another interesting pairing is petal width and petal length. 
 
-This will be demonstrated by creating some regression plots using regplot. To create side by side plots, regplot has the parameter of ax. The first plot will be a plot of the overall data and the second plot will take the flower species into account. 
+This will be demonstrated further by creating some regression plots using regplot. To create side by side plots, regplot has the parameter of ax. The first plot will be a plot of the overall data and the second plot will take the flower species into account. 
 * sepal width vs sepal length
 * petal width vs petal length
 
@@ -727,6 +764,90 @@ plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_Regre
 ADD COMMENT ON DIFFERENCES
 
 The plot of sepal width vs sepal length is an example of Simpson's paradox. Wikipedia states that [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) is a phenomenon in probability and statistics in which a trend appears in several groups of data but disappears or reverses when the groups are combined. 
+
+
+## Linear Regression Analysis
+
+Machine learning
+Linear regression analysis. What is it, why is it important? 
+Discuss the code, add the book references
+
+
+<details>
+<summary>Code for Linear Regression Analysis</summary>
+
+```python
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import cross_val_score, KFold
+
+# Instantiate the model
+reg = LinearRegression()
+
+# Select the columns of interest from the dataset
+X = iris['petal_length'].values
+y = iris['petal_width'].values
+
+# 
+X = X.reshape(-1, 1)
+
+# Split the data into training set and test set data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size= 0.3, random_state=47)
+
+# Fit the training data to the model
+reg.fit(X_train, y_train)
+
+# Predict the y data points by using the predict function on the X_test data.
+y_pred = reg.predict(X_test)
+
+# Print out the predictions and the actual values of the y_test data.
+with open('analysis.txt', 'a') as f:
+    f.write(f'Predictions: {y_pred[:5].round(3)}\nActual values: {y_test[:5]}\n\n')
+
+
+# r_squared measures the accuracy of the results.
+r_squared = reg.score(X_test, y_test)
+
+#
+rmse = mean_squared_error(y_test, y_pred, squared= False)
+
+#
+coefficent = reg.coef_
+
+#
+intercept = reg.intercept_
+
+with open('analysis.txt', 'a') as f:
+    f.write(f"The value of R^2: {r_squared.round(3)}\n")
+    f.write(f"The RMSE is : {rmse.round(3)}\n")
+    f.write(f'The slope of the regression line is: {coefficent.round(3)}\n')
+    f.write(f'The intercept is {intercept.round(3)}\n\n')
+
+# Scatter plot of petal width vs petal length and line plot of the predicted values.
+plt.scatter(X_train, y_train)
+plt.plot(X_test, y_pred, color = '#CF4E99')
+
+# Label the x-axis and y-axis
+plt.xlabel('Petal Length (cm)')
+plt.ylabel('Petal Width (cm)')
+plt.savefig('plots\\lg_analysis.png')
+plt.close()
+
+
+kf = KFold(n_splits = 5, shuffle = True, random_state=47)
+reg = LinearRegression()
+cv_results = cross_val_score(reg, X, y, cv = kf)
+
+with open('analysis.txt', 'a') as f:
+    f.write(f'{cv_results.round(3)}\n')
+    f.write(f'{np.mean(cv_results).round(3)}\n')
+    f.write(f'{np.std(cv_results).round(3)}\n')
+    f.write(f'{np.quantile(cv_results, [0.025, 0.975]).round(3)}\n\n')
+```
+
+</details>
+
 
 __COmparison with other's work__
 
