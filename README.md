@@ -94,8 +94,7 @@ iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'pet
 
 _Task:_ Output a summary of each variable to a single text file, [analysis.txt](https://github.com/IreneKilgannon/pands-project/blob/main/analysis.txt)
 
-[With open()](https://ioflood.com/blog/python-open-file/#:~:text=Python-,Different%20File%20Modes,
-reading%20and%20writing%20text%20files) is used to open a file and the mode will then tell python what 
+[With open()](https://ioflood.com/blog/python-open-file) is used to open a file and the mode will then tell python what 
 to do with the file. Two modes were used in this analysis. First write text, `'wt'` was used to both to 
 create the analysis.txt file and to write to it. The append mode, `'a'` was used to append the results 
 of the exploratory data analysis to analysis.txt. One major advantage of using with open() is that the 
@@ -538,7 +537,7 @@ _Image from realpython.com_
 
 __Why is correlation important?__
 
-When choosing the variables to use for predictive modelling and machine learning it is important to understand how the variables interact together to decide what features are important. The value of the correlation coefficient gives guidance on the best variables to use as highly correlated variables will give more accurate models than poorly correlated variables. 
+When choosing the variables to use for predictive modelling and machine learning it is important to understand how the variables interact together to decide what features are important. The value of the correlation coefficient gives guidance on the best variables to choose as highly correlated variables will give more accurate models than poorly correlated variables. 
 
 It is important to note that correlation does not mean causation. This means even though x and y are correlated, x does not necessarily cause y. There could be other variables, called [confounding variables](https://www.sciencedirect.com/topics/nursing-and-health-professions/confounding-variable) involved which are related to the variables of interest which could lead to misleading results. 
 
@@ -546,20 +545,31 @@ __Adding a line for best fit__
 
 Before the correlation coefficient is calculated it is important to create a scatter plot with a line of best fit (also known as a regression line or a trend line) to check if there is a linear or a non-linear relationship between the data points. The most commonly used method to calculate the correlation coefficient, the [Pearson method correlation](https://www.youtube.com/watch?v=k7IctLRiZmo) is only suitable for linear plots. The spread of the data around the regression line indicates if there is good correlation between the variables. The data points for variables with a high correlation coefficient will be closer to the trend line. 
 
-Matplotlib/Seaborn/Numpy analyses the data and fits a line that it thinks fits the data points the best. __HOW DOES IT DECIDE THAT? OLS, residuals__ The equation of a line is $y = mx + c$, where m is the slope and c is the y-intercept. 
+The equation of a line is $y = mx + c$, where m is the slope and c is the y-intercept (x = 0). 
+
+The value of the slope of the line does not correlate with the value of the correlation coefficient. The correlation coefficient looks at the spread of data around the regression line. The sign of the slope does correspond with the sign of the correlation coefficient. A postive slope will mean that there is a positive correlation. 
+
+Steps to fit a regression line to a scatter plot with numpy
+1. Convert the two columns to a [numpy array](https://sparkbyexamples.com/pandas/pandas-convert-column-to-numpy-array/)
+2. Use numpy [numpy polyfit](https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html) to fit a straight line between the x-axis data points and the y-axis data points.
+3. Extract the values of m and c from np.polyfit.
+4. The y-axis values for the regression line are generated from the equation of the line, which for this example is `m * sepal_length_array + c`.
 
 ```python
-sepal_length_array = iris['sepal_length'].to_numpy()
 
+# Create a numpy array of the sepal length and sepal width columns
+sepal_length_array = iris['sepal_length'].to_numpy()
 sepal_width_array = iris['sepal_width'].to_numpy()
 
 # Use numpy polyfit to fit a straight line between x and y.
 # np.polyfit(x-axis, y-axis, deg). Deg = 1 for a linear equation.
 m, c = np.polyfit(sepal_length_array, sepal_width_array, 1)
 
-# Return values for the slope, m and y-intercept, c.
-print(f'The value of the slope is {m.round(3)}.')
-print(f'The value of the intercept is {c.round(3)}.')
+# Write the values for the slope, m and y-intercept, c to analysis.txt.
+with open('analysis.txt', 'a') as f:
+    f.write(f'The value of the slope is {m.round(3)}.\n')
+    f.write(f'The value of the intercept is {c.round(3)}.\n\n')
+
 ```
 
     The value of the slope is -0.057.
@@ -569,7 +579,7 @@ print(f'The value of the intercept is {c.round(3)}.')
 These values can then be used to plot the line. The y-values for the line are generated from the values of m and c above. 
 
 <details>
-<summary> Code to </summary>
+<summary> Plotting a regression line on a scatter plot with numpy</summary>
 
 ```python
 # Demonstrating how to plot a regression line on a scatter plot using numpy.
@@ -579,7 +589,7 @@ fig, ax = plt.subplots()
 ax.scatter(sepal_length_array, sepal_width_array)
 
 # Plotting the trend line in green. The y-axis values are generated from the equation of the line, with m and c equal to the values generated above.
-ax.plot(sepal_length_array, m * sepal_length_array + c, 'g-')
+ax.plot(sepal_length_array, m * sepal_length_array + c, '#CF4E99')
 
 # Axis labels.
 plt.xlabel('Sepal Length (cm)')
@@ -587,12 +597,15 @@ plt.ylabel('Sepal Width (cm)')
 
 # Title.
 plt.title('Sepal Width vs Sepal Length')
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Numpy_reg_plot.png')
-
+plt.savefig('plots\\Numpy_reg_plot.png')
+plt.close()
 ```
 </details>
 
 ![Numpy regression plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Numpy_reg_plot.png)
+
+Matplotlib/Seaborn/Numpy analyses the data and fits a line that it thinks fits the data points the best using [ordinary least squares (OLS)](). 
+
 
 Fortunately are faster ways to add a regression line. Two of the simplest are seaborn's [regplot](https://seaborn.pydata.org/generated/seaborn.regplot.html) (regression plot) and [lmplot](https://seaborn.pydata.org/generated/seaborn.lmplot.html) (linear model plot) functions. Regplot and lmplot generate very similiar plots but they have different parameters. Regplot is an axes-level function. Seaborn lmplot is a figure-level function with access to FacetGrid. FacetGrid means that multiple plots can be created in a grid with rows and columns. lmplot has the hue, col and row parameters __for categorical variables CHECK__. It is also possible to use the pair plot function with the kind parameter equal to reg to create a plot of all the numeric variables.
 
@@ -600,18 +613,20 @@ It is not possible to to extract the values of m and c from a seaborn plot. [Lin
 
 
 <details>
-<summary>Regplot and lmplot</summary>
+<summary>Adding a regression line with seaborn lmplot</summary>
 
 ```python
 # lmplot example. Sepal Width vs Sepal Length
 sns.lmplot(iris, x = 'sepal_length_cm', y = 'sepal_width_cm', col = 'species')
 plt.suptitle('Sepal Width vs Sepal Length by Species', y = 1.05)
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\lmplot_example.png')
+plt.savefig('plots\\lmplot_example.png')
+plt.close()
 
 # Regression Line Pair Plot, kind = 'reg'
 sns.pairplot(iris, hue = 'species', kind = 'reg')
 plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_Regression_plots.png')
+plt.savefig('plots\\Pair_Regression_plots.png')
+plt.close()
 ```
 </details>
 
@@ -623,12 +638,17 @@ plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_Regre
 
 ## Calculate correlation coefficients
 
-When the regression pairplot is analysed we can see that there is a linear relationship between all the variables in the data set so the correlation coefficient can be calculated using the [corr() function]() with the Pearson method. Correlation could also be carried out using numpy's np.corrcoeff().
+When the regression pairplot is analysed we can see that there is a linear relationship between all the variables in the data set so the correlation coefficient can be calculated using the [corr() function](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html) with the Pearson method. Correlation could also be carried out using [numpy's np.corrcoeff()](https://numpy.org/doc/stable/reference/generated/numpy.corrcoef.html).
 
 ``` python
-# To calculate the correlation coefficient between two variables using numpy's corrcoeff()
+# To calculate the correlation coefficient between two variables.
 corr_SL_vs_SW = iris['sepal_length'].corr(iris['sepal_width'])
-print(f'The correlation coefficient between sepal length and sepal width is {corr_SL_vs_SW.round(3)}')
+
+with open('analysis.txt', 'a') as f:
+    f.write(f'The correlation coefficient between sepal length and sepal width is {corr_SL_vs_SW.round(3)}.\n\n')
+
+
+The correlation coefficient between sepal length and sepal width is -0.109.
 ```
 
 Once again there are a number of methods to calculate the correlation coefficent between all the numeric variables in one step. The first method uses the corr() and generates a [correlation matrix](https://datatofish.com/correlation-matrix-pandas/). The second method involves creating a [seaborn heatmap](). A heatmap is a more visual method to display the same information as a correlation matrix. It is possible to create a [heatmap using matplotlib](https://www.geeksforgeeks.org/how-to-draw-2d-heatmap-using-matplotlib-in-python/) however it is not as straightforward as a seaborn heatmap.
@@ -638,7 +658,10 @@ Once again there are a number of methods to calculate the correlation coefficent
 
 ```python
 correlation_matrix = iris.drop(['species'], axis = 1).corr()
-print(correlation_matrix)
+
+with open('analysis.txt', 'a') as f:
+    f.write(f'The correlation matrix for the variables in the iris data set. \n{correlation_matrix}\n\n')
+
 ```
 </details>
 
@@ -652,11 +675,11 @@ Correlation Matrix for the Iris Data Set.
 |petal_width  |    0.817954|   -0.356544|     0.962757|     1.000000|
 
 
-Petal length and petal width show a high positive correlation coefficient with a value of 0.963.
+Petal length and petal width show a high positive correlation coefficient with a value of 0.963. Petal length and petal width would be a good choice of variables for predictive analysis.
 
-Both petal width and petal length have a high positive correlation with sepal length with values of 0.871 and 0.818 respectively. **Considering that the function of the sepal is to protect the developing flower bud it is not overly surprising that the sepal length has a high correlation with petal length. THINK ABOUT THIS**
+Both petal width and petal length have a high positive correlation with sepal length with values of 0.871 and 0.818 respectively.
 
-Sepal width has a weak negative correlation with all the other variables in the data set with coefficient values ranging from -0.420 to -0.109.
+Sepal width has a weak negative correlation with all the other variables in the data set with coefficient values ranging from -0.420 to -0.109. 
 
 
 __Heatmap of correlation coefficients__
@@ -671,7 +694,7 @@ In addition to creating a heatmap between all the variables in the data set, I w
 fig, ax = plt.subplots(2, 2, figsize = (15, 12))
 
 # Overall values  - not taking the flower species into account
-sns.heatmap(iris.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[0, 0], vmin = -0.5, vmax=1)
+sns.heatmap(iris.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[0, 0], vmin = -0.5, vmax=1, cmap)
 ax[0,0].set_title('Overall')
 
 # Iris setosa
@@ -691,15 +714,14 @@ plt.suptitle('Correlation Coefficients for the Iris Data Set')
 plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Heatmap_correlation_coefficients.png')
 plt.close()
 ```
-
 </details>
 
 
 ![Heat map](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Heatmap_correlation_coefficients.png)
 
-These heatmaps demonstrate the importance of taking the categorical variables into account. For example the overall correlation coefficient between petal width and petal width was 0.96. When the coefficients of the indiviual species is taken into account the values range from 0.31 for _Iris setosa_, 0.79 for _Iris versicolor_ and 0.32 for _Iris virginica_. Another interesting pairing is petal width and petal length. 
+These heatmaps demonstrate the importance of taking the categorical variables into account. For example the overall correlation coefficient between petal width and petal width was 0.96, which is a very strong positive correlation. When the coefficients of the indiviual species is taken into account the values range from 0.31 for _Iris setosa_, 0.79 for _Iris versicolor_ and 0.32 for _Iris virginica_. If we were interested in predicting the petal width based on the petal length the results should be accurate as long as we are not interested in the flower species. Another interesting pairing is petal width and petal length. 
 
-This will be demonstrated further by creating some regression plots using regplot. To create side by side plots, regplot has the parameter of ax. The first plot will be a plot of the overall data and the second plot will take the flower species into account. 
+This will be demonstrated further by creating some regression plots using regplot. To create side by side plots, regplot has the parameter of ax. The first plot will be a plot of the overall data set and the second plot will take the flower species into account. 
 * sepal width vs sepal length
 * petal width vs petal length
 
@@ -747,23 +769,20 @@ ax[1, 0].set_ylabel('Petal Width (cm)')
 ax[1, 1].set_ylabel('Petal Width (cm)')
 
 # Save plots
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Regression_plots.png')
-plt.show()
+plt.savefig('plots\\Regression_plots.png')
 plt.close()
 
 # Regression Line Pair Plot, kind = 'reg'
 sns.pairplot(iris, hue = 'species', kind = 'reg')
 plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Pair_Regression_plots.png')
+plt.savefig('plots\\Pair_Regression_plots.png')
 
 ```
 </details>
 
 ![Regression plots](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Regression_plots.png)
 
-ADD COMMENT ON DIFFERENCES
-
-The plot of sepal width vs sepal length is an example of Simpson's paradox. Wikipedia states that [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) is a phenomenon in probability and statistics in which a trend appears in several groups of data but disappears or reverses when the groups are combined. 
+The regression plots clearly demonstrate why the correlation coefficients between sepal width and sepal length is different when the species is taken into account. Without taking the species into account the regression plot for sepal width vs sepal length on the left shows a negative slope with the data points scattered widely around the trend line, which would correspond with the very weak negative correlation coefficient of -0.11. When species is taken into account the regression lines now have a positive slope and the data points are not as widely spread around the line. This is an example of Simpson's paradox. Wikipedia states that [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) is a phenomenon in probability and statistics in which a trend appears in several groups of data but disappears or reverses when the groups are combined. The very weak negative correlation has now become a moderate positive correlation coefficient of 0.75 for _Iris setosa_, 0.53 for _Iris versicolor_, 0.46 for _Iris virginica_. 
 
 
 ## Linear Regression Analysis
@@ -897,6 +916,7 @@ __Markdown references__
 
 https://chrisfrew.in/blog/dropdowns-in-readmes/
 
+
 __Plotting__
 
 Figure-level vs axes-level functions https://seaborn.pydata.org/tutorial/function_overview.html#figure-level-vs-axes-level-functions
@@ -919,10 +939,10 @@ Pearson's correlation, clearly explained https://www.youtube.com/watch?v=xZ_z8KW
 
 r-squared https://statisticsbyjim.com/regression/interpret-r-squared-regression/
 
+
 __Machine Learning__
 
 https://www.kaggle.com/code/ash316/ml-from-scratch-with-iris
-
 
 
 __ Literature search Recent uses of the iris data set__ 

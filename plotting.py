@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # A function to plot a histogram
-def plot_hist(df, hue = None):
+def plot_hist(df, hue = None, unit = None):
     '''To function plot a seaborn histogram of all the numeric variables in a dataframe.
 
     Parameters

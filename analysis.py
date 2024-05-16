@@ -203,19 +203,19 @@ with open('analysis.txt', 'a') as f:
 fig, ax = plt.subplots(2, 2, figsize = (15, 12))
 
 # Overall values  - not taking the flower species into account
-sns.heatmap(iris.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[0, 0], vmin = -0.5, vmax=1)
+sns.heatmap(iris.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[0, 0], vmin = -0.5, vmax=1, cmap = 'Purples')
 ax[0,0].set_title('Overall')
 
 # Iris setosa
-sns.heatmap(setosa.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[0, 1], vmin = -0.5, vmax=1)
+sns.heatmap(setosa.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[0, 1], vmin = -0.5, vmax=1, cmap = 'Purples')
 ax[0,1].set_title('Iris setosa')
 
 # Iris versicolor
-sns.heatmap(versicolor.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[1, 0], vmin = -0.5, vmax=1)
+sns.heatmap(versicolor.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[1, 0], vmin = -0.5, vmax=1, cmap = 'Purples')
 ax[1,0].set_title('Iris versicolor')
 
 # Iris virginica
-sns.heatmap(virginica.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[1,1], vmin = -0.5, vmax=1)
+sns.heatmap(virginica.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[1,1], vmin = -0.5, vmax=1, cmap = 'Purples')
 ax[1,1].set_title('Iris virginica')
 
 # Add title
@@ -225,16 +225,15 @@ plt.close()
 
 ##### Regression Plots for Selected Variables
 
+# Create a numpy array of the sepal length and sepal width columns
 sepal_length_array = iris['sepal_length'].to_numpy()
-
 sepal_width_array = iris['sepal_width'].to_numpy()
 
 # Use numpy polyfit to fit a straight line between x and y.
 # np.polyfit(x-axis, y-axis, deg). Deg = 1 for a linear equation.
 m, c = np.polyfit(sepal_length_array, sepal_width_array, 1)
 
-# Return values for the slope, m and y-intercept, c.
-
+# Write the values for the slope, m and y-intercept, c to analysis.txt.
 with open('analysis.txt', 'a') as f:
     f.write(f'The value of the slope is {m.round(3)}.\n')
     f.write(f'The value of the intercept is {c.round(3)}.\n\n')
@@ -257,8 +256,9 @@ plt.title('Sepal Width vs Sepal Length')
 plt.savefig('plots\\Numpy_reg_plot.png')
 plt.close()
 
+######
 
-#
+# Set up a figure, axes plot of 2 rows and 2 columns
 fig, ax = plt.subplots(2, 2, figsize = (15, 10))
 
 # Regression plot between sepal length and sepal width
@@ -301,6 +301,8 @@ ax[1, 1].set_ylabel('Petal Width (cm)')
 plt.savefig('plots\\Regression_plots.png')
 plt.close()
 
+####### 
+
 # Pair regression plot 
 sns.pairplot(iris, hue = 'species', kind = 'reg')
 plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
@@ -340,7 +342,7 @@ y_pred = reg.predict(X_test)
 
 # Print out the predictions and the actual values of the y_test data.
 with open('analysis.txt', 'a') as f:
-    f.write(f'Predictions: {y_pred[:5].round(3)}\nActual values: {y_test[:5]}\n\n')
+    f.write(f'Predictions: {y_pred[:5].round(3)},\nActual values: {y_test[:5]}\n\n')
 
 
 # r_squared measures the accuracy of the results.
