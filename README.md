@@ -604,7 +604,7 @@ plt.close()
 
 ![Numpy regression plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Numpy_reg_plot.png)
 
-Matplotlib/Seaborn/Numpy analyses the data and fits a line that it thinks fits the data points the best using [ordinary least squares (OLS)](). 
+ Matplotlib/Seaborn/Numpy analyses the data and fits a line that it thinks fits the data points the best using [ordinary least squares (OLS)](). This youtube video, [The Main Ideas of Fitting a Line to Data (THe main ideas of Least Squares and Linear Regression)](https://www.youtube.com/watch?v=PaFPbb66DxQ) explains in simple terms how the line is found. Optimising values of m and c so the the sum of squared residuals in minimised. The residual is the distance the observed value is from the predicted value on the line.
 
 
 Fortunately are faster ways to add a regression line. Two of the simplest are seaborn's [regplot](https://seaborn.pydata.org/generated/seaborn.regplot.html) (regression plot) and [lmplot](https://seaborn.pydata.org/generated/seaborn.lmplot.html) (linear model plot) functions. Regplot and lmplot generate very similiar plots but they have different parameters. Regplot is an axes-level function. Seaborn lmplot is a figure-level function with access to FacetGrid. FacetGrid means that multiple plots can be created in a grid with rows and columns. lmplot has the hue, col and row parameters __for categorical variables CHECK__. It is also possible to use the pair plot function with the kind parameter equal to reg to create a plot of all the numeric variables.
@@ -711,7 +711,7 @@ ax[1,1].set_title('Iris virginica')
 
 # Add title
 plt.suptitle('Correlation Coefficients for the Iris Data Set')
-plt.savefig('C:\\Users\\Martin\\Desktop\\pands\\pands-project\\plots\\Heatmap_correlation_coefficients.png')
+plt.savefig('plots\\Heatmap_correlation_coefficients.png')
 plt.close()
 ```
 </details>
@@ -787,10 +787,19 @@ The regression plots clearly demonstrate why the correlation coefficients betwee
 
 ## Linear Regression Analysis
 
+https://realpython.com/linear-regression-in-python
+
 Machine learning
-Linear regression analysis. What is it, why is it important? 
+The three most common machine learning applications are regression, classification and clustering. Linear regression analysis is used for predictive analysis. 
+
+For this part of the project I will construct a simple linear regression model to predict the petal width based on the petal length data. The model will create a best fit line similiar to the plots above and it can be used to predict
+
+Scikit-learn is a python library that comes with many classes and functions that are required for machine learning. [LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression)
+
+What is it, why is it important? 
 Discuss the code, add the book references
 
+Train_test_split = split the data into 2 groups, 1 to train the model, the other to test the model. Usually 20-30% of the data is chosen to be test data by the test_size parameter. 
 
 <details>
 <summary>Code for Linear Regression Analysis</summary>
@@ -817,7 +826,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size= 0.3, random
 # Fit the training data to the model
 reg.fit(X_train, y_train)
 
-# Predict the y data points by using the predict function on the X_test data.
+# Predict the y data points by using the predict method on the X_test data.
 y_pred = reg.predict(X_test)
 
 # Print out the predictions and the actual values of the y_test data.
@@ -825,12 +834,14 @@ with open('analysis.txt', 'a') as f:
     f.write(f'Predictions: {y_pred[:5].round(3)}\nActual values: {y_test[:5]}\n\n')
 
 
-# r_squared measures the accuracy of the results.
+# Score give the value of r_squared, which measures the accuracy of the results.
 r_squared = reg.score(X_test, y_test)
 
-#
-rmse = mean_squared_error(y_test, y_pred, squared= False)
 
+# r_squared measures the accuracy of the results.
+r_squared_test = reg.score(X_test, y_test)
+r_squared_train = reg.score(X_train, y_train)
+ 
 #
 coefficent = reg.coef_
 
@@ -853,7 +864,51 @@ plt.ylabel('Petal Width (cm)')
 plt.savefig('plots\\lg_analysis.png')
 plt.close()
 
+```
+</details>
 
+Plot of the regression line
+![Linear regression analysis plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/lg_analysis.png)
+
+![Residuals](https://i0.wp.com/statisticsbyjim.com/wp-content/uploads/2017/04/residuals.png?resize=300%2C186&ssl=1)
+
+Plotting the residuals https://statisticsbyjim.com/regression/check-residual-plots-regression-analysis/
+https://seaborn.pydata.org/generated/seaborn.residplot.html
+
+![Residuals plot]()
+
+
+
+
+__Evaluating the model__
+
+    The first five values for the predicted values and the actual values are:
+    Predictions: [0.262 0.22  1.391 0.345 0.262],
+    Actual values: [0.2 0.2 1.3 0.4 0.4]
+
+[R-squared](https://www.youtube.com/watch?v=2AQKmw14mHM) and [root mean squared error (RMSE)](https://statisticsbyjim.com/regression/root-mean-square-error-rmse/) are used to evaluate how well the model works. 
+* R-squared measures how much variance in the target variable can be explained by our model. In simple terms, how far are the true values away from their mean? R-squared is a range from 0 to 100%, with 100% meaning that the target variable is fully explained by the dependent variable and all the data points fall on the regression line. [Interpret r-squared regression](Inhttps://statisticsbyjim.com/regression/interpret-r-squared-regression/)
+* RMSE is the square root of the mean squared error (MSE). THe MSE is the mean of the squared differences between the predicted values and the true values. RMSE is a measure of how large the residuals are dispersed. With MSE and RMSE the errors are heavily penalised as the residuals are squared. Generally RMSE is used as it has the same units of the target variable and is therefore more widely used than MSE.
+
+n = len(predictions)
+# Finish the manual calculation of the MSE
+mse_one = sum((y_test - predictions)**2) / n
+print('With a manual calculation, the error is {}'.format(mse_one))
+
+    Performance of the linear regression model.
+    The value of R-squared for the test data: 0.933.
+    The value of R-squared for the training data: 0.923.
+    The RMSE is : 0.216.
+    RMSE calculated manually is 0.216.
+    The slope of the regression line for petal width vs petal length is: [0.418].
+    The intercept of the regression line for petal width vs petal length is -0.366.
+
+
+__k-Fold Cross-Validation__
+
+The value of r-squared can depend on how the data is split by train_test_split. k-Fold cross validation is a method to get a more accurate value for r-squared values by splitting the data into subsets known as k-folds and calculating r-squared for each subset. Changing the sample used can give dramatically different results. 
+
+```python
 kf = KFold(n_splits = 5, shuffle = True, random_state=47)
 reg = LinearRegression()
 cv_results = cross_val_score(reg, X, y, cv = kf)
@@ -865,7 +920,11 @@ with open('analysis.txt', 'a') as f:
     f.write(f'{np.quantile(cv_results, [0.025, 0.975]).round(3)}\n\n')
 ```
 
-</details>
+k-Fold analysis results.
+The value of R-squared for petal width vs petal length for each fold are [0.947 0.918 0.932 0.955 0.863]
+The mean of R-squared is 0.923
+The standard deviation for R-squared is 0.033
+The 95% quantile limits are [0.869 0.954]
 
 
 __COmparison with other's work__
@@ -943,7 +1002,8 @@ r-squared https://statisticsbyjim.com/regression/interpret-r-squared-regression/
 __Machine Learning__
 
 https://www.kaggle.com/code/ash316/ml-from-scratch-with-iris
-
+"
+https://app.datacamp.com/learn/courses/supervised-learning-with-scikit-learn
 
 __ Literature search Recent uses of the iris data set__ 
 
@@ -961,6 +1021,8 @@ modules references
 
 
 /https://www.youtube.com/watch?v=CqvZ3vGoGs0&t=965s
+
+Machine Learning with python for beginners: A step by step guide with hands-on projects by Jamie Chan
 
 
 ***

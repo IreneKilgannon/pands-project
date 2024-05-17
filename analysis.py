@@ -5,6 +5,11 @@ import seaborn as sns
 
 import plotting as pt
 
+# To ignore a warning regarding a change in the figure layout of the seaborn plots.
+# UserWarning: The figure layout has changed to tight self._figure.tight_layout(*args, **kwargs)
+import warnings
+warnings.filterwarnings('ignore')
+
 # Set up seaborn colour palette. #5A4FCF is the colour code for the colour iris. 
 colors = ['#5A4FCF', '#4ECF99', '#CF4E99']
 sns.set_palette(colors)
@@ -103,7 +108,11 @@ ax[0,1].set_title('Sepal Width')
 ax[1,0].set_title('Petal Length')
 ax[1,1].set_title('Petal Width')
 
-# Save the created plot
+ax[0,0].set_ylabel('Sepal Length (cm)')
+ax[0,1].set_ylabel('Sepal Width (cm)')
+ax[1,0].set_ylabel('Petal Length (cm)')
+ax[1,1].set_ylabel('Petal Width (cm)')
+# Save .setthe created plot
 plt.savefig('plots\\Box_plot.png')
 plt.close()
 
@@ -235,8 +244,9 @@ m, c = np.polyfit(sepal_length_array, sepal_width_array, 1)
 
 # Write the values for the slope, m and y-intercept, c to analysis.txt.
 with open('analysis.txt', 'a') as f:
-    f.write(f'The value of the slope is {m.round(3)}.\n')
-    f.write(f'The value of the intercept is {c.round(3)}.\n\n')
+    f.write('Calculating the m and c values of the line with numpy.\n')
+    f.write(f'The value of the slope for sepal width vs sepal length is {m.round(3)}.\n')
+    f.write(f'The value of the intercept for sepal width vs sepal length is {c.round(3)}.\n\n')
 
 # Demonstrating how to plot a regression line on a scatter plot using numpy.
 fig, ax = plt.subplots()
@@ -311,10 +321,11 @@ plt.close()
 
 # lmplot example. Sepal Width vs Sepal Length
 sns.lmplot(iris, x = 'sepal_length', y = 'sepal_width', ci = None, col = 'species')
-plt.suptitle('Sepal Width vs Sepal Length by Species', y = 1.05)
+plt.suptitle('Sepal Width vs Sepal Length by Species', y =  1.01)
 plt.savefig('plots\\lmplot_example.png')
 plt.close()
 
+##### Linear regression analysis
 
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
@@ -328,7 +339,7 @@ reg = LinearRegression()
 X = iris['petal_length'].values
 y = iris['petal_width'].values
 
-# 
+# Reshape the X data from a 1-D array to a 2-D array.
 X = X.reshape(-1, 1)
 
 # Split the data into training set and test set data
@@ -342,40 +353,74 @@ y_pred = reg.predict(X_test)
 
 # Print out the predictions and the actual values of the y_test data.
 with open('analysis.txt', 'a') as f:
+    f.write('The first five values for the predicted values and the actual values are:\n')
     f.write(f'Predictions: {y_pred[:5].round(3)},\nActual values: {y_test[:5]}\n\n')
 
 
 # r_squared measures the accuracy of the results.
-r_squared = reg.score(X_test, y_test)
+r_squared_test = reg.score(X_test, y_test)
+r_squared_train = reg.score(X_train, y_train)
 
-#
+
+# Calculate root mean square error.
 rmse = mean_squared_error(y_test, y_pred, squared= False)
+
+# Coefficient for the regresssion line
 coefficent = reg.coef_
+
+# Intercept of the regression line
 intercept = reg.intercept_
 
+
+# To manually calculate RMSE
+n = len(y_pred)
+# Finish the manual calculation of the MSE
+manual_rmse = np.sqrt(sum((y_test - y_pred)**2) / n)
+
+
 with open('analysis.txt', 'a') as f:
-    f.write(f"The value of R^2: {r_squared.round(3)}\n")
-    f.write(f"The RMSE is : {rmse.round(3)}\n")
-    f.write(f'The slope of the regression line is: {coefficent.round(3)}\n')
-    f.write(f'The intercept is {intercept.round(3)}\n\n')
+    f.write('Performance of the linear regression model.\n')
+    f.write(f"The value of R-squared for the test data: {r_squared_test.round(3)}.\n")
+    f.write(f"The value of R-squared for the training data: {r_squared_train.round(3)}.\n")
+    f.write(f"The RMSE is : {rmse.round(3)}.\n")
+    f.write(f'RMSE calculated manually is {manual_rmse.round(3)}.\n')
+    f.write(f'The slope of the regression line for petal width vs petal length is: {coefficent.round(3)}.\n')
+    f.write(f'The intercept of the regression line for petal width vs petal length is {intercept.round(3)}.\n\n')
+
 
 # Scatter plot of petal width vs petal length and line plot of the predicted values.
 plt.scatter(X_train, y_train)
 plt.plot(X_test, y_pred, color = '#CF4E99')
 
 # Label the x-axis and y-axis
+plt.title('Linear regression analysis plot for petal width vs petal length')
 plt.xlabel('Petal Length (cm)')
 plt.ylabel('Petal Width (cm)')
 plt.savefig('plots\\lg_analysis.png')
 plt.close()
 
+# Plotting residuals
+sns.residplot(iris, x = 'petal_length', y = 'petal_width')
+plt.title('Residuals plot for petal width vs petal length')
+plt.xlabel('Petal Length (cm)')
+plt.ylabel('Petal Width (cm)')
+plt.savefig('plots\\residuals.png')
 
+
+# K-Fold cross validation to get a better estimate of R-squared.
+# Set up the k_fold parameters
 kf = KFold(n_splits = 5, shuffle = True, random_state=47)
+
+# Specify regression model
 reg = LinearRegression()
+
+# Run cross_val_score, the score default is R-squared
 cv_results = cross_val_score(reg, X, y, cv = kf)
 
+# Write the results of k-fold analysis to analysis.txt
 with open('analysis.txt', 'a') as f:
-    f.write(f'{cv_results.round(3)}\n')
-    f.write(f'{np.mean(cv_results).round(3)}\n')
-    f.write(f'{np.std(cv_results).round(3)}\n')
-    f.write(f'{np.quantile(cv_results, [0.025, 0.975]).round(3)}\n\n')
+    f.write('k-Fold analysis results.\n')
+    f.write(f'The value of R-squared for petal width vs petal length for each fold are {cv_results.round(3)}\n')
+    f.write(f'The mean of R-squared is {np.mean(cv_results).round(3)}\n')
+    f.write(f'The standard deviation for R-squared is {np.std(cv_results).round(3)}\n')
+    f.write(f'The 95% quantile limits are {np.quantile(cv_results, [0.025, 0.975]).round(3)}\n\n')

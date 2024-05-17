@@ -130,19 +130,25 @@ sepal_width      -0.109369     1.000000     -0.420516    -0.356544
 petal_length      0.871754    -0.420516      1.000000     0.962757
 petal_width       0.817954    -0.356544      0.962757     1.000000
 
-The value of the slope is -0.057.
-The value of the intercept is 3.389.
+Calculating the m and c values of the line with numpy.
+The value of the slope for sepal width vs sepal length is -0.057.
+The value of the intercept for sepal width vs sepal length is 3.389.
 
+The first five values for the predicted values and the actual values are:
 Predictions: [0.262 0.22  1.391 0.345 0.262],
 Actual values: [0.2 0.2 1.3 0.4 0.4]
 
-The value of R^2: 0.933
-The RMSE is : 0.216
-The slope of the regression line is: [0.418]
-The intercept is -0.366
+Performance of the linear regression model.
+The value of R-squared for the test data: 0.933.
+The value of R-squared for the training data: 0.923.
+The RMSE is : 0.216.
+RMSE calculated manually is 0.216.
+The slope of the regression line for petal width vs petal length is: [0.418].
+The intercept of the regression line for petal width vs petal length is -0.366.
 
-[0.947 0.918 0.932 0.955 0.863]
-0.923
-0.033
-[0.869 0.954]
+k-Fold analysis results.
+The value of R-squared for petal width vs petal length for each fold are [0.947 0.918 0.932 0.955 0.863]
+The mean of R-squared is 0.923
+The standard deviation for R-squared is 0.033
+The 95% quantile limits are [0.869 0.954]
 
