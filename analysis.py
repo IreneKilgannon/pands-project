@@ -162,6 +162,10 @@ pt.plot_hist(iris, hue = 'species')
 fig, ax = plt.subplots(1, 2)
 sns.histplot(setosa, x = 'petal_length', ax = ax[0])
 sns.histplot(setosa, x = 'petal_width', ax = ax[1])
+
+ax[0].set_xlabel('Petal Length (cm)')
+ax[1].set_xlabel('Petal Width (cm)')
+
 plt.suptitle('Histograms of Petal Length and Width for Iris setosa')
 plt.savefig('plots\\Hist_Setosa_pl.png')
 plt.close()
