@@ -6,14 +6,14 @@ Author: Irene Kilgannon
 
 Student ID: G00220627
 
-This is my analysis of the Fisher's Iris data set for the programming and scripting module for the [Higher Diploma in Science in Computing in Data Analytics](https://www.gmit.ie/higher-diploma-in-science-in-computing-in-data-analytics) at Atlantic Technological University.
+This is my analysis of Fisher's Iris data set for the programming and scripting module for the [Higher Diploma in Science in Computing in Data Analytics](https://www.gmit.ie/higher-diploma-in-science-in-computing-in-data-analytics) at Atlantic Technological University.
 
 ## Left to do
 
 __NB add literature comparison, add more references where ever needed.__
    
-1. correlation coefficients, review 
-2. regression analysis and machine learning https://campus.datacamp.com/courses/introduction-to-regression-with-statsmodels-in-python/simple-linear-regression-modeling?ex=1  add code comments, discussion, 
+1. regression analysis and machine learning https://campus.datacamp.com/courses/introduction-to-regression-with-statsmodels-in-python/simple-linear-regression-modeling?ex=1  add code comments, discussion, 
+2. Conclusion
 
 ## Project Statement
 * Research the data set and summarise it in a [README](https://github.com/IreneKilgannon/pands-project/blob/main/README.md).
@@ -30,7 +30,7 @@ __Step 1__ Download and install [Anaconda](https://www.anaconda.com/download). A
   * Add Anaconda3 to my PATH environment variable
   * Register Anaconda3 as my default Python 3.9
   
-![Anaconda](https://github.com/IreneKilgannon/pands-project/blob/main/images/Anaconda.png))
+![Anaconda](https://github.com/IreneKilgannon/pands-project/blob/main/images/Anaconda.png)
 
 __Step 2__ Download and install [Visual Studio Code](https://code.visualstudio.com/).
 
@@ -604,8 +604,9 @@ plt.close()
 
 ![Numpy regression plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Numpy_reg_plot.png)
 
- Matplotlib/Seaborn/Numpy analyses the data and fits a line that it thinks fits the data points the best using [ordinary least squares (OLS)](). This youtube video, [The Main Ideas of Fitting a Line to Data (THe main ideas of Least Squares and Linear Regression)](https://www.youtube.com/watch?v=PaFPbb66DxQ) explains in simple terms how the line is found. Optimising values of m and c so the the sum of squared residuals in minimised. The residual is the distance the observed value is from the predicted value on the line.
+ Matplotlib/Seaborn/Numpy analyses the data and fits a line that it thinks fits the data points the best using [ordinary least squares (OLS)](). This youtube video, [The Main Ideas of Fitting a Line to Data (THe main ideas of Least Squares and Linear Regression)](https://www.youtube.com/watch?v=PaFPbb66DxQ) explains in simple terms how the line is found. Optimising values of m and c so the the sum of squared residuals in minimised. The residual is the distance an the observed value is from the predicted value on the line.
 
+![Residuals](https://realpython.com/cdn-cgi/image/width=950,format=auto/https://files.realpython.com/media/fig-lin-reg.a506035b654a.png)
 
 Fortunately are faster ways to add a regression line. Two of the simplest are seaborn's [regplot](https://seaborn.pydata.org/generated/seaborn.regplot.html) (regression plot) and [lmplot](https://seaborn.pydata.org/generated/seaborn.lmplot.html) (linear model plot) functions. Regplot and lmplot generate very similiar plots but they have different parameters. Regplot is an axes-level function. Seaborn lmplot is a figure-level function with access to FacetGrid. FacetGrid means that multiple plots can be created in a grid with rows and columns. lmplot has the hue, col and row parameters __for categorical variables CHECK__. It is also possible to use the pair plot function with the kind parameter equal to reg to create a plot of all the numeric variables.
 
@@ -787,19 +788,38 @@ The regression plots clearly demonstrate why the correlation coefficients betwee
 
 ## Linear Regression Analysis
 
-https://realpython.com/linear-regression-in-python
+Machine learning is a form of artifical intelligence (A.I). Machine learning uses a mix a statistics and computer science and it's aim is to develop a model that learns to make predictions and inferences from patterns in existing data and apply it to new data without step by step instructions.
 
-Machine learning
-The three most common machine learning applications are regression, classification and clustering. Linear regression analysis is used for predictive analysis. 
+The three most common machine learning applications are regression, classification and clustering. [Linear regression analysis](https://realpython.com/linear-regression-in-python) is used for predictive analysis on continuous data. [Classification](https://www.datacamp.com/blog/ classification-machine-learning) is performed on categorical data and is used to predict the label of a given input. For example a classification could be used in the iris data set could predict to the species of the iris. The first chapter of Introduction to Machine Learning with Python by Andreas C Muller and Sarah Guido demonstrates how to build a model to classify iris species. The iris data set is still used to test improvements in classification models. [Clustering]() divides data into groups based on similarity. Clustering is a type of unsupervised machine learning. 
 
-For this part of the project I will construct a simple linear regression model to predict the petal width based on the petal length data. The model will create a best fit line similiar to the plots above and it can be used to predict
+Regresssion attempts to determine the relationship between a dependent variable (sometimes called a target variable) and a series of other independent variables (sometimes called features or predictor variables). In simple linear regression there is only one predictor variable. Multiple linear regression has multiple features to predict the value for the target variable.
 
-Scikit-learn is a python library that comes with many classes and functions that are required for machine learning. [LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression)
+For multiple linear regression the equation is $y = a_o +a_1x_1 +a_2x_2 + a_3x_3 + ... + a_nx_n$ where $y$ is the target variable and $x_1, x_2....x_n$  are the predictor variables and $a_0, a_1, ....a_n$ are the coefficients. For simple linear regression the formula is $y = mx +c$ as we saw previously. 
 
-What is it, why is it important? 
-Discuss the code, add the book references
+For this part of the project I will construct a simple linear regression model to predict the petal width based on the petal length data. 
 
-Train_test_split = split the data into 2 groups, 1 to train the model, the other to test the model. Usually 20-30% of the data is chosen to be test data by the test_size parameter. 
+[Scikit-learn]() is a python library that comes with many classes and functions that are required for machine learning. [LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression) is one class that can be used for linear regression analysis. Ridge and lasso are two other classes for linear regression. 
+
+__Step 1__ Split the dataset into a training set and test set.
+
+Train_test_split is imported from sklearn.model_selection and is used split the data into two groups, one to train the model (X_train, y_train), the other to test the model (X_test, y_test). Usually 20-30% of the data is chosen to be test data by the test_size parameter. The test set should not be available to the model at any point until the model has been created..
+
+__Step 2__  Train the model.
+
+Instantiate a LinearRegression object, reg and use it to call the fit() method. The fit() method calculates the line of best fit. It does not return any value but For simple linear regression.
+
+__Step 3__ Predict the target values.
+
+The final step is to use the predict method on the X_test data. This is the first time the test data will be exposed to the model.
+
+__Step 4__ Evaluate the model
+
+The model is evaluated by calculating R-squared, with the score method and RMSE (root mean square value). 
+
+[R-squared](https://www.youtube.com/watch?v=2AQKmw14mHM) and [root mean squared error (RMSE)](https://statisticsbyjim.com/regression/root-mean-square-error-rmse/) are used to evaluate how well the model works. 
+* R-squared measures how much variance in the target variable can be explained by our model. In simple terms, how far are the true values away from their mean? R-squared is a range from 0 to 1, with 1 meaning that the target variable is fully explained by the dependent variable and all the data points fall on the regression line. [Interpret r-squared regression](Inhttps://statisticsbyjim.com/regression/interpret-r-squared-regression/)
+* [RMSE](https://statisticsbyjim.com/regression/root-mean-square-error-rmse/) is the square root of the mean squared error (MSE). THe MSE is the mean of the squared differences between the predicted values and the true values. RMSE is a measure of how large the residuals are dispersed. With MSE and RMSE the errors are heavily penalised as the residuals are squared. Generally RMSE is used as it has the same units of the target variable and is therefore more widely used than MSE. The values of RMSE range from 0 to infinity, with the lower the value the better. Zero means the predicted values match the actual values. 
+
 
 <details>
 <summary>Code for Linear Regression Analysis</summary>
@@ -817,7 +837,7 @@ reg = LinearRegression()
 X = iris['petal_length'].values
 y = iris['petal_width'].values
 
-# 
+# Reshape the X data from a 1-D array to a 2-D array.
 X = X.reshape(-1, 1)
 
 # Split the data into training set and test set data
@@ -834,19 +854,27 @@ with open('analysis.txt', 'a') as f:
     f.write(f'Predictions: {y_pred[:5].round(3)}\nActual values: {y_test[:5]}\n\n')
 
 
-# Score give the value of r_squared, which measures the accuracy of the results.
-r_squared = reg.score(X_test, y_test)
-
-
 # r_squared measures the accuracy of the results.
+# R_squared for the test data
 r_squared_test = reg.score(X_test, y_test)
+
+# R_squared for the training data
 r_squared_train = reg.score(X_train, y_train)
- 
-#
+
+
+# Calculate root mean square error.
+rmse = mean_squared_error(y_test, y_pred, squared= False)
+
+# Coefficient for the regresssion line ie the slope as this is a simple linear regression
 coefficent = reg.coef_
 
-#
+# Intercept of the regression line
 intercept = reg.intercept_
+
+# To manually calculate RMSE
+n = len(y_pred)
+# Finish the manual calculation of the MSE
+manual_rmse = np.sqrt(sum((y_test - y_pred)**2) / n)
 
 with open('analysis.txt', 'a') as f:
     f.write(f"The value of R^2: {r_squared.round(3)}\n")
@@ -870,15 +898,30 @@ plt.close()
 Plot of the regression line
 ![Linear regression analysis plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/lg_analysis.png)
 
-![Residuals](https://i0.wp.com/statisticsbyjim.com/wp-content/uploads/2017/04/residuals.png?resize=300%2C186&ssl=1)
+To ensure there are no underlying trends that could affect the analysis, this [article](https://statisticsbyjim.com/regression/check-residual-plots-regression-analysis/) entitled, Check your residual plots to ensure trustworthy regression results suggests plotting the residuals to ensure they are randomly scattered. 
 
-Plotting the residuals https://statisticsbyjim.com/regression/check-residual-plots-regression-analysis/
-https://seaborn.pydata.org/generated/seaborn.residplot.html
+Seaborn has a [residplot](https://seaborn.pydata.org/generated/seaborn.residplot.html) function hat makes it easy to plot the residuals.
 
-![Residuals plot]()
+<details>
+<summary>Code to plot the residuals</summary>
+```python
+# Plotting residuals
+sns.residplot(iris, x = 'petal_length', y = 'petal_width')
+# Add title
+plt.title('Residuals plot for petal width vs petal length')
+# Label x-axis
+plt.xlabel('Petal Length (cm)')
+#Label y-axis
+plt.ylabel('Petal Width (cm)')
+# Save the plot
+plt.savefig('plots\\residuals.png')
+plt.close()
+```
+</details>
 
+![Residuals plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/residuals.png)
 
-
+The residuals are randomly scattered in the residual plot 
 
 __Evaluating the model__
 
@@ -886,15 +929,15 @@ __Evaluating the model__
     Predictions: [0.262 0.22  1.391 0.345 0.262],
     Actual values: [0.2 0.2 1.3 0.4 0.4]
 
-[R-squared](https://www.youtube.com/watch?v=2AQKmw14mHM) and [root mean squared error (RMSE)](https://statisticsbyjim.com/regression/root-mean-square-error-rmse/) are used to evaluate how well the model works. 
-* R-squared measures how much variance in the target variable can be explained by our model. In simple terms, how far are the true values away from their mean? R-squared is a range from 0 to 100%, with 100% meaning that the target variable is fully explained by the dependent variable and all the data points fall on the regression line. [Interpret r-squared regression](Inhttps://statisticsbyjim.com/regression/interpret-r-squared-regression/)
-* RMSE is the square root of the mean squared error (MSE). THe MSE is the mean of the squared differences between the predicted values and the true values. RMSE is a measure of how large the residuals are dispersed. With MSE and RMSE the errors are heavily penalised as the residuals are squared. Generally RMSE is used as it has the same units of the target variable and is therefore more widely used than MSE.
+The predicted values and the actual values appear to be in close agreement with each other. 
 
-n = len(predictions)
+```python
+# To manually calculate RMSE
+n = len(y_pred)
 # Finish the manual calculation of the MSE
-mse_one = sum((y_test - predictions)**2) / n
-print('With a manual calculation, the error is {}'.format(mse_one))
+manual_rmse = np.sqrt(sum((y_test - y_pred)**2) / n)
 
+```
     Performance of the linear regression model.
     The value of R-squared for the test data: 0.933.
     The value of R-squared for the training data: 0.923.
@@ -903,10 +946,18 @@ print('With a manual calculation, the error is {}'.format(mse_one))
     The slope of the regression line for petal width vs petal length is: [0.418].
     The intercept of the regression line for petal width vs petal length is -0.366.
 
+The linear regression model is a good fit for the data with an R-squared value of 0.933 for the unseen test data. The feature, petal length therefore explains explains 93.3% of the variance in the target variable, petal width. The value for R-squared on the training set was also calculated as a large discrepency between the values can indicate if the training data has been either overfitted or underfitted to the model. In this case there does not appear to be any under or overfitting present. 
+
+The RMSE value of 0.216 cm. This means that the difference between what the model predicts for petal width and the actual value is 0.216 cm. As the RMSE value is close to zero this is a very good fit. 
 
 __k-Fold Cross-Validation__
 
-The value of r-squared can depend on how the data is split by train_test_split. k-Fold cross validation is a method to get a more accurate value for r-squared values by splitting the data into subsets known as k-folds and calculating r-squared for each subset. Changing the sample used can give dramatically different results. 
+The value of r-squared can depend on how the data is split by train_test_split as changing the sample used can give dramatically different results. With [k-Fold cross validation](https://www.w3schools.com/python/python_ml_cross_validation.asp) the data is split into subsets known as k-folds and r-squared is calculated for each subset. It is a method to evaluate the model, it does not train a new model. 
+
+The number of folds is indicated by the n_fold parameter. The default is 5. 
+
+<details>
+<summary>Code for K-Fold Cross-Validation</summary>
 
 ```python
 kf = KFold(n_splits = 5, shuffle = True, random_state=47)
@@ -920,12 +971,20 @@ with open('analysis.txt', 'a') as f:
     f.write(f'{np.quantile(cv_results, [0.025, 0.975]).round(3)}\n\n')
 ```
 
-k-Fold analysis results.
-The value of R-squared for petal width vs petal length for each fold are [0.947 0.918 0.932 0.955 0.863]
-The mean of R-squared is 0.923
-The standard deviation for R-squared is 0.033
-The 95% quantile limits are [0.869 0.954]
+</details>
 
+    k-Fold analysis results.
+    The values of R-squared for petal width vs petal length for each fold are [0.947 0.918 0.932 0.955 0.863]
+    The mean of R-squared is 0.923
+    The standard deviation for R-squared is 0.033
+    The 95% quantile limits are [0.869 0.954]
+
+This simple example nicely demonstrates that the sample chosen can affect the value of R-squared. We can see from the results that the value for R-squared ranges from 0.863 to 0.955. The mean value of 0.923 with a std deviation of 0.033 compares favourably with the previously value of 0.933 obtained for the test set. 
+
+
+__Conclusion__
+
+What did I? WHat would I like to have done?
 
 __COmparison with other's work__
 
@@ -938,14 +997,13 @@ https://www.hackersrealm.net/post/iris-dataset-analysis-using-python
 
 
 
-## Conclusion
 
 Who would have thought that nearly one hundred years later Anderson's data would be used by thousands of students worldwide who are learning statistics, data science or machine learning? https://www.sciencedirect.com/science/article/pii/S1877050919320836
 
 
 https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/
 
-## References
+## Additional References
 
 www.canva.com
 
@@ -964,7 +1022,7 @@ RA Fisher and the science of hatred https://www.newstatesman.com/long-reads/2020
 
 __Write output to a file in python__
 
-In the command line use of file_name.py > outout_file_name.txt https://www.reddit.com/r/learnpython/comments/12emhsa/how_do_i_save_the_output_of_the_python_code_as_a/
+In the command line use of file_name.py > output_file_name.txt https://www.reddit.com/r/learnpython/comments/12emhsa/how_do_i_save_the_output_of_the_python_code_as_a/
 
 Python File Write https://www.w3schools.com/python/python_file_write.asp
 
@@ -986,11 +1044,10 @@ Datacamp Introduction to Data Visualization with Matplotlib
 
 Datacamp Introduction to Data Visualization with Seaborn
 
+Intermediate Data VIsualization with Seaborn https://app.datacamp.com/learn/courses/intermediate-data-visualization-with-seaborn
+
 Understanding Boxplots https://builtin.com/data-science/boxplot
 
-Countplot using seaborn in python https://www.geeksforgeeks.org/countplot-using-seaborn-in-python/?ref=ml_lbp
-
-Seaborn catplot https://www.geeksforgeeks.org/python-seaborn-catplot/?ref=lbp
 
 __Correlation References__
 
@@ -1005,9 +1062,11 @@ https://www.kaggle.com/code/ash316/ml-from-scratch-with-iris
 "
 https://app.datacamp.com/learn/courses/supervised-learning-with-scikit-learn
 
+k-Fold cross validation Introduction to machine learning with python, Andreas C Muller & Sarah Guido, pgs 252 - 260 )
+
 __ Literature search Recent uses of the iris data set__ 
 
-https://www.sciencedirect.com/science/article/pii/S1877050919320836
+Enhance Classification Models for Iris Dataset, Procedia Computer Science, ://www.sciencedirect.com/science/article/pii/S1877050919320836
 
 https://ijece.iaescore.com/index.php/IJECE/article/view/33889
 

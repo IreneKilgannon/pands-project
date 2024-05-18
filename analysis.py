@@ -401,10 +401,15 @@ plt.close()
 
 # Plotting residuals
 sns.residplot(iris, x = 'petal_length', y = 'petal_width')
+# Add title
 plt.title('Residuals plot for petal width vs petal length')
+# Label x-axis
 plt.xlabel('Petal Length (cm)')
+#Label y-axis
 plt.ylabel('Petal Width (cm)')
+# Save the plot
 plt.savefig('plots\\residuals.png')
+plt.close()
 
 
 # K-Fold cross validation to get a better estimate of R-squared.
