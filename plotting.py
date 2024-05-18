@@ -43,16 +43,17 @@ def plot_scatter(df, hue = None):
     -------
     Saved scatter plots between all the numeric variables in the data set as a png file.
     '''
-    # Initialize an empty list for plotted x variables
+    # Initialize an empty list for plotted x variables. 
     plotted_x = []
     for x in df:
+        # The variable, x is added to the plotted_x list
         plotted_x.append(x)
-        # Only want a scatter plot of the numeric variables
+        # Only create a scatter plot of the numeric variables of data type integer or float.
         if df[x].dtype == 'int' or df[x].dtype == 'float':
             for y in df:
                 # Only numeric data types will be plotted
                 if df[y].dtype == 'int' or df[y].dtype == 'float':
-                    # Do not create a plot if x and y are the same or if x has been used to create a plot previously.
+                    # Continue if x and y are the same or if y is in the plotted_x list.
                     if x == y or y in plotted_x:
                         continue
                     else:

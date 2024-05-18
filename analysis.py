@@ -108,11 +108,13 @@ ax[0,1].set_title('Sepal Width')
 ax[1,0].set_title('Petal Length')
 ax[1,1].set_title('Petal Width')
 
+# Label y-axis
 ax[0,0].set_ylabel('Sepal Length (cm)')
 ax[0,1].set_ylabel('Sepal Width (cm)')
 ax[1,0].set_ylabel('Petal Length (cm)')
 ax[1,1].set_ylabel('Petal Width (cm)')
-# Save .setthe created plot
+
+# Save the box plot
 plt.savefig('plots\\Box_plot.png')
 plt.close()
 
@@ -156,14 +158,18 @@ plt.close()
 # Hue is the species column to separate the species by colour. 
 pt.plot_hist(iris, hue = 'species')
 
+# Histograms for petal length and petal width for Iris setosa
+fig, ax = plt.subplots(1, 2)
+sns.histplot(setosa, x = 'petal_length', ax = ax[0])
+sns.histplot(setosa, x = 'petal_width', ax = ax[1])
+plt.suptitle('Histograms of Petal Length and Width for Iris setosa')
+plt.savefig('plots\\Hist_Setosa_pl.png')
+plt.close()
+
 ######################################
 # SCATTER PLOT CODE
 
 #### Output a scatter plot of each pair of variables ####
-
-# Call the plot_scatter function from the plotting module.
-pt.plot_scatter(iris, hue = 'species')
-
 
 # Use of a pairplot.
 g = sns.pairplot(iris)
@@ -171,6 +177,8 @@ g.fig.suptitle('Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.
 plt.savefig('plots\\Pair_plot.png')
 plt.close()
 
+# Call the plot_scatter function from the plotting module.
+pt.plot_scatter(iris, hue = 'species')
 
 # Minimium value in Sepal Width columns for Iris setosa
 min = setosa['sepal_width'].min()
