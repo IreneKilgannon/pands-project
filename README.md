@@ -8,12 +8,6 @@ Student ID: G00220627
 
 This is my analysis of Fisher's Iris data set for the programming and scripting module for the [Higher Diploma in Science in Computing in Data Analytics](https://www.gmit.ie/higher-diploma-in-science-in-computing-in-data-analytics) at Atlantic Technological University.
 
-## Left to do
-
-__NB add literature comparison, add more references where ever needed.__
-   
-1. Conclusion
-
 ## Project Statement
 * Research the data set and summarise it in a [README](https://github.com/IreneKilgannon/pands-project/blob/main/README.md).
 * Download the data set and add it to my [GitHub repository](https://github.com/IreneKilgannon/pands-project).
@@ -429,7 +423,7 @@ plt.close()
 ```
 </details>
 
-![Histogram of Iris setosa, petal length and petal width]()
+![Histogram of Iris setosa, petal length and petal width](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Hist_Setosa_pl.png)
 
 We can clearly see that the number of bins did affect the distribution. Both petal length and petal width for _Iris setosa_ do have a normal distribution. 
 
@@ -437,16 +431,9 @@ The histograms created in this analysis are comparable to [other analysis](https
 
 ## Scatter plot of each pair of variables
 
-The purpose of a [scatter plot](https://www.atlassian.com/data/charts/what-is-a-scatter-plot#:~:text=A%20scatter%20plot%20(aka%20scatter,to%20observe%20relationships%20between%20variables.)) is to demonstrate the relationship between two numeric variables. Scatter plots also indicate if there are any outlying points (outliers) away from the main data points that could disrupt accurate correlation.
+The purpose of a [scatter plot](https://www.atlassian.com/data/charts/what-is-a-scatter-plot#:~:text=A%20scatter%20plot%20(aka%20scatter,to%20observe%20relationships%20between%20variables.)) is to demonstrate the relationship between two continuous numeric variables. Scatter plots also indicate if there are any outlying points (outliers) away from the main data points that could disrupt accurate correlation.
 
-Scatter plots can be created with [seaborn scatter plots](https://www.geeksforgeeks.org/scatterplot-using-seaborn-in-python/) and with [matplotlib's plt.scatter function](https://www.w3schools.com/python/python_ml_scatterplot.asp). Seaborn also has a pairplot feature to create a scatter plots for each of the variables in the data set. 
-
-![Pair plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Pair_plot.png)
-
-As part of my plotting module, there is a function to create scatter plots for each of the numeric variables in the data set. The pair plot function creates twelve scatter plots for the four numeric variables in the iris data set. Each set of variables gets plotted twice eg. petal width vs petal length and petal length vs petal width, so the same plot with the axis's reversed. The plot_scatter function in plotting.py is designed to generate half the number of plots created by pair plot, so each variable will only get plotted once against the other. Once again, hue is an optional parameter. 
-
-<details>
-<summary>Scatter plot code</summary>
+Scatter plots can be created with [seaborn scatter plots](https://www.geeksforgeeks.org/scatterplot-using-seaborn-in-python/) and with [matplotlib's plt.scatter function](https://www.w3schools.com/python/python_ml_scatterplot.asp). Seaborn also has a [pairplot](https://seaborn.pydata.org/generated/seaborn.pairplot.html) feature to create a scatter plots between all of the variables in the data set. 
 
 ```python
 # Use of pairplot
@@ -454,9 +441,22 @@ g = sns.pairplot(iris)
 g.fig.suptitle('Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
 plt.savefig('plots\\Pair_plot.png')
 plt.close()
+```
+
+![Pair plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Pair_plot.png)
+
+
+When we exam the pair plot we can see that there are distinct clusters in most plots. Most have one large and one smaller cluster. From the information the histograms and box plots have provided the smaller cluster is probably _Iris setosa_. A scatter plot defined by hue for the species should confirm this. 
+
+As part of my plotting module, there is also a function to create scatter plots for each of the numeric variables in the data set. The pair plot function creates twelve scatter plots for the four numeric variables in the iris data set. Each set of variables gets plotted twice e.g. petal width vs petal length and petal length vs petal width, so the same plot with the axis's reversed. The plot_scatter function in plotting.py is designed to generate half the number of plots created by pair plot, so each variable will only get plotted once against the other. Hue is an optional parameter for this function. The plot_scatter function will be used to create scatter plots for the data set, with hue equal to species.
+
+<details>
+<summary>Scatter plot code</summary>
+
+```python
 
 def plot_scatter(df, hue = None):
-    '''A function to plot a seaborn scatter plot of each pair of numeric variables in a dataframe.
+    '''A function to plot a seaborn scatter plots of each pair of numeric variables in a dataframe.
 
     Parameters
     ----------
@@ -507,7 +507,22 @@ pt.plot_scatter(iris, hue = 'species')
 |![PWvsPL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Petal%20Length.png)|![PWvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Sepal%20Length.png)|
 |![PWvsSW](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Sepal%20Width.png)|![SWvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Sepal%20Width_vs_Sepal%20Length.png)|
 
-The scatter plots demonstrate clearly that _Iris setosa_ is a distinct cluster. It does not overlap with with _Iris versicolor_ or _Iris virginica_ in any of the scatter plots. It is important to always cross check what appears to be an outlier in the scatter plot with the box plot. What I thought was an obvious outlier in the scatter plot for sepal width for_Iris setosa_ 2.3 cm, is in the box plot the minimium value in the sepal width range for _Iris setosa_ and is not an outlier! As the data point is so far from the main set of data points I calculated the upper and lower limits for outliers as shown in this data camp course, [handling outliers](https://campus.datacamp.com/courses/exploratory-data-analysis-in-python/data-cleaning-and-imputation?ex=12). As the lower limit for outliers for Iris setosa for sepal width is anything less than 2.3 cm, it is not considered an outlier. 
+These scatter plots demonstrate clearly that _Iris setosa_ is a distinct cluster. It does not overlap with with _Iris versicolor_ or _Iris virginica_ in any of the scatter plots. It is important to always cross check what appears to be an outlier in the scatter plot with the box plot. What I thought was an obvious outlier in the scatter plot for sepal width for_Iris setosa_ 2.3 cm, is in the box plot the minimium value in the sepal width range for _Iris setosa_ and is not an outlier! As the data point is so far from the main set of data points I calculated the upper and lower limits for outliers as shown in this data camp course, [handling outliers](https://campus.datacamp.com/courses/exploratory-data-analysis-in-python/data-cleaning-and-imputation?ex=12). 
+
+The steps to calculate the lower limit for outliers are: 
+1. Calculate 25th percentile using [quantile method](https://www.w3schools.com/python/pandas/ref_df_quantile.asp)
+    twenty_fifth = setosa['sepal_width'].quantile(0.25)
+
+2. Calculate the 75th percentile using quantile method
+    seventy_fifth = setosa['sepal_width'].quantile(0.75)
+
+3. Calculate the IQR, interquantile range. The difference between 75th and 25th percentile.
+    s_width_iqr = seventy_fifth - twenty_fifth
+
+4. Lower limit is 25th percentile minus 1.5thimes the IQR
+    lower_limit = twenty_fifth percentile - (1.5 * iqr)
+
+The values of the 75th and 25th percentile can also be obtained from the results of the describe method. 
 
 <details>
 <summary>Calculating lower and upper limits of outliers.</summary>
@@ -519,11 +534,13 @@ min = setosa['sepal_width'].min()
 # Identifying outliers
 # Calculating the range for outliers for the sepal width for Iris setosa.
 
-# Calculate the 75th percentile
+# Calculate the 75th percentile using quantile function
 seventy_fifth = setosa['sepal_width'].quantile(0.75)
+
+# Calculate the 25th percentile
 twenty_fifth = setosa['sepal_width'].quantile(0.25)
 
-# IQR (interquartile range) Difference between the 75th and 25th percentile
+# IQR (interquartile range) for sepal width. Difference between the 75th and 25th percentile
 s_width_iqr = seventy_fifth - twenty_fifth
 
 # Upper Outliers, points outside the 75th percentile plus 1.5 times the IQR
@@ -536,18 +553,16 @@ with open('analysis.txt', 'a') as f:
     f.write(f'The minimium value in the sepal width column for Iris setosa is {min}\n')
     f.write(f'The lower limit for outliers in the sepal width column for Iris setosa is {lower_limit.round(2)}.\n')
     f.write(f'The upper limit for outliers in the sepal width column for Iris setosa is {upper_limit.round(2)}.\n\n')
-
 ```
+</details>
+
     The minimium value in the sepal width column for Iris setosa is 2.3
     The lower limit for outliers in the sepal width column for Iris setosa is 2.3.
     The upper limit for outliers in the sepal width column for Iris setosa is 4.5.
 
-</details>
+As the lower limit for outliers for _Iris setosa_ for sepal width is anything less than 2.3 cm, the data point at 2.3 cm is not considered an outlier.
 
-The clusters of _Iris versicolor_ and _Iris virginica_ overlap in all the scatter plots. In the plot of sepal length vs sepal width there is a significant amount of overlap. The least amount of overlap appears to be in the scatter plots between petal length and petal width and between petal width and sepal width. One widely used technique for classification in machine learning is called [K-nearest neighbours(KNN)](https://www.datacamp.com/tutorial/k-nearest-neighbor-classification-scikit-learn). The K-nearest neighbours algorithm looks at the nearest data points to the data point of interest and decides which cluster the data point belongs to. Minimising the overlap of clusters will improve the chance of correct cluster assignment.
-
-
-
+The clusters of _Iris versicolor_ and _Iris virginica_ overlap in all the scatter plots. In the plot of sepal length vs sepal width there is a significant amount of overlap. The least amount of overlap appears to be in the scatter plots between petal length and petal width and between petal width and sepal width. One widely used technique for classification in machine learning is called [K-nearest neighbours (KNN)](https://www.datacamp.com/tutorial/k-nearest-neighbor-classification-scikit-learn). The K-nearest neighbours algorithm looks at the nearest data points to the data point of interest and decides which cluster the data point belongs to. Minimising the overlap of clusters will improve the chance of correct cluster assignment.
 
 
 ## Any Other Analysis
@@ -570,22 +585,15 @@ When choosing the variables to use for predictive modelling and machine learning
 
 It is important to note that correlation does not mean causation. This means even though x and y are correlated, x does not necessarily cause y. There could be other variables, called [confounding variables](https://www.sciencedirect.com/topics/nursing-and-health-professions/confounding-variable) involved which are related to the variables of interest which could lead to misleading results. 
 
-__Adding a line for best fit__
+Before the correlation coefficient is calculated it is important to create a scatter plot with a line of best fit (also known as a regression line or a trend line) to verify if there is a linear or a non-linear relationship between the data points. The most commonly used method to calculate the correlation coefficient, the [Pearson method correlation](https://www.youtube.com/watch?v=k7IctLRiZmo) is only suitable for linear plots. The spread of the data around the regression line indicates if there is good correlation between the variables. The data points for variables with a high correlation coefficient will be closer to the trend line. 
 
-Before the correlation coefficient is calculated it is important to create a scatter plot with a line of best fit (also known as a regression line or a trend line) to check if there is a linear or a non-linear relationship between the data points. The most commonly used method to calculate the correlation coefficient, the [Pearson method correlation](https://www.youtube.com/watch?v=k7IctLRiZmo) is only suitable for linear plots. The spread of the data around the regression line indicates if there is good correlation between the variables. The data points for variables with a high correlation coefficient will be closer to the trend line. 
-
-The equation of a line is $y = mx + c$, where m is the slope and c is the y-intercept (x = 0). 
-
-The value of the slope of the line does not correlate with the value of the correlation coefficient. The correlation coefficient looks at the spread of data around the regression line. The sign of the slope does correspond with the sign of the correlation coefficient. A postive slope will mean that there is a positive correlation. 
-
-Steps to fit a regression line to a scatter plot with numpy
-1. Convert the two columns to a [numpy array](https://sparkbyexamples.com/pandas/pandas-convert-column-to-numpy-array/)
+Steps to fit a regression line to a scatter plot with numpy:
+1. Convert the two columns to a [numpy array](https://sparkbyexamples.com/pandas/pandas-convert-column-to-numpy-array/).
 2. Use numpy [numpy polyfit](https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html) to fit a straight line between the x-axis data points and the y-axis data points.
 3. Extract the values of m and c from np.polyfit.
-4. The y-axis values for the regression line are generated from the equation of the line, which for this example is `m * sepal_length_array + c`.
+4. The y-axis values for the regression line are generated from the equation of the line, $y = mx +  $, which for this example is `m * sepal_length_array + c`.
 
 ```python
-
 # Create a numpy array of the sepal length and sepal width columns
 sepal_length_array = iris['sepal_length'].to_numpy()
 sepal_width_array = iris['sepal_width'].to_numpy()
@@ -598,14 +606,13 @@ m, c = np.polyfit(sepal_length_array, sepal_width_array, 1)
 with open('analysis.txt', 'a') as f:
     f.write(f'The value of the slope is {m.round(3)}.\n')
     f.write(f'The value of the intercept is {c.round(3)}.\n\n')
-
 ```
+
+The equation of a line is $y = mx + c$, where m is the slope and c is the y-intercept at x = 0. The values of m and c can be extracted from numpy's polyfit and these are used to calculated the y-values for the line.
 
     The value of the slope is -0.057.
     The value of the intercept is 3.389.
 
-
-These values can then be used to plot the line. The y-values for the line are generated from the values of m and c above. 
 
 <details>
 <summary> Plotting a regression line on a scatter plot with numpy</summary>
@@ -633,11 +640,7 @@ plt.close()
 
 ![Numpy regression plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Numpy_reg_plot.png)
 
- Matplotlib/Seaborn/Numpy analyses the data and fits a line that it thinks fits the data points the best using [ordinary least squares (OLS)](). This youtube video, [The Main Ideas of Fitting a Line to Data (THe main ideas of Least Squares and Linear Regression)](https://www.youtube.com/watch?v=PaFPbb66DxQ) explains in simple terms how the line is found. Optimising values of m and c so the the sum of squared residuals in minimised. The residual is the distance an the observed value is from the predicted value on the line.
-
-![Residuals](https://realpython.com/cdn-cgi/image/width=950,format=auto/https://files.realpython.com/media/fig-lin-reg.a506035b654a.png)
-
-Fortunately are faster ways to add a regression line. Two of the simplest are seaborn's [regplot](https://seaborn.pydata.org/generated/seaborn.regplot.html) (regression plot) and [lmplot](https://seaborn.pydata.org/generated/seaborn.lmplot.html) (linear model plot) functions. Regplot and lmplot generate very similiar plots but they have different parameters. Regplot is an axes-level function. Seaborn lmplot is a figure-level function with access to FacetGrid. FacetGrid means that multiple plots can be created in a grid with rows and columns. lmplot has the hue, col and row parameters __for categorical variables CHECK__. It is also possible to use the pair plot function with the kind parameter equal to reg to create a plot of all the numeric variables.
+Fortunately are faster ways to add a regression line. Two of the simplest are seaborn's [regplot](https://seaborn.pydata.org/generated/seaborn.regplot.html) (regression plot) and [lmplot](https://seaborn.pydata.org/generated/seaborn.lmplot.html) (linear model plot) functions. Regplot and lmplot generate very similiar plots but they have different parameters. Regplot is an axes-level function. Seaborn lmplot is a figure-level function with access to FacetGrid. FacetGrid means that multiple plots can be created in a grid with rows and columns. lmplot has the hue, col and row parameters to further differentiate the data points. It is also possible to use the pair plot function with the kind parameter equal to reg to create a regression plot of all the numeric variables.
 
 It is not possible to to extract the values of m and c from a seaborn plot. [Linear regression analysis](https://medium.com/@shuv.sdr/simple-linear-regression-in-python-a0069b325bf8) is required.
 
@@ -653,15 +656,12 @@ plt.savefig('plots\\lmplot_example.png')
 plt.close()
 
 # Regression Line Pair Plot, kind = 'reg'
-sns.pairplot(iris, hue = 'species', kind = 'reg')
+sns.pairplot(iris, kind = 'reg')
 plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
 plt.savefig('plots\\Pair_Regression_plots.png')
 plt.close()
 ```
 </details>
-
-![lmplot example, hue = species](https://github.com/IreneKilgannon/pands-project/blob/main/plots/lmplot_example.png)
-
 
 ![Pair regression plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Pair_Regression_plots.png)
 
@@ -677,9 +677,10 @@ corr_SL_vs_SW = iris['sepal_length'].corr(iris['sepal_width'])
 with open('analysis.txt', 'a') as f:
     f.write(f'The correlation coefficient between sepal length and sepal width is {corr_SL_vs_SW.round(3)}.\n\n')
 
-
-The correlation coefficient between sepal length and sepal width is -0.109.
 ```
+    The correlation coefficient between sepal length and sepal width is -0.109.
+
+A correlation coefficient of -0.109 is a weak negative correlation. As sepal width increases, sepal length decreases. The value of the slope of the line does not correlate with the value of the correlation coefficient. The sign of the slope does correspond with the sign of the correlation coefficient. A postive slope will mean that there is a positive correlation, a negative slope means a negative correlation. The correlation coefficient looks at the spread of data around the regression line. 
 
 Once again there are a number of methods to calculate the correlation coefficent between all the numeric variables in one step. The first method uses the corr() and generates a [correlation matrix](https://datatofish.com/correlation-matrix-pandas/). The second method involves creating a [seaborn heatmap](). A heatmap is a more visual method to display the same information as a correlation matrix. It is possible to create a [heatmap using matplotlib](https://www.geeksforgeeks.org/how-to-draw-2d-heatmap-using-matplotlib-in-python/) however it is not as straightforward as a seaborn heatmap.
 
@@ -749,7 +750,7 @@ plt.close()
 
 ![Heat map](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Heatmap_correlation_coefficients.png)
 
-These heatmaps demonstrate the importance of taking the categorical variables into account. For example the overall correlation coefficient between petal width and petal width was 0.96, which is a very strong positive correlation. When the coefficients of the indiviual species is taken into account the values range from 0.31 for _Iris setosa_, 0.79 for _Iris versicolor_ and 0.32 for _Iris virginica_. If we were interested in predicting the petal width based on the petal length the results should be accurate as long as we are not interested in the flower species. Another interesting pairing is petal width and petal length. 
+These heatmaps demonstrate the importance of taking the categorical variables into account. For example the overall correlation coefficient between petal width and petal width was 0.96, which is a very strong positive correlation. When the coefficients of the indiviual species is taken into account the values range from 0.31 for _Iris setosa_, 0.79 for _Iris versicolor_ and 0.32 for _Iris virginica_. If we were interested in predicting the petal width based on the petal length the results should be accurate as long as we are not interested in the flower species. Another interesting pairing is sepal width and sepal length. 
 
 This will be demonstrated further by creating some regression plots using regplot. To create side by side plots, regplot has the parameter of ax. The first plot will be a plot of the overall data set and the second plot will take the flower species into account. 
 * sepal width vs sepal length
@@ -801,49 +802,54 @@ ax[1, 1].set_ylabel('Petal Width (cm)')
 # Save plots
 plt.savefig('plots\\Regression_plots.png')
 plt.close()
-
-# Regression Line Pair Plot, kind = 'reg'
-sns.pairplot(iris, hue = 'species', kind = 'reg')
-plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
-plt.savefig('plots\\Pair_Regression_plots.png')
-
 ```
 </details>
 
 ![Regression plots](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Regression_plots.png)
 
-The regression plots clearly demonstrate why the correlation coefficients between sepal width and sepal length is different when the species is taken into account. Without taking the species into account the regression plot for sepal width vs sepal length on the left shows a negative slope with the data points scattered widely around the trend line, which would correspond with the very weak negative correlation coefficient of -0.11. When species is taken into account the regression lines now have a positive slope and the data points are not as widely spread around the line. This is an example of Simpson's paradox. Wikipedia states that [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) is a phenomenon in probability and statistics in which a trend appears in several groups of data but disappears or reverses when the groups are combined. The very weak negative correlation has now become a moderate positive correlation coefficient of 0.75 for _Iris setosa_, 0.53 for _Iris versicolor_, 0.46 for _Iris virginica_. 
+The regression plots clearly demonstrates why the correlation coefficients between sepal width and sepal length are different when the species is taken into account. Without taking the species into account the regression plot for sepal width vs sepal length on the left shows a negative slope with the data points scattered widely around the trend line, which would correspond with the very weak negative correlation coefficient of -0.11. When species is taken into account the regression lines now have a positive slope and the data points are not as widely spread around the line. This is an example of Simpson's paradox. Wikipedia states that [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) is a phenomenon in probability and statistics in which a trend appears in several groups of data but disappears or reverses when the groups are combined. The very weak negative correlation has now become a moderate positive correlation coefficient of 0.75 for _Iris setosa_, 0.53 for _Iris versicolor_, 0.46 for _Iris virginica_. 
+
 
 
 ## Linear Regression Analysis
 
-Machine learning is a form of artifical intelligence (A.I). Machine learning uses a mix a statistics and computer science and it's aim is to develop a model that learns to make predictions and inferences from patterns in existing data and apply it to new data without step by step instructions.
+Machine learning is a form of artifical intelligence (A.I). Machine learning uses a mix a statistics and computer science and its aim is to develop a model that learns to make predictions and inferences from patterns in existing data and apply it to new data without step by step instructions.
 
-The three most common machine learning applications are regression, classification and clustering. [Linear regression analysis](https://realpython.com/linear-regression-in-python) is used for predictive analysis on continuous data. [Classification](https://www.datacamp.com/blog/ classification-machine-learning) is performed on categorical data and is used to predict the label of a given input. For example a classification could be used in the iris data set could predict to the species of the iris. The first chapter of Introduction to Machine Learning with Python by Andreas C Muller and Sarah Guido demonstrates how to build a model to classify iris species. The iris data set is still used to test improvements in classification models. [Clustering]() divides data into groups based on similarity. Clustering is a type of unsupervised machine learning. 
+The three most common machine learning applications are regression, classification and clustering. [Linear regression analysis](https://realpython.com/linear-regression-in-python) is used for predictive analysis on continuous data. [Classification](https://www.datacamp.com/blog/ classification-machine-learning) is performed on categorical data and is used to predict the label of a given input. For example a classification could be used in the iris data set could predict to the species of the iris. The first chapter of Introduction to Machine Learning with Python by Andreas C Muller and Sarah Guido demonstrates how to build a model to classify iris species. The iris data set is still used to test improvements in classification models. [Clustering]() divides data into groups based on similarity. Clustering is a type of unsupervised machine learning, regression and classification are supervised machine learning. 
 
 Regresssion attempts to determine the relationship between a dependent variable (sometimes called a target variable) and a series of other independent variables (sometimes called features or predictor variables). In simple linear regression there is only one predictor variable. Multiple linear regression has multiple features to predict the value for the target variable.
 
-For multiple linear regression the equation is $y = a_o +a_1x_1 +a_2x_2 + a_3x_3 + ... + a_nx_n$ where $y$ is the target variable and $x_1, x_2....x_n$  are the predictor variables and $a_0, a_1, ....a_n$ are the coefficients. For simple linear regression the formula is $y = mx +c$ as we saw previously. 
+For multiple linear regression the equation is:
+    $y = a_o +a_1x_1 +a_2x_2 + a_3x_3 + ... + a_nx_n$
+
+where $y$ is the target variable and $x_1, x_2....x_n$  are the predictor variables and $a_0, a_1, ....a_n$ are the coefficients. 
+
+For simple linear regression the formula is $y = mx +c$ as we saw previously. 
 
 For this part of the project I will construct a simple linear regression model to predict the petal width based on the petal length data. 
 
-[Scikit-learn]() is a python library that comes with many classes and functions that are required for machine learning. [LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression) is one class that can be used for linear regression analysis. Ridge and lasso are two other classes for linear regression. 
+[Scikit-learn](https://scikit-learn.org/stable/index.html) is a python library that comes with many classes and functions that are required for machine learning. [LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression) is one class in scikit-learn that is used for linear regression analysis. Ridge and lasso are two other classes for linear regression. 
+
+The basic steps for classification and regression are similiar. Some data preprocessing may be required if the data set is not in the correct format. 
 
 __Step 1__ Split the dataset into a training set and test set.
 
-Train_test_split is imported from sklearn.model_selection and is used split the data into two groups, one to train the model (X_train, y_train), the other to test the model (X_test, y_test). Usually 20-30% of the data is chosen to be test data by the test_size parameter. The test set should not be available to the model at any point until the model has been created..
+[Train_test_split](https://realpython.com/train-test-split-python-data/) is imported from sklearn.model_selection and is used split the data into two groups, one to train the model (X_train, y_train), the other to test the model (X_test, y_test). Usually 20-30% of the data is chosen to be test data by the test_size parameter. The test set should not be available to the model at any point until the model has been created.
 
 __Step 2__  Train the model.
 
-Instantiate a LinearRegression object, reg and use it to call the fit() method. The fit() method calculates the line of best fit. It does not return any value but For simple linear regression.
+Instantiate the desired object, in this case, the [LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html) object, reg and use it to call the fit() method. The fit() method calculates the line of best fit. The data is analysed and a line is fitted to the data points so that the the sum of the squared residuals in minimised according to [ordinary least squares (OLS)](). The residual is the distance an the observed 
+value is from the predicted value on the regression line. This youtube video, [The Main Ideas of Fitting a Line to Data (The main ideas of Least Squares and Linear Regression)](https://www.youtube.comwatch?
+v=PaFPbb66DxQexplains) in simple terms how the line is found.
+
+![Residuals](https://realpython.com/cdn-cgi/image/width=450,format=auto/https://files.realpython.com/media/
+fig-lin-reg.a506035b654a.png)
 
 __Step 3__ Predict the target values.
 
 The final step is to use the predict method on the X_test data. This is the first time the test data will be exposed to the model.
 
 __Step 4__ Evaluate the model
-
-The model is evaluated by calculating R-squared, with the score method and RMSE (root mean square value). 
 
 [R-squared](https://www.youtube.com/watch?v=2AQKmw14mHM) and [root mean squared error (RMSE)](https://statisticsbyjim.com/regression/root-mean-square-error-rmse/) are used to evaluate how well the model works. 
 * R-squared measures how much variance in the target variable can be explained by our model. In simple terms, how far are the true values away from their mean? R-squared is a range from 0 to 1, with 1 meaning that the target variable is fully explained by the dependent variable and all the data points fall on the regression line. [Interpret r-squared regression](Inhttps://statisticsbyjim.com/regression/interpret-r-squared-regression/)
@@ -859,7 +865,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import cross_val_score, KFold
 
-# Instantiate the model
+# Instantiate the object
 reg = LinearRegression()
 
 # Select the columns of interest from the dataset
@@ -924,24 +930,30 @@ plt.close()
 ```
 </details>
 
-Plot of the regression line
+
 ![Linear regression analysis plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/lg_analysis.png)
 
-To ensure there are no underlying trends that could affect the analysis, this [article](https://statisticsbyjim.com/regression/check-residual-plots-regression-analysis/) entitled, Check your residual plots to ensure trustworthy regression results suggests plotting the residuals to ensure they are randomly scattered. 
+To ensure there are no underlying trends that could affect the analysis, this [article](https://statisticsbyjim.com/regression/check-residual-plots-regression-analysis/) entitled, "Check your residual plots to ensure trustworthy regression results" suggests plotting the residuals to ensure they are randomly scattered. 
 
-Seaborn has a [residplot](https://seaborn.pydata.org/generated/seaborn.residplot.html) function hat makes it easy to plot the residuals.
+Seaborn has a [residplot](https://seaborn.pydata.org/generated/seaborn.residplot.html) function that makes it easy to plot the residuals. A residual plots is a plot of residuals vs fitted values.
 
 <details>
 <summary>Code to plot the residuals</summary>
+
 ```python
+
+# Calculate the residual, Obserced value minus predicted value. 
+residuals = y_test - y_pred
+
 # Plotting residuals
-sns.residplot(iris, x = 'petal_length', y = 'petal_width')
+sns.residplot(x = y_pred, x = residuals)
+
 # Add title
-plt.title('Residuals plot for petal width vs petal length')
+plt.title('Residuals plot')
 # Label x-axis
-plt.xlabel('Petal Length (cm)')
+plt.xlabel('Fitted values, y_test')
 #Label y-axis
-plt.ylabel('Petal Width (cm)')
+plt.ylabel('Residuals')
 # Save the plot
 plt.savefig('plots\\residuals.png')
 plt.close()
@@ -950,13 +962,13 @@ plt.close()
 
 ![Residuals plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/residuals.png)
 
-The residuals are randomly scattered in the residual plot 
+The residuals are randomly scattered in the residual plot, which is the desired result. Occassionally there might be a pattern in the residuals which would mean that the model would need to be reevaluated.
 
 __Evaluating the model__
 
-    The first five values for the predicted values and the actual values are:
-    Predictions: [0.262 0.22  1.391 0.345 0.262],
-    Actual values: [0.2 0.2 1.3 0.4 0.4]
+    The first five predicted values for petal width and the actual values are:
+    Predictioned Values: [0.262 0.22  1.391 0.345 0.262]
+    Actual Values: [0.2 0.2 1.3 0.4 0.4]
 
 The predicted values and the actual values appear to be in close agreement with each other. 
 
@@ -981,7 +993,7 @@ The RMSE value of 0.216 cm. This means that the difference between what the mode
 
 __k-Fold Cross-Validation__
 
-The value of r-squared can depend on how the data is split by train_test_split as changing the sample used can give dramatically different results. With [k-Fold cross validation](https://www.w3schools.com/python/python_ml_cross_validation.asp) the data is split into subsets known as k-folds and r-squared is calculated for each subset. It is a method to evaluate the model, it does not train a new model. 
+The value of r-squared can depend on how the data is split by train_test_split as changing the sample used can give dramatically different results. With [k-Fold cross validation](https://www.w3schools.com/python/python_ml_cross_validation.asp) the data is split into subsets known as k-folds and R-squared is calculated for each subset. It is a method to evaluate the model, it does not train a new model. 
 
 The number of folds is indicated by the n_fold parameter. The default is 5. 
 
@@ -999,7 +1011,6 @@ with open('analysis.txt', 'a') as f:
     f.write(f'{np.std(cv_results).round(3)}\n')
     f.write(f'{np.quantile(cv_results, [0.025, 0.975]).round(3)}\n\n')
 ```
-
 </details>
 
     k-Fold analysis results.
@@ -1011,36 +1022,22 @@ with open('analysis.txt', 'a') as f:
 This simple example nicely demonstrates that the sample chosen can affect the value of R-squared. We can see from the results that the value for R-squared ranges from 0.863 to 0.955. The mean value of 0.923 with a std deviation of 0.033 compares favourably with the previously value of 0.933 obtained for the test set. 
 
 
-__Conclusion__
+## Conclusions
 
-What did I? WHat would I like to have done?
+There are many many examples of exploratory data anaysis of the iris data set. Some examples are [here](https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/), [here](https://zion-oladiran.medium.com/exploratory-data-analysis-iris-dataset-68897497b120), [here](https://www.kaggle.com/code/danalexandru/simple-analysis-of-iris-dataset) and [here](https://www.hackersrealm.net/post/iris-dataset-analysis-using-python). They are all similiar to this analysis with a description of the data set, exploratory data analysis, histograms, scatter plots and correlation analysis. The popularity of the data set makes it difficult to be original but the upside is that it is easy for the student data analyst to compare their results with previous studies! My plots and correlations were similiar to previous analyses. 
 
-__COmparison with other's work__
+I believe that my plotting.py module will be of use in future projects. As well as using it for this project, I tested the module on another data set, the Palmer penguins dataset. It worked well for that data set too and the appropriate histograms and scatter plots were produced. I would like to improve it so that it can create figure, axes plots rather than seperate, individual plots.
 
-https://zion-oladiran.medium.com/exploratory-data-analysis-iris-dataset-68897497b120
+My very basic linear regression analysis to predict the petal width of the iris based on the petal length demonstrated the steps involved in constructing a linear regression model. For more complicated models the same fundamental steps of splitting the data, fitting the data to a model and predicting the test data are required but more data preprocessing may be required. No data preprocessing was required for the iris data set as there was no missing data. If I were to construct a classification model for the iris species based on the numeric data, the species column would need to be preprocessed as [models can only work with numeric data](https://www.w3schools.com/python/python_ml_preprocessing.asp).
 
-https://www.kaggle.com/code/danalexandru/simple-analysis-of-iris-dataset
+A search for the iris data set on [Google scholar](https://scholar.google.com/) and [sciencedirect.com](https://www.sciencedirect.com/) shows that the data set is still used by researchers to compare the performance of new models with existing methods. Examples of this are the following papers: [this](https://www.sciencedirect.com/science/article/pii/S2589004223020837), [this](https://ijece.iaescore.com/index.php/IJECE/article/view/33889) and [this](https://iopscience.iop.org/article/10.1088/1742-6596/2068/1/012004/pdf). While the title alone of some papers are incomphrensible to me, it is interesting to see that the data set does have some more serious applications that being solely a data set that is used by students to develop their skills in data analytics. 
 
-https://www.hackersrealm.net/post/iris-dataset-analysis-using-python
+Who would have envisioned that nearly one hundred years after Anderson's data would be used by thousands of students worldwide who are learning statistics, data science or machine learning?  https://www.sciencedirect.com/science/article/pii/S1877050919320836
 
-
-
-
-
-Who would have thought that nearly one hundred years later Anderson's data would be used by thousands of students worldwide who are learning statistics, data science or machine learning? https://www.sciencedirect.com/science/article/pii/S1877050919320836
-
-
-https://www.geeksforgeeks.org/python-basics-of-pandas-using-iris-dataset/
 
 ## Additional References
 
-www.canva.com
-
-https://blog.hubspot.com/website/center-an-image-in-html#why-center-images-in-html-and-css
-
-pandas transpose()  https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.transpose.html
-
-__Fisher and racism__
+The banner was designed on www.canva.com
 
 What is wrong with Ronald Aylmer Fisher https://profjoecain.net/what-is-wrong-ronald-aylmer-fisher/
 
@@ -1048,69 +1045,42 @@ The outstanding scientist, R.A. Fisher: his views on eugenics and race https://w
 
 RA Fisher and the science of hatred https://www.newstatesman.com/long-reads/2020/07/ra-fisher-and-science-hatred
 
-
-__Write output to a file in python__
-
-In the command line use of file_name.py > output_file_name.txt https://www.reddit.com/r/learnpython/comments/12emhsa/how_do_i_save_the_output_of_the_python_code_as_a/
+Ways to save python terminal output to a text file https://www.geeksforgeeks.org/ways-to-save-python-terminal-output-to-a-text-file/
 
 Python File Write https://www.w3schools.com/python/python_file_write.asp
 
 Writing to file in python https://www.geeksforgeeks.org/writing-to-file-in-python/
 
+Dropdowns in readme https://chrisfrew.in/blog/dropdowns-in-readmes/
 
-__Markdown references__
-
-https://chrisfrew.in/blog/dropdowns-in-readmes/
-
-
-__Plotting__
 
 Figure-level vs axes-level functions https://seaborn.pydata.org/tutorial/function_overview.html#figure-level-vs-axes-level-functions
 
 Python Seaborn Tutorial for Beginners: Start Visualizing Data https://www.datacamp.com/tutorial/seaborn-python-tutorial
 
-Datacamp Introduction to Data Visualization with Matplotlib
+Datacamp Introduction to Data Visualization with Matplotlib https://app.datacamp.com/learn/courses/introduction-to-data-visualization-with-matplotlib
 
-Datacamp Introduction to Data Visualization with Seaborn
+Datacamp Introduction to Data Visualization with Seaborn https://app.datacamp.com/learn/courses/introduction-to-data-visualization-with-seaborn
 
 Intermediate Data VIsualization with Seaborn https://app.datacamp.com/learn/courses/intermediate-data-visualization-with-seaborn
 
 Understanding Boxplots https://builtin.com/data-science/boxplot
 
+Python Tutorial: if__name__='__main__', Corey Schafer https://www.youtube.com/watch?v=sugvnHA7ElY
 
-__Correlation References__
+Python Tutorial for Beginners: Import Modules and Exploring the Standard Library, Corey Schaffer, https://www.youtube.com/watch?v=CqvZ3vGoGs0&0
 
 Pearson's correlation, clearly explained https://www.youtube.com/watch?v=xZ_z8KWkhXE
 
-r-squared https://statisticsbyjim.com/regression/interpret-r-squared-regression/
+ML from scratch with iris https://www.kaggle.com/code/ash316/ml-from-scratch-with-iris
+
+Datacamp course Supervised learning with scikit-learn https://app.datacamp.com/learn/courses/supervised-learning-with-scikit-learn
+
+Introduction to machine learning with python, Andreas C Muller & Sarah Guido, k-Fold cross validation, pgs 252 - 260
+
+Machine Learning with python for beginners: A step by step guide with hands-on projects, Jamie Chan
 
 
-__Machine Learning__
-
-https://www.kaggle.com/code/ash316/ml-from-scratch-with-iris
-"
-https://app.datacamp.com/learn/courses/supervised-learning-with-scikit-learn
-
-k-Fold cross validation Introduction to machine learning with python, Andreas C Muller & Sarah Guido, pgs 252 - 260 )
-
-__ Literature search Recent uses of the iris data set__ 
-
-Enhance Classification Models for Iris Dataset, Procedia Computer Science, ://www.sciencedirect.com/science/article/pii/S1877050919320836
-
-https://ijece.iaescore.com/index.php/IJECE/article/view/33889
-
-https://iopscience.iop.org/article/10.1088/1742-6596/2068/1/012004/pdf
-
-https://peaceadegbite1.medium.com/iris-flower-classification-60790e9718a1#:~:text=The%20figures%20above%20show%20that,not%20greater%20than%203.8%20cm.
-
-__name__ https://www.youtube.com/watch?v=sugvnHA7ElY&t=357s
-
-modules references
-
-
-/https://www.youtube.com/watch?v=CqvZ3vGoGs0&t=965s
-
-Machine Learning with python for beginners: A step by step guide with hands-on projects by Jamie Chan
 
 
 ***

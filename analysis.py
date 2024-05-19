@@ -326,7 +326,7 @@ plt.close()
 ####### 
 
 # Pair regression plot 
-sns.pairplot(iris, hue = 'species', kind = 'reg')
+sns.pairplot(iris, kind = 'reg')
 plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
 plt.savefig('plots\\Pair_Regression_plots.png')
 plt.close()
@@ -365,8 +365,8 @@ y_pred = reg.predict(X_test)
 
 # Print out the predictions and the actual values of the y_test data.
 with open('analysis.txt', 'a') as f:
-    f.write('The first five values for the predicted values and the actual values are:\n')
-    f.write(f'Predictions: {y_pred[:5].round(3)},\nActual values: {y_test[:5]}\n\n')
+    f.write('The first five predicted values for petal width and the actual values are:\n')
+    f.write(f'Predicted Values: {y_pred[:5].round(3)}\nActual Values: {y_test[:5]}\n\n')
 
 
 # r_squared measures the accuracy of the results.
@@ -412,13 +412,19 @@ plt.savefig('plots\\lg_analysis.png')
 plt.close()
 
 # Plotting residuals
-sns.residplot(iris, x = 'petal_length', y = 'petal_width')
+
+# Calculate the residual, Observed value minus predicted value. 
+residuals = y_test - y_pred
+
+# Plotting residuals
+sns.residplot(x = y_pred, y = residuals)
+
 # Add title
-plt.title('Residuals plot for petal width vs petal length')
+plt.title('Residuals plot')
 # Label x-axis
-plt.xlabel('Petal Length (cm)')
+plt.xlabel('Fitted values, y_test')
 #Label y-axis
-plt.ylabel('Petal Width (cm)')
+plt.ylabel('Residuals')
 # Save the plot
 plt.savefig('plots\\residuals.png')
 plt.close()

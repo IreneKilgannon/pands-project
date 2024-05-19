@@ -71,7 +71,6 @@ def plot_scatter(df, hue = None):
                         plt.savefig(f"plots\\Scatterplot_{y.title().replace('_', ' ')}_vs_{x.title().replace('_', ' ')}.png")
                         plt.close()
 
-## DO i actually need this?
 if __name__ == '__main__':
     plot_hist()
     plot_scatter()
