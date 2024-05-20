@@ -92,7 +92,7 @@ with open('analysis.txt', 'a') as f:
     f.write(versicolor_summary)
     f.write(virginica_summary)
 
-
+######################################
 # A box plot to visually compare the summary statistics across the three species in the data set.
 
 # Create a fig, ax plot
@@ -100,12 +100,12 @@ fig, ax = plt.subplots(2,2, figsize = (10, 10))
 
 # Create a box plot for each variable, coloured by species.
 sns.boxplot(ax = ax[0, 0], x = 'species', y = 'sepal_length', data = iris)
-sns.boxplot(ax = ax[0, 1], x = 'species', y= 'sepal_width', data = iris)
+sns.boxplot(ax = ax[0, 1], x = 'species', y = 'sepal_width', data = iris)
 sns.boxplot(ax = ax[1, 0], x = 'species', y = 'petal_length', data = iris)
 sns.boxplot(ax = ax[1, 1], x = 'species', y = 'petal_width', data = iris)
 
 # Overall plot title
-plt.suptitle('Box plot by Species for Each Variable')
+plt.suptitle('Box plot of Each Variable by Species')
 
 # Label each subplot title
 ax[0,0].set_title('Sepal Length')
@@ -128,7 +128,7 @@ plt.close()
 
 # TASK: Save a histogram of each variable to png files
 
-# Create a histogram of each numeric variable as a figure axes plot.
+# Create a histogram of each numeric variable as a figure axes plot with two rows and two columns.
 fig, ax = plt.subplots(2, 2, figsize = (13, 13))
 
 # Histogram of sepal length, with title and x-axis label
@@ -158,19 +158,26 @@ plt.suptitle('Histogram of the Iris Data Set')
 plt.savefig('plots\\Summary_Histogram.png')
 plt.close()
 
+#####     #####     #####
 
 # Call the plot_hist function from the plotting module on the iris data set.
 # Hue is the species column to separate the species by colour. 
 pt.plot_hist(iris, hue = 'species')
 
-# Histograms for petal length and petal width for Iris setosa
+#####     #####     #####
+
+# Histograms for petal length and petal width for Iris setosa, the number of bins are important.
 fig, ax = plt.subplots(1, 2)
+
+# Create the histograms
 sns.histplot(setosa, x = 'petal_length', ax = ax[0])
 sns.histplot(setosa, x = 'petal_width', ax = ax[1])
 
+# Label the axis
 ax[0].set_xlabel('Petal Length (cm)')
 ax[1].set_xlabel('Petal Width (cm)')
 
+# Add title, save the plot
 plt.suptitle('Histograms of Petal Length and Width for Iris setosa')
 plt.savefig('plots\\Hist_Setosa_pl.png')
 plt.close()
@@ -178,16 +185,21 @@ plt.close()
 ######################################
 # SCATTER PLOT CODE
 
-#### Output a scatter plot of each pair of variables ####
+# Task: Output a scatter plot of each pair of variables
 
 # Use of a pairplot.
-g = sns.pairplot(iris)
-g.fig.suptitle('Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
+sns.pairplot(iris)
+
+# Save the plot
 plt.savefig('plots\\Pair_plot.png')
 plt.close()
 
+#####     #####     #####
+
 # Call the plot_scatter function from the plotting module.
 pt.plot_scatter(iris, hue = 'species')
+
+#####     #####     #####
 
 # Minimium value in Sepal Width columns for Iris setosa
 min = setosa['sepal_width'].min()
@@ -197,15 +209,17 @@ min = setosa['sepal_width'].min()
 
 # Calculate the 75th percentile
 seventy_fifth = setosa['sepal_width'].quantile(0.75)
+
+# Calculate the 25th percentile.
 twenty_fifth = setosa['sepal_width'].quantile(0.25)
 
-# IQR (interquartile range) Difference between the 75th and 25th percentile
+# IQR (interquartile range) Difference between the 75th and 25th percentile.
 s_width_iqr = seventy_fifth - twenty_fifth
 
-# Upper Outliers, points outside the 75th percentile plus 1.5 times the IQR
+# Upper Outliers, points outside the 75th percentile plus 1.5 times the IQR.
 upper_limit = seventy_fifth + (1.5 * s_width_iqr)
 
-# Lower Outliers, points outside the 25th percentile minus 1.5 times the IQR
+# Lower Outliers, points outside the 25th percentile minus 1.5 times the IQR.
 lower_limit = twenty_fifth - (1.5 * s_width_iqr)
 
 with open('analysis.txt', 'a') as f:
@@ -213,43 +227,11 @@ with open('analysis.txt', 'a') as f:
     f.write(f'The lower limit for outliers in the sepal width column for Iris setosa is {lower_limit.round(2)}.\n')
     f.write(f'The upper limit for outliers in the sepal width column for Iris setosa is {upper_limit.round(2)}.\n')
 
-#### Any other analysis ####
 
-# To calculate the correlation coefficient between two variables
-corr_SL_vs_SW = iris['sepal_length'].corr(iris['sepal_width'])
+######################################
+#### ANY OTHER ANALYSIS
 
-# Create a correlation matrix between the numeric variables in the data set.
-correlation_matrix = iris.drop(['species'], axis = 1).corr()
-
-with open('analysis.txt', 'a') as f:
-    f.write(f'The correlation coefficient between sepal length and sepal width is {corr_SL_vs_SW.round(3)}.\n\n')
-    f.write(f'The correlation matrix for the variables in the iris data set. \n{correlation_matrix}\n\n')
-
-# Create a heatmap of the correlation coefficients between the variables in the data set.
-fig, ax = plt.subplots(2, 2, figsize = (15, 12))
-
-# Overall values  - not taking the flower species into account
-sns.heatmap(iris.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[0, 0], vmin = -0.5, vmax=1, cmap = 'Purples')
-ax[0,0].set_title('Overall')
-
-# Iris setosa
-sns.heatmap(setosa.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[0, 1], vmin = -0.5, vmax=1, cmap = 'Purples')
-ax[0,1].set_title('Iris setosa')
-
-# Iris versicolor
-sns.heatmap(versicolor.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[1, 0], vmin = -0.5, vmax=1, cmap = 'Purples')
-ax[1,0].set_title('Iris versicolor')
-
-# Iris virginica
-sns.heatmap(virginica.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[1,1], vmin = -0.5, vmax=1, cmap = 'Purples')
-ax[1,1].set_title('Iris virginica')
-
-# Add title
-plt.suptitle('Correlation Coefficients for the Iris Data Set')
-plt.savefig('plots\\Heatmap_correlation_coefficients.png')
-plt.close()
-
-##### Regression Plots for Selected Variables
+# Creating a regression line on a scatter plot using numpy
 
 # Create a numpy array of the sepal length and sepal width columns
 sepal_length_array = iris['sepal_length'].to_numpy()
@@ -283,7 +265,63 @@ plt.title('Sepal Width vs Sepal Length')
 plt.savefig('plots\\Numpy_reg_plot.png')
 plt.close()
 
-######
+
+#####     #####     #####
+
+# Pair regression plot 
+sns.pairplot(iris, kind = 'reg')
+plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
+plt.savefig('plots\\Pair_Regression_plots.png')
+plt.close()
+
+#####     #####     #####
+
+# To calculate the correlation coefficient between two variables
+corr_SL_vs_SW = iris['sepal_length'].corr(iris['sepal_width'])
+
+#####     #####     #####
+
+# Create a correlation matrix between the numeric variables in the data set.
+correlation_matrix = iris.drop(['species'], axis = 1).corr()
+
+with open('analysis.txt', 'a') as f:
+    f.write(f'The correlation coefficient between sepal length and sepal width is {corr_SL_vs_SW.round(3)}.\n\n')
+    f.write(f'The correlation matrix for the variables in the iris data set. \n{correlation_matrix}\n\n')
+
+#####     #####     #####
+
+# Create a heatmap of the correlation coefficients between the variables in the data set.
+fig, ax = plt.subplots(2, 2, figsize = (15, 12))
+
+# Overall values - not taking the flower species into account
+sns.heatmap(iris.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[0, 0], vmin = -0.5, vmax=1, cmap = 'Purples')
+ax[0,0].set_title('Overall')
+
+# Iris setosa
+sns.heatmap(setosa.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[0, 1], vmin = -0.5, vmax=1, cmap = 'Purples')
+ax[0,1].set_title('Iris setosa')
+
+# Iris versicolor
+sns.heatmap(versicolor.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[1, 0], vmin = -0.5, vmax=1, cmap = 'Purples')
+ax[1,0].set_title('Iris versicolor')
+
+# Iris virginica
+sns.heatmap(virginica.drop(['species'], axis = 1).corr(), annot = True, linewidths = 0.2, ax = ax[1,1], vmin = -0.5, vmax=1, cmap = 'Purples')
+ax[1,1].set_title('Iris virginica')
+
+# Add title
+plt.suptitle('Correlation Coefficients for the Iris Data Set')
+plt.savefig('plots\\Heatmap_correlation_coefficients.png')
+plt.close()
+# lmplot example. Sepal Width vs Sepal Length
+sns.lmplot(iris, x = 'sepal_length', y = 'sepal_width', ci = None, col = 'species')
+plt.suptitle('Sepal Width vs Sepal Length by Species', y =  1.01)
+plt.savefig('plots\\lmplot_example.png')
+plt.close()
+
+#####     #####     #####
+
+# Regression plots for selected variables.
 
 # Set up a figure, axes plot of 2 rows and 2 columns
 fig, ax = plt.subplots(2, 2, figsize = (15, 10))
@@ -326,30 +364,18 @@ ax[1, 1].set_ylabel('Petal Width (cm)')
 # Add legend
 plt.legend()
 
-# Save plots
+# Save plot
 plt.savefig('plots\\Regression_plots.png')
 plt.close()
 
-####### 
+#####     #####     #####
 
-# Pair regression plot 
-sns.pairplot(iris, kind = 'reg')
-plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
-plt.savefig('plots\\Pair_Regression_plots.png')
-plt.close()
-
-# lmplot example. Sepal Width vs Sepal Length
-sns.lmplot(iris, x = 'sepal_length', y = 'sepal_width', ci = None, col = 'species')
-plt.suptitle('Sepal Width vs Sepal Length by Species', y =  1.01)
-plt.savefig('plots\\lmplot_example.png')
-plt.close()
-
-##### Linear regression analysis
+# Linear regression analysis
 
 # Instantiate the model
 reg = LinearRegression()
 
-# Select the columns of interest from the dataset
+# Select the columns of interest from the dataset, X is the feature, y is the target variable
 X = iris['petal_length'].values
 y = iris['petal_width'].values
 
@@ -372,12 +398,15 @@ with open('analysis.txt', 'a') as f:
 
 
 # r_squared measures the accuracy of the results.
+# R_squared for the test data
 r_squared_test = reg.score(X_test, y_test)
+
+# R_squared for the training data
 r_squared_train = reg.score(X_train, y_train)
 
 
 # Calculate root mean square error.
-rmse = mean_squared_error(y_test, y_pred, squared= False)
+rmse = mean_squared_error(y_test, y_pred, squared = False)
 
 # Coefficient for the regresssion line
 coefficent = reg.coef_
@@ -385,13 +414,12 @@ coefficent = reg.coef_
 # Intercept of the regression line
 intercept = reg.intercept_
 
-
 # To manually calculate RMSE
 n = len(y_pred)
 # Finish the manual calculation of the MSE
 manual_rmse = np.sqrt(sum((y_test - y_pred)**2) / n)
 
-
+# 
 with open('analysis.txt', 'a') as f:
     f.write('Performance of the linear regression model.\n')
     f.write(f"The value of R-squared for the test data: {r_squared_test.round(3)}.\n")
@@ -401,17 +429,22 @@ with open('analysis.txt', 'a') as f:
     f.write(f'The slope of the regression line for petal width vs petal length is: {coefficent.round(3)}.\n')
     f.write(f'The intercept of the regression line for petal width vs petal length is {intercept.round(3)}.\n\n')
 
+#####     #####     #####
 
-# Scatter plot of petal width vs petal length and line plot of the predicted values.
+# Scatter plot of petal width vs petal length
 plt.scatter(X_train, y_train)
+
+# Line plot of the predicted values.
 plt.plot(X_test, y_pred, color = '#CF4E99')
 
-# Label the x-axis and y-axis
+# Add title, label the x-axis and y-axis
 plt.title('Linear regression analysis plot for petal width vs petal length')
 plt.xlabel('Petal Length (cm)')
 plt.ylabel('Petal Width (cm)')
 plt.savefig('plots\\lg_analysis.png')
 plt.close()
+
+#####     #####     #####
 
 # Plotting residuals
 
@@ -431,6 +464,7 @@ plt.ylabel('Residuals')
 plt.savefig('plots\\residuals.png')
 plt.close()
 
+#####     #####     #####
 
 # K-Fold cross validation to get a better estimate of R-squared.
 # Set up the k_fold parameters

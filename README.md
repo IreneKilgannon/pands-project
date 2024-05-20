@@ -6,7 +6,7 @@ Author: Irene Kilgannon
 
 Student ID: G00220627
 
-This is my analysis of Fisher's Iris data set for the programming and scripting module for a [Higher Diploma in Science in Computing in Data Analytics](https://www.gmit.ie/higher-diploma-in-science-in-computing-in-data-analytics) at Atlantic Technological University.
+This is my analysis of Fisher's Iris data set for the programming and scripting module for a [Higher Diploma in Science in Computing in Data Analytics](https://www.gmit.ie/higher-diploma-in-science-in-computing-in-data-analytics) at [Atlantic Technological University](https://www.atu.ie/).
 
 ## Project Statement
 * Research the data set and summarise it in a [README](https://github.com/IreneKilgannon/pands-project/blob/main/README.md).
@@ -35,8 +35,7 @@ __Step 5__ Open Cmder (or the terminal in VSCode) and enter the following to clo
 
     git clone https://github.com/IreneKilgannon/pands-project.git
 
-__Step 5__ To run analysis.py, in the correct directory of either Cmder or the terminal in VSCode enter: python analysis.py
-
+__Step 5__ To run analysis.py, in the correct directory of either Cmder or the terminal in VSCode enter: python analysis.py. The analysis.txt file will be created and all plots will be added to the plots directory. 
 
 ## Get Help
 
@@ -275,12 +274,12 @@ fig, ax = plt.subplots(2,2, figsize = (10, 10))
 
 # Create a box plot for each variable, coloured by species.
 sns.boxplot(ax = ax[0, 0], x = 'species', y = 'sepal_length', data = iris)
-sns.boxplot(ax = ax[0, 1], x = 'species', y= 'sepal_width', data = iris)
+sns.boxplot(ax = ax[0, 1], x = 'species', y = 'sepal_width', data = iris)
 sns.boxplot(ax = ax[1, 0], x = 'species', y = 'petal_length', data = iris)
 sns.boxplot(ax = ax[1, 1], x = 'species', y = 'petal_width', data = iris)
 
 # Overall plot title
-plt.suptitle('Box plot by Species for Each Variable')
+plt.suptitle('Box plot of Each Variable by Species')
 
 # Label each plot
 ax[0,0].set_title('Sepal Length')
@@ -318,6 +317,7 @@ The four variables of sepal length, sepal width, petal length and petal width ar
 <summary>Histogram code</summary>
 
 ```python
+# Create a histogram of each numeric variable as a figure axes plot with two rows and two columns.
 fig, ax = plt.subplots(2, 2, figsize = (13, 13))
 
 # Histogram of sepal length
@@ -355,7 +355,7 @@ The four histograms all have an surprisingly different shapes and are comparable
 
 ![Normal Distribution](https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Bellcurve.svg/320px-Bellcurve.svg.png)
 
-_Normal Distribution_
+_Image credit Wikipedia, Normal Distribution_
 
 It is worth investigating to see if the species of the flower is affecting the shape of the curve. Rather than create a plot for each of the variables by coding each of the variables separately (as I did above), I wrote function to plot each of the variables in the data set by looping through any column whose datatype is either integer or float. The histograms were created using a [seaborn histplot](). Seaborn's hue parameter makes it very easy to differentiate the data by a categorical variable, which in this case is species. Hue is an optional argument for the function. The plotted function will create the histograms created above but as individual histograms and not as the [figure, axes plot](https://stackoverflow.com/questions/5575451/difference-between-axes-and-axis-in-matplotlib) created above. 
 
@@ -417,10 +417,18 @@ Now that the data has been classified by species we can see that most of the his
 <summary>Code to Create Histograms for Petal Length and Petal Width for Iris setosa</summary>
 
 ```python
-# Histograms for petal length and petal width for Iris setosa
+# Histograms for petal length and petal width for Iris setosa, the number of bins are important.
 fig, ax = plt.subplots(1, 2)
+
+# Create the histograms
 sns.histplot(setosa, x = 'petal_length', ax = ax[0])
 sns.histplot(setosa, x = 'petal_width', ax = ax[1])
+
+# Label the axis
+ax[0].set_xlabel('Petal Length (cm)')
+ax[1].set_xlabel('Petal Width (cm)')
+
+# Add title, save the plot
 plt.suptitle('Histograms of Petal Length and Width for Iris setosa')
 plt.savefig('plots\\Hist_Setosa_pl.png')
 plt.close()
@@ -441,10 +449,12 @@ Scatter plots can be created with [seaborn scatter plots](https://www.geeksforge
 
 <details>
 <summary>Code to create a pairplot</summary>
+
 ```python
 # Use of pairplot
-g = sns.pairplot(iris)
-g.fig.suptitle('Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
+sns.pairplot(iris)
+
+# Save the plot
 plt.savefig('plots\\Pair_plot.png')
 plt.close()
 ```
@@ -467,7 +477,7 @@ def plot_scatter(df, hue = None):
     Parameters
     ----------
     df : dataframe
-    hue : a categorical variable in the data set. Optional parameter/argument CHECK CORRECT TERM.
+    hue : a categorical variable in the data set. Optional parameter.
     
     Returns
     -------
@@ -529,7 +539,7 @@ min = setosa['sepal_width'].min()
 # Calculate the 75th percentile using quantile function.
 seventy_fifth = setosa['sepal_width'].quantile(0.75)
 
-# Calculate the 25th percentile
+# Calculate the 25th percentile.
 twenty_fifth = setosa['sepal_width'].quantile(0.25)
 
 # IQR (interquartile range) for sepal width. Difference between the 75th and 25th percentile.
@@ -644,11 +654,6 @@ It is not possible to to extract the values of m and c from a seaborn plot. Line
 <summary>Adding a Regression Line with Seaborn Lmplot</summary>
 
 ```python
-# lmplot example. Sepal Width vs Sepal Length
-sns.lmplot(iris, x = 'sepal_length_cm', y = 'sepal_width_cm', col = 'species')
-plt.suptitle('Sepal Width vs Sepal Length by Species', y = 1.05)
-plt.savefig('plots\\lmplot_example.png')
-plt.close()
 
 # Regression Line Pair Plot, kind = 'reg'
 sns.pairplot(iris, kind = 'reg')
@@ -752,8 +757,9 @@ This will be demonstrated further by creating some regression plots using regplo
 <summary>Code for Regression Plot</summary>
 
 ```python
-##### Regression Plots for Selected Variables
+# Regression plots for selected variables.
 
+# Set up a figure, axes plot of 2 rows and 2 columns
 fig, ax = plt.subplots(2, 2, figsize = (15, 10))
 
 # Regression plot between sepal length and sepal width
@@ -791,8 +797,10 @@ ax[0, 1].set_ylabel('Sepal Width (cm)')
 ax[1, 0].set_ylabel('Petal Width (cm)')
 ax[1, 1].set_ylabel('Petal Width (cm)')
 
+# Add legend
 plt.legend()
-# Save plots
+
+# Save plot
 plt.savefig('plots\\Regression_plots.png')
 plt.close()
 ```
@@ -850,7 +858,7 @@ from sklearn.model_selection import cross_val_score, KFold
 # Instantiate the object
 reg = LinearRegression()
 
-# Select the columns of interest from the dataset
+# Select the columns of interest from the dataset, X is the feature, y is the target variable
 X = iris['petal_length'].values
 y = iris['petal_width'].values
 
@@ -868,8 +876,8 @@ y_pred = reg.predict(X_test)
 
 # Print out the predictions and the actual values of the y_test data.
 with open('analysis.txt', 'a') as f:
-    f.write(f'Predictions: {y_pred[:5].round(3)}\nActual values: {y_test[:5]}\n\n')
-
+    f.write('The first five predicted values for petal width and the actual values are:\n')
+    f.write(f'Predicted Values: {y_pred[:5].round(3)}\nActual Values: {y_test[:5]}\n\n')
 
 # r_squared measures the accuracy of the results.
 # R_squared for the test data
@@ -879,7 +887,7 @@ r_squared_test = reg.score(X_test, y_test)
 r_squared_train = reg.score(X_train, y_train)
 
 # Calculate root mean square error.
-rmse = mean_squared_error(y_test, y_pred, squared= False)
+rmse = mean_squared_error(y_test, y_pred, squared = False)
 
 # Coefficient for the regresssion line ie the slope as this is a simple linear regression
 coefficent = reg.coef_
@@ -893,16 +901,21 @@ n = len(y_pred)
 manual_rmse = np.sqrt(sum((y_test - y_pred)**2) / n)
 
 with open('analysis.txt', 'a') as f:
-    f.write(f"The value of R^2: {r_squared.round(3)}\n")
-    f.write(f"The RMSE is : {rmse.round(3)}\n")
-    f.write(f'The slope of the regression line is: {coefficent.round(3)}\n')
-    f.write(f'The intercept is {intercept.round(3)}\n\n')
+    f.write('Performance of the linear regression model.\n')
+    f.write(f"The value of R-squared for the test data: {r_squared_test.round(3)}.\n")
+    f.write(f"The value of R-squared for the training data: {r_squared_train.round(3)}.\n")
+    f.write(f"The RMSE is : {rmse.round(3)}.\n")
+    f.write(f'RMSE calculated manually is {manual_rmse.round(3)}.\n')
+    f.write(f'The slope of the regression line for petal width vs petal length is: {coefficent.round(3)}.\n')
+    f.write(f'The intercept of the regression line for petal width vs petal length is {intercept.round(3)}.\n\n')
 
-# Scatter plot of petal width vs petal length and line plot of the predicted values.
+# Scatter plot of petal width vs petal length.
 plt.scatter(X_train, y_train)
+
+# Line plot of the predicted values.
 plt.plot(X_test, y_pred, color = '#CF4E99')
 
-# Label the x-axis and y-axis
+# Add title, label the x-axis and y-axis
 plt.xlabel('Petal Length (cm)')
 plt.ylabel('Petal Width (cm)')
 plt.savefig('plots\\lg_analysis.png')
@@ -984,10 +997,11 @@ reg = LinearRegression()
 cv_results = cross_val_score(reg, X, y, cv = kf)
 
 with open('analysis.txt', 'a') as f:
-    f.write(f'{cv_results.round(3)}\n')
-    f.write(f'{np.mean(cv_results).round(3)}\n')
-    f.write(f'{np.std(cv_results).round(3)}\n')
-    f.write(f'{np.quantile(cv_results, [0.025, 0.975]).round(3)}\n\n')
+    f.write('k-Fold analysis results.\n')
+    f.write(f'The value of R-squared for petal width vs petal length for each fold are {cv_results.round(3)}\n')
+    f.write(f'The mean of R-squared is {np.mean(cv_results).round(3)}\n')
+    f.write(f'The standard deviation for R-squared is {np.std(cv_results).round(3)}\n')
+    f.write(f'The 95% quantile limits are {np.quantile(cv_results, [0.025, 0.975]).round(3)}\n\n')
 ```
 </details>
 
@@ -1057,7 +1071,7 @@ Introduction to machine learning with python, Andreas C Muller & Sarah Guido, k-
 
 Machine Learning with python for beginners: A step by step guide with hands-on projects, Jamie Chan
 
-
+Parameters or Arguments https://www.w3schools.com/python/gloss_python_function_arguments.asp#
 
 
 ***
