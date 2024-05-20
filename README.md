@@ -29,13 +29,17 @@ __Step 2__ Download and install [Visual Studio Code](https://code.visualstudio.c
 
 __Step 3__ Download [Cmder.app](https://cmder.app/).
 
-__Step 3__ Each file was written in VScode and pushed to the [pands-project repository](https://github.com/IreneKilgannon/pands-project) on GitHub for assessment.
+__Step 4__ Each file was written in VScode and pushed to the [pands-project repository](https://github.com/IreneKilgannon/pands-project) on GitHub for assessment.
 
 __Step 5__ Open Cmder (or the terminal in VSCode) and enter the following to clone the repository from GitHub:
 
     git clone https://github.com/IreneKilgannon/pands-project.git
 
-__Step 5__ To run analysis.py, in the correct directory of either Cmder or the terminal in VSCode enter: python analysis.py. The analysis.txt file will be created and all plots will be added to the plots directory. 
+__Step 6__ To run analysis.py, in the correct directory of either Cmder or the terminal in VSCode enter: 
+
+    python analysis.py 
+
+The analysis.txt file will be created and all plots will be added to the plots directory. 
 
 ## Get Help
 
@@ -45,7 +49,7 @@ If you have any questions or queries you can contact me at g00220627@atu.ie or a
 
 ## Background to Fisher's Iris Data Set
 
-In 1928 Edgar Anderson published his paper entitled ['The Problem of Species in the Northern Blue Flags, _Iris versicolor_ and _Iris virginica_'](https://www.biodiversitylibrary.org/page/15997721). Anderson was a evolutionary biologist interested in answering two questions namely, what are species and how have they originated? Between 1923 and 1928 he and his team studied _Iris versicolor_ at a number of different sites from Ontario in Canada to Alabama in the United States, by measuring a number of different iris characteristics. Surprisingly his study found that there were actually two iris species present, _Iris versicolor_ and _Iris virginia_ and that it was possible to differentiate between them by geographic location. This is reflected in the [common names of these two species of iris](https://hgic.clemson.edu/factsheet/rain-garden-plants-iris-versicolor-and-iris-virginica/). _Iris versicolor_ is commonly known as the Northern blue flag iris and _Iris virginica_ is commonly known as the Southern blue flag iris.
+In 1928 Edgar Anderson published his paper entitled ['The Problem of Species in the Northern Blue Flags, _Iris versicolor_ and _Iris virginica_'](https://www.biodiversitylibrary.org/page/15997721). Anderson was a evolutionary biologist interested in answering two questions namely, what are species and how have they originated? Between 1923 and 1928 he and his team studied _Iris versicolor_ by measuring a number of different iris characteristics at a number of different sites from Ontario in Canada to Alabama in the United States. Surprisingly his study found that there were actually two iris species present, _Iris versicolor_ and _Iris virginia_ and that it was possible to differentiate between them by geographic location. This is reflected in the [common names of these two species of iris](https://hgic.clemson.edu/factsheet/rain-garden-plants-iris-versicolor-and-iris-virginica/). _Iris versicolor_ is commonly known as the Northern blue flag iris and _Iris virginica_ is commonly known as the Southern blue flag iris.
 
 ![iris](images//Iris_images.png)
 
@@ -93,7 +97,7 @@ iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'pet
 
 _Task:_ Output a summary of each variable to a single text file, [analysis.txt](https://github.com/IreneKilgannon/pands-project/blob/main/analysis.txt).
 
-[With open('file_name.txt', 'mode')](https://ioflood.com/blog/python-open-file) is used to open a text file and the mode will then tell python what to do with the file. Two modes were used in this analysis. First write text, `'wt'` was used to both to create the analysis.txt file and to write to it. After that the append mode, `'a'` was used to append the results of the exploratory data analysis to analysis.txt. One major advantage of using `with open()` is that the file will automatically close when the programme has finished running.
+[With open('file_name.txt', 'mode')](https://ioflood.com/blog/python-open-file) is used to open a text file and the mode will then tell python what to do with the file. Two modes were used in this analysis. First write text, `'wt'` was used to both to create the analysis.txt file and to write to it. After that the append mode, `'a'` was used to append the results of any additional analysis to analysis.txt. One major advantage of using `with open()` is that the file will automatically close when the data has been written to it.
 
 ```python
     with open('analysis.txt', 'wt') as f:
@@ -309,7 +313,7 @@ The box plot confirms the analysis from the summary statistcs. It clearly demons
 
 _Task_: Save a histogram of each variable to png files.
 
-[Histograms](https://thirdspacelearning.com/gcse-maths/statistics/histogram/) are used to plot continuous numeric data and shows the distribution of values. The data is divided up into a range of values, called bins. The number of bins chosen can affect the appearance of the histogram. The default number of bins for a matplotlib histogram is ten. For seaborn histograms the default for the bins parameter is 'auto' so it will optimise the histogram with what it calculates to be the correct number of bins.
+[Histograms](https://thirdspacelearning.com/gcse-maths/statistics/histogram/) are used to plot continuous numeric data and shows the distribution of values. The data is divided up into a range of values, called [bins](https://www.geeksforgeeks.org/bin-size-in-matplotlib-histogram/). The number of bins chosen can affect the appearance of the histogram. The default number of bins for a matplotlib histogram is ten. For seaborn histograms the default for the bins parameter is 'auto' so it will optimise the histogram with what it calculates to be the correct number of bins.
 
 The four variables of sepal length, sepal width, petal length and petal width are continuous numeric data and can be plotted as histograms.
 
@@ -357,7 +361,7 @@ The four histograms all have an surprisingly different shapes and are comparable
 
 _Image credit Wikipedia, Normal Distribution_
 
-It is worth investigating to see if the species of the flower is affecting the shape of the curve. Rather than create a plot for each of the variables by coding each of the variables separately (as I did above), I wrote function to plot each of the variables in the data set by looping through any column whose datatype is either integer or float. The histograms were created using a [seaborn histplot](). Seaborn's hue parameter makes it very easy to differentiate the data by a categorical variable, which in this case is species. Hue is an optional argument for the function. The plotted function will create the histograms created above but as individual histograms and not as the [figure, axes plot](https://stackoverflow.com/questions/5575451/difference-between-axes-and-axis-in-matplotlib) created above. 
+It is worth investigating to see if the species of the flower is affecting the shape of the curve. Rather than create a plot for each of the variables by coding each of the variables separately (as I did above), I wrote function to plot each of the variables in the data set by looping through any column whose datatype is either integer or float. The histograms were created using a [seaborn histplot](). Seaborn's hue parameter makes it very easy to differentiate the data by a categorical variable, which in this case is species. Hue is an optional parameter for the function. The plotted function will create the histograms created above but as individual histograms and not as the [figure, axes plot](https://stackoverflow.com/questions/5575451/difference-between-axes-and-axis-in-matplotlib) created above. 
 
 ```python
 # To plot the histograms created previously using the plotting module.
@@ -713,7 +717,7 @@ Sepal width has a weak negative correlation with all the other variables in the 
 
 __Heatmap of correlation coefficients__
 
-In addition to creating a heatmap between all the variables in the data set, I will create individual heatmaps for each species. 
+In addition to creating a heatmap between all the variables in the data set, I will create individual heatmaps for each species.
 
 <details>
 <summary> Code to Create a Heatmap of the Correlation Coefficients</summary>
@@ -816,7 +820,7 @@ The plots for petal width vs petal length show us why the strong correlation coe
 
 Machine learning is a form of artifical intelligence. Machine learning uses a mix a statistics and computer science and its aim is to develop a model that learns to make predictions and inferences from patterns in existing data and apply it to new data without step by step instructions.
 
-The three most common machine learning applications are regression, classification and clustering. [Linear regression analysis](https://realpython.com/linear-regression-in-python) is used for predictive analysis on continuous data. [Classification](https://www.datacamp.com/blog/ classification-machine-learning) is performed on categorical data and is used to predict the label of a given input. For example a classification could be used in the iris data set could predict to the species of the iris. The first chapter of Introduction to Machine Learning with Python by Andreas C Muller and Sarah Guido demonstrates how to build a model to classify iris species. The iris data set is still used to test improvements in classification models. [Clustering](https://builtin.com/data-science/data-clustering-python) divides data into groups based on similarity. Clustering is a type of unsupervised machine learning, regression and classification are supervised machine learning. 
+The three most common machine learning applications are regression, classification and clustering. [Linear regression analysis](https://realpython.com/linear-regression-in-python) is used for predictive analysis on continuous data. [Classification](https://www.datacamp.com/blog/classification-machine-learning) is performed on categorical data and is used to predict the label of a given input. For example classification could be used in the iris data set to predict to the species of the iris. The first chapter of Introduction to Machine Learning with Python by Andreas C Muller and Sarah Guido demonstrates how to build a model to classify iris species. The iris data set is still used to test improvements in classification models. [Clustering](https://builtin.com/data-science/data-clustering-python) divides data into groups based on similarity. Clustering is a type of unsupervised machine learning, regression and classification are supervised machine learning. 
 
 Regresssion attempts to determine the relationship between a dependent variable (sometimes called a target variable) and a series of other independent variables (sometimes called features or predictor variables). In simple linear regression there is only one predictor variable. Multiple linear regression has multiple features to predict the value for the target variable.
 
@@ -954,7 +958,7 @@ plt.close()
 
 ![Residuals plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/residuals.png)
 
-The residuals are randomly scattered in the residual plot, which is the desired result. Occasionally there might be a pattern in the residuals which would mean that the model would need to be reevaluated.
+The residuals are randomly scattered in the residuals plot, which is the desired result. Occasionally there might be a pattern in the residuals which means that the model would need to be reevaluated.
 
 __Evaluating the model__
 
@@ -962,7 +966,7 @@ __Evaluating the model__
     Predictioned Values: [0.262 0.22  1.391 0.345 0.262]
     Actual Values: [0.2 0.2 1.3 0.4 0.4]
 
-The predicted values and the actual values appear to be in close agreement with each other. 
+The predicted values and the actual values appear to be in close agreement with each other.
 
 ```python
 # To manually calculate RMSE
@@ -1031,9 +1035,7 @@ The banner was designed by me on www.canva.com
 
 What is wrong with Ronald Aylmer Fisher? https://profjoecain.net/what-is-wrong-ronald-aylmer-fisher/
 
-The outstanding scientist, R.A. Fisher: his views on eugenics and race https://www.nature.com/articles/s41437-020-00394-6
-
-RA Fisher and the science of hatred https://www.newstatesman.com/long-reads/2020/07/ra-fisher-and-science-hatred
+The outstanding scientist, R.A. Fisher: his views on eugenics and race https://www.nature.com/articles/s41437-020-00394-
 
 Ways to save python terminal output to a text file https://www.geeksforgeeks.org/ways-to-save-python-terminal-output-to-a-text-file/
 
