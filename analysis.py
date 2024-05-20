@@ -2,8 +2,13 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 import plotting as pt
+
+# For linear regression analysis the following modules are required:
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import cross_val_score, KFold
 
 # To ignore a warning regarding a change in the figure layout of the seaborn plots.
 # UserWarning: The figure layout has changed to tight self._figure.tight_layout(*args, **kwargs)
@@ -300,7 +305,7 @@ sns.regplot(versicolor, x = 'petal_length', y = 'petal_width', ax = ax[1, 1], la
 sns.regplot(virginica, x = 'petal_length', y = 'petal_width', ax = ax[1, 1], label = 'virginica', ci = None)
 
 # Add title
-plt.suptitle('Some Regression Plots for Iris Data Set')
+plt.suptitle('Regression Plots for Selected Variables in the Iris Data Set')
 ax[0, 0].set_title('Sepal Width vs Sepal Length')
 ax[0, 1].set_title('Sepal Width vs Sepal Length by Species')
 ax[1, 0].set_title('Petal Width vs Petal Length')
@@ -318,6 +323,8 @@ ax[0, 1].set_ylabel('Sepal Width (cm)')
 ax[1, 0].set_ylabel('Petal Width (cm)')
 ax[1, 1].set_ylabel('Petal Width (cm)')
 
+# Add legend
+plt.legend()
 
 # Save plots
 plt.savefig('plots\\Regression_plots.png')
@@ -338,11 +345,6 @@ plt.savefig('plots\\lmplot_example.png')
 plt.close()
 
 ##### Linear regression analysis
-
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error
-from sklearn.model_selection import cross_val_score, KFold
 
 # Instantiate the model
 reg = LinearRegression()
