@@ -17,7 +17,7 @@ This is my analysis of Fisher's Iris data set for the programming and scripting 
     3. outputs a scatter plot of each pair of variables.
     4. any other analysis.
 
-## How To Run The Project
+## How to Run the Project
 
 __Step 1__ Download and install [Anaconda](https://www.anaconda.com/download). Anaconda is a Python distributon package and comes with pre-installed packages such as [pandas](https://pandas.pydata.org/docs/user_guide/index.html#user-guide), [NumPy](https://numpy.org/doc/stable/user/whatisnumpy.html), [Matplotlib](https://matplotlib.org/) and [Seaborn](https://seaborn.pydata.org/) which are required for this project. Please note that when installing Anaconda it is important to check the two boxes for:
   * Add Anaconda3 to my PATH environment variable
@@ -49,7 +49,7 @@ If you have any questions or queries you can contact me at g00220627@atu.ie or a
 
 ## Background to Fisher's Iris Data Set
 
-In 1928 Edgar Anderson published his paper entitled ['The Problem of Species in the Northern Blue Flags, _Iris versicolor_ and _Iris virginica_'](https://www.biodiversitylibrary.org/page/15997721). Anderson was a evolutionary biologist interested in answering two questions namely, what are species and how have they originated? Between 1923 and 1928 he and his team studied _Iris versicolor_ by measuring a number of different iris characteristics at a number of different sites from Ontario in Canada to Alabama in the United States. Surprisingly his study found that there were actually two iris species present, _Iris versicolor_ and _Iris virginia_ and that it was possible to differentiate between them by geographic location. This is reflected in the [common names of these two species of iris](https://hgic.clemson.edu/factsheet/rain-garden-plants-iris-versicolor-and-iris-virginica/). _Iris versicolor_ is commonly known as the Northern blue flag iris and _Iris virginica_ is commonly known as the Southern blue flag iris.
+In 1928 Edgar Anderson published his paper entitled ['The Problem of Species in the Northern Blue Flags, _Iris versicolor_ and _Iris virginica_'](https://www.biodiversitylibrary.org/page/15997721). Anderson was an evolutionary biologist interested in answering two questions namely, what are species and how have they originated? Between 1923 and 1928 he and his team studied _Iris versicolor_ by measuring a number of different iris characteristics at a number of different sites from Ontario in Canada to Alabama in the United States. Surprisingly his study found that there were actually two iris species present, _Iris versicolor_ and _Iris virginica_ and that it was possible to differentiate between them by geographic location. This is reflected in the [common names of these two species of iris](https://hgic.clemson.edu/factsheet/rain-garden-plants-iris-versicolor-and-iris-virginica/). _Iris versicolor_ is commonly known as the Northern blue flag iris and _Iris virginica_ is commonly known as the Southern blue flag iris.
 
 ![iris](images//Iris_images.png)
 
@@ -87,7 +87,7 @@ from sklearn.model_selection import cross_val_score, KFold
 
 The data set was downloaded from [UCI Maching Learning Repository](https://archive.ics.uci.edu/dataset/53/iris) and imported. This csv file does not contain column names and the column names were obtained from the variables table on the [information page of the iris data set](https://archive.ics.uci.edu/dataset/53/iris). The column names are sepal_length_cm, sepal_width_cm, petal_length_cm, petal_width_cm and species.
 
-A number of methods were explored to add the column names. This reference, [adding headers to a dataframe in pandas a comprehensive-guide](https://saturncloud.io/blog/adding-headers-to-a-dataframe-in-pandas-a-comprehensive-guide/) was particularily helpful. The quickest method is to add the column names using the names parameter when the data set is loaded. I did not add "_cm" to the columm names.
+A number of methods were explored to add the column names. This reference, [adding headers to a dataframe in pandas a comprehensive-guide](https://saturncloud.io/blog/adding-headers-to-a-dataframe-in-pandas-a-comprehensive-guide/) was particularly helpful. The quickest method is to add the column names using the names parameter when the data set is loaded. I did not add "_cm" to the columm names.
 
 ```python
 iris = pd.read_csv("iris_data.csv", names = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width', 'species'])
@@ -211,9 +211,9 @@ Overall summary statistics for the data set.
 |75%   |     6.400000 |    3.300000  |    5.100000  |   1.800000|
 |max   |     7.900000 |    4.400000  |    6.900000  |   2.500000| 
 
-The summary statistics reveal that petal lengths and petal widths are smaller than the sepal lengths and sepal widths. Petal width is the smallest variable with the min length of 0.1 cm, a mean of 1.20 cm with max size of 2.5 mm. Sepal length is the largest of the four variables with a mean of 5.8 mm. I would imagine that the size difference between the sepals and petals would help an amateur botanist distinguish between them if they could not do so by looking at the flower.
+The summary statistics reveal that petal lengths and petal widths are smaller than the sepal lengths and sepal widths. Petal width is the smallest variable with the min length of 0.1 cm, a mean of 1.20 cm with max size of 2.5 cm. Sepal length is the largest of the four variables with a mean of 5.8 cm. I would imagine that the size difference between the sepals and petals would help an amateur botanist distinguish between them if they could not do so by looking at the flower.
 
-Summary Statistics for Each Iris Species
+Summary Statistics for each Iris Species
 
 ```python
 # Summary statistics grouped by species. Transpose the result to make easier comparisons between the species.
@@ -233,6 +233,10 @@ Summary statistics grouped by species
 |            | 50%   |    5.000000 |        5.900000  |      6.500000|
 |            | 75%   |    5.200000 |        6.300000  |      6.900000|
 |            | max   |    5.800000 |        7.000000  |      7.900000|
+
+
+|species      |      | Iris-setosa | Iris-versicolor  |Iris-virginica|
+|---|--- |---|---|---|
 |sepal_width | count |   50.000000 |       50.000000  |     50.000000|
 |            | mean  |    3.418000 |        2.770000  |      2.974000|
 |            | std   |    0.381024 |        0.313798  |      0.322497|
@@ -241,6 +245,9 @@ Summary statistics grouped by species
 |            | 50%   |    3.400000 |        2.800000  |      3.000000|
 |            | 75%   |    3.675000 |        3.000000  |      3.175000|
 |            | max   |    4.400000 |        3.400000  |      3.800000|
+
+|species      |      | Iris-setosa | Iris-versicolor  |Iris-virginica|
+|---|--- |---|---|---|
 |petal_length| count |   50.000000 |       50.000000  |     50.000000|
 |            | mean  |    1.464000 |        4.260000  |      5.552000|
 |            | std   |    0.173511 |        0.469911  |      0.551895|
@@ -249,6 +256,9 @@ Summary statistics grouped by species
 |            | 50%   |    1.500000 |        4.350000  |      5.550000|
 |            | 75%   |    1.575000 |        4.600000  |      5.875000|
 |            | max   |    1.900000 |        5.100000  |      6.900000|
+
+|species      |      | Iris-setosa | Iris-versicolor  |Iris-virginica|
+|---|--- |---|---|---|
 |petal_width | count |   50.000000 |       50.000000  |     50.000000|
 |            | mean  |    0.244000 |        1.326000  |      2.026000|
 |            | std   |    0.107210 |        0.197753  |      0.274650|
@@ -355,13 +365,13 @@ plt.close()
 
 ![Overall Histogram](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Summary_Histogram.png)
 
-The four histograms all have an surprisingly different shapes and are comparable to the plots obtained in this journal [article](https://www.researchgate.net/figure/The-histograms-on-each-feature-of-the-Iris-data-set_fig4_309515576). The histograms should have a [normal distribution](https://www.youtube.com/watch?v=rzFX5NWojp0) and only one plot, the histogram of sepal width looks like it approaches a normal distribution. 
+The four histograms all have different shapes and are comparable to the plots obtained in this journal [article](https://www.researchgate.net/figure/The-histograms-on-each-feature-of-the-Iris-data-set_fig4_309515576). The histograms should have a [normal distribution](https://www.youtube.com/watch?v=rzFX5NWojp0) and only one plot, the histogram of sepal width looks like it approaches a normal distribution. 
 
 ![Normal Distribution](https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Bellcurve.svg/320px-Bellcurve.svg.png)
 
 _Image credit Wikipedia, Normal Distribution_
 
-It is worth investigating to see if the species of the flower is affecting the shape of the curve. Rather than create a plot for each of the variables by coding each of the variables separately (as I did above), I wrote function to plot each of the variables in the data set by looping through any column whose datatype is either integer or float. The histograms were created using a [seaborn histplot](). Seaborn's hue parameter makes it very easy to differentiate the data by a categorical variable, which in this case is species. Hue is an optional parameter for the function. The plotted function will create the histograms created above but as individual histograms and not as the [figure, axes plot](https://stackoverflow.com/questions/5575451/difference-between-axes-and-axis-in-matplotlib) created above. 
+It is worth investigating to see if the species of the flower is affecting the shape of the curve. Rather than create a plot for each of the variables by coding each of the variables separately (as I did above), I wrote a function to plot each of the variables in the data set by looping through any column whose data type is either integer or float. The histograms were created using a [seaborn histplot](https://www.datacamp.com/tutorial/how-to-make-a-seaborn-histogram). Seaborn's hue parameter makes it very easy to differentiate the data by a categorical variable, which in this case is species. Hue is an optional parameter for the function. The plotted function will create the histograms created above but as individual histograms and not as the [figure, axes plot](https://stackoverflow.com/questions/5575451/difference-between-axes-and-axis-in-matplotlib) created above. 
 
 ```python
 # To plot the histograms created previously using the plotting module.
@@ -369,7 +379,7 @@ plot_hist(iris)
 ```
 
 <details>
-<summary>Code to Create Histograms Using the plotting.py Module.</summary>
+<summary>Code to Create Histograms using the plotting.py Module.</summary>
 
 ```python
 # This function is contained in the plotting.py module
@@ -407,7 +417,7 @@ pt.plot_hist(iris, hue = 'species')
 ```
 </details>
 
-To make a side by side comparison of the histograms I have displayed them in the table below. I would like to make figure, axes plot of the histograms so that there are all plotted in the same figure but to date I have been unable to do this.
+To make a side by side comparison of the histograms I have displayed them in the table below.
 
 |Histograms created using plotting.py||
 |---|---|
@@ -445,7 +455,7 @@ We can clearly see that the number of bins did affect the distribution. Both pet
 
 The histograms created in this analysis are comparable to [other analysis](https://medium.com/@nirajan.acharya666/exploratory-data-analysis-of-iris-dataset-9c0df76771df) of the data set. 
 
-## Scatter Plots for Each Pair of Variables.
+## Scatter Plots for each Pair of Variables.
 
 The purpose of a [scatter plot](https://www.atlassian.com/data/charts/what-is-a-scatter-plot) is to demonstrate the relationship between two continuous numeric variables. Scatter plots also indicate if there are any outlying points (outliers) away from the main data points that could disrupt accurate correlation.
 
@@ -466,12 +476,12 @@ plt.close()
 
 ![Pair plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Pair_plot.png)
 
-When we exam the pair plot we can see that there are two distinct clusters in most plots. Most have one large and one smaller cluster. From the information the histograms and box plots have provided the smaller cluster is probably _Iris setosa_. A scatter plot defined by hue for the species should confirm this. 
+When we exam the pairplot we can see that there are two distinct clusters in most plots. Most have one large and one smaller cluster. From the information the histograms and box plots have provided the smaller cluster is probably _Iris setosa_. A scatter plot defined by hue for the species should confirm this. 
 
 As part of my plotting module, there is also a function to create scatter plots for each of the numeric variables in the data set. The pair plot function creates twelve scatter plots for the four numeric variables in the iris data set. Each set of variables gets plotted twice e.g. petal width vs petal length and petal length vs petal width, so the same plot with the axis's reversed. The plot_scatter function in plotting.py is designed to generate half the number of plots created by pair plot, so each variable will only get plotted once against the other. Hue is an optional parameter for this function. The plot_scatter function will be used to create scatter plots for the data set, with hue equal to species.
 
 <details>
-<summary>Code to Create Scatter Plots Using Plotting.py.</summary>
+<summary>Code to Create Scatter Plots using Plotting.py.</summary>
 
 ```python
 # This function is contained in the plotting.py module
@@ -527,8 +537,7 @@ pt.plot_scatter(iris, hue = 'species')
 |![PWvsPL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Petal%20Length.png)|![PWvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Sepal%20Length.png)|
 |![PWvsSW](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Petal%20Width_vs_Sepal%20Width.png)|![SWvsSL](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Scatterplot_Sepal%20Width_vs_Sepal%20Length.png)|
 
-These scatter plots demonstrate clearly that _Iris setosa_ is a distinct cluster. It does not overlap with with _Iris versicolor_ or _Iris virginica_ in any of the scatter plots. It is important to always cross check what appears to be an outlier in the scatter plot with the box plot. What I thought was an obvious outlier in the scatter plot for sepal width for_Iris setosa_ at 2.3 cm, is in the box plot the minimium value in the sepal width range for _Iris setosa_ and is not an outlier! As the data point is so far from the main set of data points I calculated the upper and lower limits for outliers as shown in this data camp course [handling outliers](https://campus.datacamp.com/courses/exploratory-data-analysis-in-python/data-cleaning-and-imputation?ex=12) to double check that this is correct. 
-
+These scatter plots demonstrate clearly that _Iris setosa_ is a distinct cluster. It does not overlap with with _Iris versicolor_ or _Iris virginica_ in any of the scatter plots. It is important to always cross check what appears to be an outlier in the scatter plot with the box plot. What I thought was an obvious outlier in the scatter plot for sepal width for _Iris setosa_ at 2.3 cm, is in the box plot the minimium value in the sepal width range for _Iris setosa_ and is not an outlier! As the data point is so far from the main set of data points I calculated the upper and lower limits for outliers as shown in this data camp course [handling outliers](https://campus.datacamp.com/courses/exploratory-data-analysis-in-python/data-cleaning-and-imputation?ex=12) to double check that this is correct. 
 
 <details>
 <summary>Code to Calculate the Lower and Upper Limits for Outliers.</summary>
@@ -566,9 +575,9 @@ with open('analysis.txt', 'a') as f:
     The lower limit for outliers in the sepal width column for Iris setosa is 2.3.
     The upper limit for outliers in the sepal width column for Iris setosa is 4.5.
 
-As the lower limit for outliers for the sepal width of _Iris setosa_ is anything less than 2.3 cm, the data point at 2.3 cm is not considered an outlier. The values of the 75th and 25th percentile could also have been obtained from the results of the describe method. 
+The lower limit for outliers for the sepal width of _Iris setosa_ is anything less than 2.3 cm, so the data point at 2.3 cm is not considered an outlier. The values of the 75th and 25th percentile could also have been obtained from the results of the describe method. 
 
-The clusters of _Iris versicolor_ and _Iris virginica_ overlap in all the scatter plots. In the plot of sepal length vs sepal width there is a significant amount of overlap. The least amount of overlap appears to be in the scatter plots between petal length and petal width and between petal width and sepal width. One widely used technique for classification in machine learning is called [K-nearest neighbours (KNN)](https://www.datacamp.com/tutorial/k-nearest-neighbor-classification-scikit-learn). The K-nearest neighbours algorithm looks at the nearest data points to the data point of interest and decides which cluster the data point most likely belongs to. Minimising the overlap of clusters will improve the chance of correct cluster assignment.
+The clusters of _Iris versicolor_ and _Iris virginica_ overlap in all the scatter plots. In the plot of sepal length vs sepal width there is a significant amount of overlap. The least amount of overlap appears to be in the scatter plots between petal length and petal width and between petal width and sepal width. One widely used technique for classification in machine learning is called [K-nearest neighbors (KNN)](https://www.datacamp.com/tutorial/k-nearest-neighbor-classification-scikit-learn). The K-nearest neighbors algorithm looks at the nearest data points to the data point of interest to decide which cluster the data point most likely belongs to. Minimising the overlap of clusters will improve the chance of correct cluster assignment.
 
 ## Any Other Analysis
 
@@ -586,9 +595,9 @@ _Image from realpython.com_
 
 __Why is correlation important?__
 
-When choosing the variables to use for predictive modelling and machine learning it is important to understand how the variables interact together to decide what features are important. The value of the correlation coefficient gives guidance on the best variables to choose as highly correlated variables will give more accurate models than poorly correlated variables. 
+When choosing the variables to use for predictive modelling and machine learning it is important to understand how the variables interact together to decide what features are important. The value of the correlation coefficient gives guidance on the best variables to choose as highly correlated variables give more accurate models than poorly correlated variables. 
 
-It is important to note that correlation does not mean causation. This means even though x and y are correlated, x does not necessarily cause y. There could be other variables, called [confounding variables](https://www.scribbr.com/methodology/confounding-variables/) involved which are related to the variables of interest which could lead to misleading results. 
+It is important to note that correlation does not mean causation. This means even though x and y are correlated, x does not necessarily cause y. There could be other variables, called [confounding variables](https://www.scribbr.com/methodology/confounding-variables/) involved which are related to the variables of interest that could lead to misleading results. 
 
 Before the correlation coefficient is calculated it is important to create a scatter plot with a line of best fit (also known as a regression line or a trend line) to verify if there is a linear or a non-linear relationship between the data points. The most commonly used method to calculate the correlation coefficient, the [Pearson method correlation](https://www.youtube.com/watch?v=k7IctLRiZmo) is only suitable for linear plots. Please note that it is the spread of the data around the regression line that indicates if there is good correlation between the variables. The data points for variables with a high correlation coefficient will be closer to the trend line. 
 
@@ -596,7 +605,7 @@ Steps to fit a regression line to a scatter plot with numpy:
 1. Convert the two columns to a [numpy array](https://sparkbyexamples.com/pandas/pandas-convert-column-to-numpy-array/).
 2. Use numpy [numpy polyfit](https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html) to fit a straight line between the x-axis data points and the y-axis data points.
 3. Extract the values of m and c from np.polyfit.
-4. The y-axis values for the regression line are generated from the equation of the line, $y = mx +  $, which for this example is `m * sepal_length_array + c`.
+4. The y-axis values for the regression line are generated from the equation of the line, $y = mx + c$, which for this example is `m * sepal_length_array + c`.
 
 <details>
 <summary>Using Numpy's Polyfit</summary>
@@ -618,7 +627,7 @@ with open('analysis.txt', 'a') as f:
 ```
 </details>
 
-The equation of a line is $y = mx + c$, where m is the slope and c is the y-intercept at x = 0. The values of m and c can be extracted from numpy's polyfit and these are used to calculated the y-values for the line.
+The equation of a line is $y = mx + c$, where m is the slope and c is the y-intercept at x = 0. The values of m and c can be extracted from numpy's polyfit and these are used to calculated the y-data points for the regression line.
 
     The value of the slope is -0.057.
     The value of the intercept is 3.389.
@@ -655,7 +664,7 @@ Fortunately there are faster ways to add a regression line. Two of the simplest 
 It is not possible to to extract the values of m and c from a seaborn plot. Linear regression analysis is required.
 
 <details>
-<summary>Adding a Regression Line with Seaborn Lmplot</summary>
+<summary>Code for a Regression Pairplot</summary>
 
 ```python
 
@@ -672,7 +681,7 @@ plt.close()
 
 ## Calculate correlation coefficients
 
-When the regression pairplot is analysed we can see that there is a linear relationship between all the variables in the data set so the correlation coefficient can be calculated using the [corr() function](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html) with the Pearson method. Correlation could also be carried out using [numpy's np.corrcoeff()](https://numpy.org/doc/stable/reference/generated/numpy.corrcoef.html).
+When the regression pairplot is analysed we can see that there is a linear relationship between all the variables in the data set therefore the correlation coefficient can be calculated using the [corr() function](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html) with the Pearson method. Correlation could also be carried out using [numpy's np.corrcoeff()](https://numpy.org/doc/stable/reference/generated/numpy.corrcoef.html).
 
 ``` python
 # To calculate the correlation coefficient using corr() between sepal length and sepal width.
@@ -709,9 +718,9 @@ Correlation Matrix for the Iris Data Set.
 |petal_width  |    0.817954|   -0.356544|     0.962757|     1.000000|
 
 
-Petal length and petal width show a high positive correlation coefficient with a value of 0.963. Petal length and petal width would be a good choice of variables for predictive analysis.
+Petal length and petal width have a high positive correlation coefficient with a value of 0.963. Petal length and petal width would be a good choice of variables for predictive analysis.
 
-Both petal width and petal length have a high positive correlation with sepal length with values of 0.871 and 0.818 respectively.
+Both petal width and petal length have a high positive correlation with sepal length, with values of 0.871 and 0.818 respectively.
 
 Sepal width has a weak negative correlation with all the other variables in the data set with coefficient values ranging from -0.420 to -0.109. 
 
@@ -751,9 +760,9 @@ plt.close()
 
 ![Heat map](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Heatmap_correlation_coefficients.png)
 
-These heatmaps demonstrate the importance of taking the categorical variables into account. For example the overall correlation coefficient between petal width and petal width was 0.96, which is a very strong positive correlation. When the coefficients of the indiviual species is taken into account the values range from 0.31 for _Iris setosa_, 0.79 for _Iris versicolor_ and 0.32 for _Iris virginica_. If we were interested in predicting the petal width based on the petal length the results should be accurate as long as we are not interested in the flower species. Another interesting pairing is sepal width and sepal length. 
+These heatmaps demonstrate the importance of taking the categorical variables into account. For example the overall correlation coefficient between petal width and petal length was 0.96, which is a very strong positive correlation. When the coefficients of the indiviual species is taken into account the values range from 0.31 for _Iris setosa_, 0.79 for _Iris versicolor_ and 0.32 for _Iris virginica_. If we were interested in predicting the petal width based on the petal length the results should be accurate as long as we are not interested in the flower species. Another interesting pairing is sepal width and sepal length. 
 
-This will be demonstrated further by creating some regression plots using regplot. To create side by side plots, regplot has the parameter of ax. The plot on the left will be a plot of the overall data set and the plot on the right will take the flower species into account. 
+This will be demonstrated further by creating some regression plots using regplot. To create side by side plots, regplot has the parameter of ax. The plot on the left will be a plot of the overall data set. The plot on the right will take the flower species into account. 
 * sepal width vs sepal length
 * petal width vs petal length
 
@@ -812,27 +821,27 @@ plt.close()
 
 ![Regression plots](https://github.com/IreneKilgannon/pands-project/blob/main/plots/Regression_plots.png)
 
-The regression plots clearly demonstrates why the correlation coefficients between sepal width and sepal length are different when the species is taken into account. Without taking the species into account the regression plot for sepal width vs sepal length on the left shows a negative slope with the data points scattered widely around the trend line, which would correspond with the very weak negative correlation coefficient of -0.11. When species is taken into account the regression lines now have a positive slope and the data points are not as widely spread around the line. This is an example of Simpson's paradox. Wikipedia states that [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) is a phenomenon in probability and statistics in which a trend appears in several groups of data but disappears or reverses when the groups are combined. The very weak negative correlation has now become a moderate positive correlation coefficient of 0.75 for _Iris setosa_, 0.53 for _Iris versicolor_, 0.46 for _Iris virginica_. 
+The regression plots clearly demonstrate why the correlation coefficients between sepal width and sepal length are different when the species is taken into account. Without taking the species into account the regression plot for sepal width vs sepal length on the left shows a negative slope with the data points scattered widely around the trend line, which would correspond with the very weak negative correlation coefficient of -0.11. When the species is taken into account the regression lines have a positive slope and the data points are not as widely spread around the line. This is an example of Simpson's paradox. Wikipedia states that [Simpson's paradox](https://en.wikipedia.org/wiki/Simpson%27s_paradox) "is a phenomenon in probability and statistics in which a trend appears in several groups of data but disappears or reverses when the groups are combined". The very weak negative correlation has now become a moderate positive correlation coefficient of 0.75 for _Iris setosa_, 0.53 for _Iris versicolor_ and 0.46 for _Iris virginica_. 
 
 The plots for petal width vs petal length show us why the strong correlation coefficient of 0.96 between petal width and petal length are not as strong for the individual flower species. _Iris setosa_ and _Iris virginica_ have weak correlation coefficients of 0.31 and 0.32, whereas the coefficient for _Iris versicolor_ is a more respectable 0.79.
 
 ## Linear Regression Analysis
 
-Machine learning is a form of artifical intelligence. Machine learning uses a mix a statistics and computer science and its aim is to develop a model that learns to make predictions and inferences from patterns in existing data and apply it to new data without step by step instructions.
+Machine learning is a form of artifical intelligence. Machine learning uses a mix of statistics and computer science. Its aim is to develop a model that learns to make predictions and inferences from patterns in existing data and apply it to new data without step by step instructions.
 
-The three most common machine learning applications are regression, classification and clustering. [Linear regression analysis](https://realpython.com/linear-regression-in-python) is used for predictive analysis on continuous data. [Classification](https://www.datacamp.com/blog/classification-machine-learning) is performed on categorical data and is used to predict the label of a given input. For example classification could be used in the iris data set to predict to the species of the iris. The first chapter of Introduction to Machine Learning with Python by Andreas C Muller and Sarah Guido demonstrates how to build a model to classify iris species. The iris data set is still used to test improvements in classification models. [Clustering](https://builtin.com/data-science/data-clustering-python) divides data into groups based on similarity. Clustering is a type of unsupervised machine learning, regression and classification are supervised machine learning. 
+The three most common machine learning applications are regression, classification and clustering. [Linear regression analysis](https://realpython.com/linear-regression-in-python) is used for predictive analysis on continuous data. [Classification](https://www.datacamp.com/blog/classification-machine-learning) is performed on categorical data and is used to predict the label of a given input. Classification could be used to predict the species of the iris. The first chapter of Introduction to Machine Learning with Python by Andreas C Muller and Sarah Guido demonstrates how to build a model to classify iris species. [Clustering](https://builtin.com/data-science/data-clustering-python) divides data into groups based on similarity. Clustering is unsupervised machine learning. Regression and classification are supervised machine learning. 
 
 Regresssion attempts to determine the relationship between a dependent variable (sometimes called a target variable) and a series of other independent variables (sometimes called features or predictor variables). In simple linear regression there is only one predictor variable. Multiple linear regression has multiple features to predict the value for the target variable.
 
-For this part of the project I will construct a simple linear regression model to predict the petal width based on the petal length data. 
+For this part of the project I will construct a simple linear regression model to predict the petal width based on the petal length. 
 
-[Scikit-learn](https://scikit-learn.org/stable/index.html) is a python library that comes with many classes and functions that are required for machine learning. [LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression) is one class in scikit-learn that is used for linear regression analysis. Ridge and lasso are two other classes for linear regression. 
+[Scikit-learn](https://scikit-learn.org/stable/index.html) is a python library that comes with many classes and functions that are required for machine learning. [LinearRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html#sklearn.linear_model.LinearRegression) is one class in scikit-learn that is used for linear regression analysis. Ridge and Lasso are two other classes for linear regression. 
 
 The basic steps for classification and regression are similiar. Some data preprocessing may be required if the data set is not in the correct format. 
 
 __Step 1__ Split the dataset into a training set and test set.
 
-[Train_test_split](https://realpython.com/train-test-split-python-data/) is imported from sklearn.model_selection and is used split the data into two groups, one to train the model (X_train, y_train), the other to test the model (X_test, y_test). Usually 20-30% of the data is chosen to be test data by the test_size parameter. The test set should not be available to the model at any point until the model has been created.
+[Train_test_split](https://realpython.com/train-test-split-python-data/) is imported from sklearn.model_selection. It is used split the data into two groups, one to train the model (X_train, y_train), the other to test the model (X_test, y_test). Usually 20-30% of the data is chosen to be test data by the test_size parameter. The test set should not be available to the model at any point until the model has been created.
 
 __Step 2__  Train the model.
 
@@ -847,8 +856,8 @@ The final step is to use the predict method on the X_test data. This is the firs
 __Step 4__ Evaluate the model.
 
 [R-squared](https://www.youtube.com/watch?v=2AQKmw14mHM) and [root mean squared error (RMSE)](https://statisticsbyjim.com/regression/root-mean-square-error-rmse/) are used to evaluate how well the model works. 
-* R-squared measures how much variance in the target variable can be explained by our model. R-squared is a range from 0 to 1, with 1 meaning that the target variable is fully explained by the dependent variable and all the data points fall on the regression line. [Interpret r-squared regression](https://statisticsbyjim.com/regression/interpret-r-squared-regression/)
-* RMSE is the square root of the mean squared error (MSE). THe MSE is the mean of the squared differences between the predicted values and the true values. RMSE is a measure of how large the residuals are dispersed. With MSE and RMSE the errors are heavily penalised as the residuals are squared. Generally RMSE is used as it has the same units of the target variable which makes it easier to comprehend than MSE. The values of RMSE range from 0 to infinity, with the lower the value the better. Zero means the predicted values match the actual values. 
+* R-squared measures how much variance in the target variable can be explained by our model. R-squared is a range from 0 to 1, with 1 meaning that the target variable is fully explained by the dependent variable and all the data points fall on the regression line. 
+* RMSE is the square root of the mean squared error (MSE). MSE is the mean of the squared differences between the predicted values and the true values. RMSE is a measure of how large the residuals are dispersed. With MSE and RMSE the errors are heavily penalised as the residuals are squared. Generally RMSE is used as it has the same units as the target variable which makes it easier to comprehend than MSE. The values of RMSE range from 0 to infinity, with the lower the value the better. Zero means the predicted values match the actual values. 
 
 <details>
 <summary>Code for Linear Regression Analysis</summary>
@@ -958,7 +967,7 @@ plt.close()
 
 ![Residuals plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/residuals.png)
 
-The residuals are randomly scattered in the residuals plot, which is the desired result. Occasionally there might be a pattern in the residuals which means that the model would need to be reevaluated.
+The residuals are randomly scattered in the residuals plot, which is the desired result. Occasionally there might be a pattern in the residuals which means that the model would need to be re-evaluated.
 
 __Evaluating the model__
 
@@ -982,9 +991,9 @@ manual_rmse = np.sqrt(sum((y_test - y_pred)**2)/n)
     The slope of the regression line for petal width vs petal length is: [0.418].
     The intercept of the regression line for petal width vs petal length is -0.366.
 
-The linear regression model is a good fit for the data with an R-squared value of 0.933 for the unseen test data. The feature, petal length therefore explains explains 93.3% of the variance in the target variable, petal width. The value for R-squared on the training set was also calculated as a large discrepency between the values can indicate if the training data has been either overfitted or underfitted to the model. In this case there does not appear to be any under or overfitting present. 
+The linear regression model is a good fit for the data with an R-squared value of 0.933 for the unseen test data. The feature, petal length therefore explains 93.3% of the variance in the target variable, petal width. The value for R-squared on the training set was also calculated as a large discrepency between the values can indicate if the training data has been either overfitted or underfitted to the model. In this case there does not appear to be any under or overfitting present. 
 
-The RMSE value of 0.216 cm. This means that the difference between what the model predicts for petal width and the actual value is 0.216 cm. As the RMSE value is close to zero this is a very good fit. 
+The RMSE value of 0.216 cm. This means that the difference between what the model predicts for petal width and the actual width is 0.216 cm. As the RMSE value is close to zero this is a very good fit. 
 
 __k-Fold Cross-Validation__
 
@@ -1026,7 +1035,7 @@ I believe that my plotting.py module will be of use in future projects. As well 
 
 My very basic linear regression analysis to predict the petal width of the iris based on the petal length demonstrated the steps involved in constructing a linear regression model. For more complicated models the same fundamental steps of splitting the data, fitting the data to a model and predicting the test data are required but more data preprocessing may be required. No data preprocessing was required for the iris data set as there was no missing data. If I were to construct a classification model for the iris species based on the numeric data, the species column would need to be preprocessed as [models can only work with numeric data](https://www.w3schools.com/python/python_ml_preprocessing.asp).
 
-A search for the iris data set on [Google scholar](https://scholar.google.com/) and [sciencedirect.com](https://www.sciencedirect.com/) shows that this data set is still used by researchers to compare the performance of new models with existing methods. Examples of this are the following papers: [this](https://www.sciencedirect.com/science/article/pii/S2589004223020837), [this](https://ijece.iaescore.com/index.php/IJECE/article/view/33889) and [this](https://iopscience.iop.org/article/10.1088/1742-6596/2068/1/012004/pdf). While the title alone of some papers are incomphrensible to me, it is interesting to see that the data set does have some more serious applications that being solely a data set that is used by students to develop their skills in data analytics. 
+A search for the iris data set on [Google scholar](https://scholar.google.com/) and [sciencedirect.com](https://www.sciencedirect.com/) shows that this data set is still used by researchers to compare the performance of new models with existing methods. Examples of this are the following papers: [this](https://www.sciencedirect.com/science/article/pii/S2589004223020837), [this](https://ijece.iaescore.com/index.php/IJECE/article/view/33889) and [this](https://iopscience.iop.org/article/10.1088/1742-6596/2068/1/012004/pdf). While the title alone of some of the papers are incomphrensible to me, it is interesting to see that the data set does have some more serious applications than being solely a data set that is used by students to develop their skills in data analytics. 
 Who would have envisioned that nearly one hundred years later Anderson's data would still be in use today?  
 
 ## Additional References
@@ -1066,6 +1075,8 @@ Python Tutorial for Beginners: Import Modules and Exploring the Standard Library
 Pearson's correlation, clearly explained https://www.youtube.com/watch?v=xZ_z8KWkhXE
 
 ML from scratch with iris https://www.kaggle.com/code/ash316/ml-from-scratch-with-iris
+
+Interpret r-squared regression https://statisticsbyjim.com/regression/interpret-r-squared-regression/
 
 Datacamp course Supervised learning with scikit-learn https://app.datacamp.com/learn/courses/supervised-learning-with-scikit-learn
 
