@@ -54,7 +54,6 @@ unique = f"The unique names in the species column are: \n {iris['species'].uniqu
 # Value count of each species.
 count_species = f"A count of each species: \n {iris['species'].value_counts()} \n\n"
 
-
 #### Summary information for the numeric columns
 
 # Summary statistics for the overall data set
@@ -166,7 +165,6 @@ plt.close()
 pt.plot_hist(iris, hue = 'species')
 
 #####     #####     #####
-
 # Histograms for petal length and petal width for Iris setosa, the number of bins are important.
 fig, ax = plt.subplots(1, 2)
 
@@ -185,8 +183,6 @@ plt.close()
 
 ######################################
 # SCATTER PLOT CODE
-
-# Task: Output a scatter plot of each pair of variables
 
 # Use of a pairplot.
 sns.pairplot(iris)
@@ -266,7 +262,6 @@ plt.ylabel('Sepal Width (cm)')
 plt.title('Sepal Width vs Sepal Length')
 plt.savefig('plots\\Numpy_reg_plot.png')
 plt.close()
-
 
 #####     #####     ##
 # Pair regression plot 
