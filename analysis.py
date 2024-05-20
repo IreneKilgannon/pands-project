@@ -159,6 +159,7 @@ plt.savefig('plots\\Summary_Histogram.png')
 plt.close()
 
 #####     #####     #####
+# Histograms by species with the plotting.py module.
 
 # Call the plot_hist function from the plotting module on the iris data set.
 # Hue is the species column to separate the species by colour. 
@@ -200,6 +201,7 @@ plt.close()
 pt.plot_scatter(iris, hue = 'species')
 
 #####     #####     #####
+# Calculating the limits for outliers for the sepal width of Iris setosa
 
 # Minimium value in Sepal Width columns for Iris setosa
 min = setosa['sepal_width'].min()
@@ -266,8 +268,7 @@ plt.savefig('plots\\Numpy_reg_plot.png')
 plt.close()
 
 
-#####     #####     #####
-
+#####     #####     ##
 # Pair regression plot 
 sns.pairplot(iris, kind = 'reg')
 plt.suptitle('Regression Pair Plot of the Numeric Variables in the Iris Data Set', y = 1.05)
@@ -275,12 +276,10 @@ plt.savefig('plots\\Pair_Regression_plots.png')
 plt.close()
 
 #####     #####     #####
-
 # To calculate the correlation coefficient between two variables
 corr_SL_vs_SW = iris['sepal_length'].corr(iris['sepal_width'])
 
 #####     #####     #####
-
 # Create a correlation matrix between the numeric variables in the data set.
 correlation_matrix = iris.drop(['species'], axis = 1).corr()
 
@@ -289,7 +288,6 @@ with open('analysis.txt', 'a') as f:
     f.write(f'The correlation matrix for the variables in the iris data set. \n{correlation_matrix}\n\n')
 
 #####     #####     #####
-
 # Create a heatmap of the correlation coefficients between the variables in the data set.
 fig, ax = plt.subplots(2, 2, figsize = (15, 12))
 
@@ -313,14 +311,8 @@ ax[1,1].set_title('Iris virginica')
 plt.suptitle('Correlation Coefficients for the Iris Data Set')
 plt.savefig('plots\\Heatmap_correlation_coefficients.png')
 plt.close()
-# lmplot example. Sepal Width vs Sepal Length
-sns.lmplot(iris, x = 'sepal_length', y = 'sepal_width', ci = None, col = 'species')
-plt.suptitle('Sepal Width vs Sepal Length by Species', y =  1.01)
-plt.savefig('plots\\lmplot_example.png')
-plt.close()
 
 #####     #####     #####
-
 # Regression plots for selected variables.
 
 # Set up a figure, axes plot of 2 rows and 2 columns
@@ -369,7 +361,6 @@ plt.savefig('plots\\Regression_plots.png')
 plt.close()
 
 #####     #####     #####
-
 # Linear regression analysis
 
 # Instantiate the model
@@ -396,14 +387,11 @@ with open('analysis.txt', 'a') as f:
     f.write('The first five predicted values for petal width and the actual values are:\n')
     f.write(f'Predicted Values: {y_pred[:5].round(3)}\nActual Values: {y_test[:5]}\n\n')
 
-
-# r_squared measures the accuracy of the results.
 # R_squared for the test data
 r_squared_test = reg.score(X_test, y_test)
 
 # R_squared for the training data
 r_squared_train = reg.score(X_train, y_train)
-
 
 # Calculate root mean square error.
 rmse = mean_squared_error(y_test, y_pred, squared = False)
@@ -419,7 +407,7 @@ n = len(y_pred)
 # Finish the manual calculation of the MSE
 manual_rmse = np.sqrt(sum((y_test - y_pred)**2) / n)
 
-# 
+# Write the variables to analysis.txt
 with open('analysis.txt', 'a') as f:
     f.write('Performance of the linear regression model.\n')
     f.write(f"The value of R-squared for the test data: {r_squared_test.round(3)}.\n")
@@ -428,8 +416,6 @@ with open('analysis.txt', 'a') as f:
     f.write(f'RMSE calculated manually is {manual_rmse.round(3)}.\n')
     f.write(f'The slope of the regression line for petal width vs petal length is: {coefficent.round(3)}.\n')
     f.write(f'The intercept of the regression line for petal width vs petal length is {intercept.round(3)}.\n\n')
-
-#####     #####     #####
 
 # Scatter plot of petal width vs petal length
 plt.scatter(X_train, y_train)
@@ -445,10 +431,9 @@ plt.savefig('plots\\lg_analysis.png')
 plt.close()
 
 #####     #####     #####
-
 # Plotting residuals
 
-# Calculate the residual, Observed value minus predicted value. 
+# Calculate the residual, observed value minus predicted value. 
 residuals = y_test - y_pred
 
 # Plotting residuals
@@ -465,8 +450,8 @@ plt.savefig('plots\\residuals.png')
 plt.close()
 
 #####     #####     #####
+# K-Fold cross validation to calculate R-squared for differents splits of the data set.
 
-# K-Fold cross validation to get a better estimate of R-squared.
 # Set up the k_fold parameters
 kf = KFold(n_splits = 5, shuffle = True, random_state=47)
 
