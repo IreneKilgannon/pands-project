@@ -954,7 +954,7 @@ plt.close()
 
 ![Residuals plot](https://github.com/IreneKilgannon/pands-project/blob/main/plots/residuals.png)
 
-The residuals are randomly scattered in the residual plot, which is the desired result. Occassionally there might be a pattern in the residuals which would mean that the model would need to be reevaluated.
+The residuals are randomly scattered in the residual plot, which is the desired result. Occasionally there might be a pattern in the residuals which would mean that the model would need to be reevaluated.
 
 __Evaluating the model__
 
@@ -1022,8 +1022,8 @@ I believe that my plotting.py module will be of use in future projects. As well 
 
 My very basic linear regression analysis to predict the petal width of the iris based on the petal length demonstrated the steps involved in constructing a linear regression model. For more complicated models the same fundamental steps of splitting the data, fitting the data to a model and predicting the test data are required but more data preprocessing may be required. No data preprocessing was required for the iris data set as there was no missing data. If I were to construct a classification model for the iris species based on the numeric data, the species column would need to be preprocessed as [models can only work with numeric data](https://www.w3schools.com/python/python_ml_preprocessing.asp).
 
-A search for the iris data set on [Google scholar](https://scholar.google.com/) and [sciencedirect.com](https://www.sciencedirect.com/) shows that the data set is still used by researchers to compare the performance of new models with existing methods. Examples of this are the following papers: [this](https://www.sciencedirect.com/science/article/pii/S2589004223020837), [this](https://ijece.iaescore.com/index.php/IJECE/article/view/33889) and [this](https://iopscience.iop.org/article/10.1088/1742-6596/2068/1/012004/pdf). While the title alone of some papers are incomphrensible to me, it is interesting to see that the data set does have some more serious applications that being solely a data set that is used by students to develop their skills in data analytics. 
-Who would have envisioned that nearly one hundred years later Anderson's data would still be in use today.  
+A search for the iris data set on [Google scholar](https://scholar.google.com/) and [sciencedirect.com](https://www.sciencedirect.com/) shows that this data set is still used by researchers to compare the performance of new models with existing methods. Examples of this are the following papers: [this](https://www.sciencedirect.com/science/article/pii/S2589004223020837), [this](https://ijece.iaescore.com/index.php/IJECE/article/view/33889) and [this](https://iopscience.iop.org/article/10.1088/1742-6596/2068/1/012004/pdf). While the title alone of some papers are incomphrensible to me, it is interesting to see that the data set does have some more serious applications that being solely a data set that is used by students to develop their skills in data analytics. 
+Who would have envisioned that nearly one hundred years later Anderson's data would still be in use today?  
 
 ## Additional References
 
